@@ -1,5 +1,3 @@
-const SHOW_PLACEHOLDERS = false;
-const MIN_PHOTOS_PER_CHAPTER = 3; // Seuil minimum de photos réelles pour afficher un chapitre individuel // Mode production : masquer les placeholders et les chapitres sans photo réelle
 
 /**
  * DORCAS MOÏRA - PORTFOLIO DATA ARCHITECTURE (AWWWARDS EDITION)
@@ -8,8 +6,7 @@ const MIN_PHOTOS_PER_CHAPTER = 3; // Seuil minimum de photos réelles pour affic
  */
 
 const PORTFOLIO_DATA = {
-  SHOW_PLACEHOLDERS: SHOW_PLACEHOLDERS,
-  MIN_PHOTOS_PER_CHAPTER: MIN_PHOTOS_PER_CHAPTER,
+  MIN_PHOTOS_PER_CHAPTER: 3,
   identity: {
     stageName: "Dorcas Moïra",
     fullName: "SAPHOU Dorcas Moïra",

@@ -340,36 +340,6 @@ function updateLanguage(lang, forceUpdate = false) {
  * Mode production et galeries adaptatives
  */
 function applyAdaptiveGalleries() {
-  const isProduction = window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.SHOW_PLACEHOLDERS === false;
-  if (!isProduction) return;
-
-  document.body.classList.add('hide-placeholders');
-
-  // S'assurer que tous les chapitres avec vraies photos et Selected Works restent visibles
-  ['selected-works', 'chap-01', 'chap-02', 'chap-03', 'chap-04', 'chap-05'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'block';
-  });
-
-  // Masquer les mosaïques / archives de placeholders sans photos réelles
-  const visualMosaic = document.getElementById('visual-mosaic');
-  if (visualMosaic) visualMosaic.style.display = 'none';
-
-  // Masquer toutes les cartes placeholder restantes
-  document.querySelectorAll('[data-placeholder="true"]').forEach(el => {
-    el.style.display = 'none';
-  });
-
-  // Filtrage des liens de navigation pour les sections masquées
-  document.querySelectorAll('.menu-nav-links a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === '#visual-mosaic' || href === '#visual-chapters' || href === '#archive') {
-      const li = link.closest('li');
-      if (li) li.style.display = 'none';
-    }
-  });
-
-  // Re-synchronisation de la Lightbox
   initLightboxElements();
 }
 
@@ -377,18 +347,9 @@ function applyAdaptiveGalleries() {
  * Initialisation et synchronisation de la collection d'images Lightbox
  */
 function initLightboxElements() {
-  const isProduction = window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.SHOW_PLACEHOLDERS === false;
-  let all = Array.from(document.querySelectorAll('[data-lightbox]'));
-
-  if (isProduction) {
-    all = all.filter(el => {
-      if (el.getAttribute('data-placeholder') === 'true') return false;
-      if (el.closest('[data-has-real-photos="false"]')) return false;
-      if (el.closest('[data-placeholder="true"]')) return false;
-      if (el.offsetParent === null && window.getComputedStyle(el).display === 'none') return false;
-      return true;
-    });
-  }
+  const all = Array.from(document.querySelectorAll('[data-lightbox]')).filter(el => {
+    return !(el.offsetParent === null && window.getComputedStyle(el).display === 'none');
+  });
 
   galleryElements = all;
   window.galleryElements = galleryElements;
@@ -398,6 +359,11 @@ function initLightboxElements() {
     }
     el._lightboxHandler = (e) => {
       e.preventDefault();
+      openLightbox(index);
+    };
+    el.addEventListener('click', el._lightboxHandler);
+  });
+}
       openLightbox(index);
     };
     el.addEventListener('click', el._lightboxHandler);
@@ -817,86 +783,9 @@ function initEditorialDoublePage() {
  */
 function initVisualMosaic() {
   if (!dom.mosaicContainer || !window.PORTFOLIO_DATA) return;
-  if (window.PORTFOLIO_DATA.SHOW_PLACEHOLDERS === false) {
-    const sec = document.getElementById('visual-mosaic');
-    if (sec) sec.style.display = 'none';
-    return;
-  }
-
-  const ch06 = window.PORTFOLIO_DATA.chapters.find(c => c.id === '06-visual-chapters');
-  if (!ch06 || !ch06.images) return;
-
-  dom.mosaicContainer.innerHTML = '';
-  ch06.images.forEach((item, idx) => {
-    const card = document.createElement('div');
-    card.className = `mosaic-item ${item.isTall ? 'tall' : ''}`;
-    card.setAttribute('data-category', item.category);
-    card.setAttribute('data-lightbox', `06-visual-${String(idx + 1).padStart(2, '0')}`);
-    card.setAttribute('data-caption', `${item.captionFr} · Dorcas Moïra`);
-
-    if (idx >= 12 && window.innerWidth < 768 && !isShowingAllLooks) {
-      card.classList.add('is-hidden-mobile');
-    }
-
-    const media = document.createElement('div');
-    media.className = 'mosaic-item-media';
-
-    const img = document.createElement('img');
-    img.src = item.src;
-    img.alt = item.alt;
-    img.loading = 'lazy';
-
-    const tag = document.createElement('span');
-    tag.className = 'mosaic-item-tag';
-    tag.textContent = item.category.toUpperCase();
-
-    media.appendChild(img);
-    card.appendChild(media);
-    card.appendChild(tag);
-    dom.mosaicContainer.appendChild(card);
-  });
-
-  initLightboxElements();
-
-  if (dom.mosaicToggleBtn) {
-    dom.mosaicToggleBtn.addEventListener('click', () => {
-      isShowingAllLooks = !isShowingAllLooks;
-      document.querySelectorAll('.is-hidden-mobile').forEach(el => {
-        el.style.display = isShowingAllLooks ? 'block' : 'none';
-      });
-      const span = dom.mosaicToggleBtn.querySelector('span');
-      if (span) {
-        span.textContent = isShowingAllLooks ? 'Réduire la sélection' : 'Voir tous les 42 looks';
-      }
-    });
-  }
-
-  if (dom.filterButtons) {
-    dom.filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        dom.filterButtons.forEach(b => {
-          b.classList.remove('is-active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        btn.classList.add('is-active');
-        btn.setAttribute('aria-selected', 'true');
-
-        const filterVal = btn.getAttribute('data-filter');
-        const items = document.querySelectorAll('#mosaicGridContainer .mosaic-item');
-
-        items.forEach(item => {
-          const itemCat = item.getAttribute('data-category');
-          if (filterVal === 'all' || itemCat === filterVal) {
-            item.classList.remove('is-hidden');
-            item.style.opacity = '0';
-            setTimeout(() => { item.style.opacity = '1'; }, 40);
-          } else {
-            item.classList.add('is-hidden');
-          }
-        });
-      });
-    });
-  }
+  const sec = document.getElementById('visual-mosaic');
+  if (sec) sec.style.display = 'none';
+  return;
 }
 
 /**
