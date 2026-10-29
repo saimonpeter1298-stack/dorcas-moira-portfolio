@@ -1,0 +1,1101 @@
+"""
+Generate new refactored js/main.js
+"""
+
+code = r'''/**
+ * DORCAS MOÏRA · ENGINE AWWWARDS EDITION
+ * Modular Architecture with Strict TDZ Elimination, Safe Lifecycle,
+ * Dynamic Adaptive Galleries, FLIP Lightbox, Luxury Loader & 4s Safety Net.
+ * 
+ * Palette stricte : #0B0807, #1E140F, #B87A52, #E3B48C, #F3E6D8, #9C8A7C
+ */
+
+// =========================================================================
+// 1. DICTIONNAIRE BILINGUE & VOCABULAIRE HAUTE COUTURE (GLOBAL)
+// =========================================================================
+const I18N = {
+  fr: {
+    menu_home: "Accueil",
+    menu_signature: "Manifeste",
+    menu_about: "Who is Moïra ?",
+    menu_compcard: "Comp Card",
+    menu_chapters: "Chapitres Photo",
+    menu_motion: "Vidéo & Motion",
+    menu_whyme: "Pourquoi moi",
+    menu_contact: "Contact & Booking",
+    hero_badge: "Candidate Miss Gabon Maroc 2026",
+    hero_role: "Modèle Photo | Afro Fashion Muse",
+    hero_tagline: "« La beauté gabonaise dans sa version la plus moderne. »",
+    hero_scroll: "Découvrir l'univers",
+    manifesto_text: "« J'incarne une beauté qui ne cherche pas à entrer dans une case. Du studio à la lumière naturelle, du portrait intense au mood estival, de l'afro-chic au casual premium, avec une <span class=\"highlight-word\">aisance instinctive</span>. »",
+    kw_1: "Élégante",
+    kw_2: "Expressive",
+    kw_3: "Solaire",
+    kw_4: "Éditoriale",
+    about_subtitle: "Une silhouette, une énergie, une vision",
+    about_p1: "Je suis une jeune mannequin gabonaise, passionnée par l'image, la mode et l'expression visuelle. Mon univers mélange élégance afro, attitude contemporaine, naturel et présence studio.",
+    about_p2: "Je voyage entre douceur et intensité, naturel et sophistication, héritage africain et modernité fashion. Chaque collaboration est une narration vivante où la création prend tout son relief.",
+    label_directions: "Directions Artistiques",
+    label_dna: "Model ADN",
+    dna_1: "Présence naturelle",
+    dna_2: "Élégance",
+    dna_3: "Adaptabilité",
+    dna_4: "Expressivité",
+    dna_5: "Polyvalence",
+    dna_6: "Professionnalisme",
+    compcard_subtitle: "Mensurations officielles & Spécifications",
+    compcard_avail: "Casablanca, Maroc · Déplacements possibles",
+    meas_age: "Âge",
+    meas_height: "Taille",
+    meas_weight: "Poids",
+    meas_waist: "Tour de taille",
+    meas_bust: "Poitrine",
+    meas_hips: "Hanches",
+    meas_shoes: "Pointure",
+    meas_skin: "Teint de peau",
+    skin_val: "Ébène",
+    meas_hair: "Cheveux",
+    hair_val: "Noirs",
+    meas_eyes: "Yeux",
+    eyes_val: "Bruns",
+    btn_compcard: "Télécharger ma comp card (PDF)",
+    btn_booknow: "Demander les disponibilités",
+    mosaic_count: "42 Regards Exclusifs",
+    why_subtitle: "L'alliance de l'intuition artistique et du professionnalisme",
+    why_t1: "Direction artistique",
+    why_p1: "Je comprends rapidement une vision créative et je sais lui donner vie devant l'objectif avec naturel et précision.",
+    why_t2: "Polyvalence stylistique",
+    why_p2: "Du portrait éditorial à la campagne commerciale, j'adapte mon jeu sans jamais perdre mon identité solaire et affirmée.",
+    why_t3: "Énergie jeune et actuelle",
+    why_p3: "Une image adaptée aux marques modernes, aux créateurs avant-gardistes et aux exigences des formats digitaux premium.",
+    why_t4: "Professionnalisme",
+    why_p4: "Ponctuelle, investie et rigoureuse, je considère chaque collaboration comme un partenariat fondé sur le respect et l'excellence.",
+    why_t5: "Création de valeur",
+    why_p5: "Je ne cherche pas uniquement à poser : je contribue à créer des images fortes qui subliment le produit et renforcent l'identité de marque.",
+    tl_2023: "Shooting photo de campagne officielle, <strong>Daily Desiign</strong>",
+    tl_2024: "Défilé de marque haute couture, <strong>Kuba Concept Store</strong>",
+    tl_2025: "Shootings photo majeurs de campagnes : <strong>Dimension Beyond the Extrêmes · Djino · Nourima</strong>",
+    tl_2026: "Candidate officielle au prestigieux titre <strong>Miss Gabon Maroc 2026</strong>",
+    metric_1_l: "Vues sur TikTok",
+    metric_1_s: "Portée virale globale",
+    metric_2_l: "Likes sur TikTok",
+    metric_2_s: "Interactions & Partages",
+    metric_3_l: "Vues Instagram",
+    metric_3_s: "Sur les 30 derniers jours",
+    metric_4_l: "Vues mensuelles Pinterest",
+    metric_4_s: "Moodboards mode & style",
+    contact_lead: "Prête à donner vie à vos prochaines campagnes, lookbooks, défilés et contenus exclusifs. Disponible au Maroc et à l'international.",
+    form_name: "Nom & Prénom *",
+    form_brand: "Marque / Agence / Photographe *",
+    form_type: "Type de Projet *",
+    form_date: "Date envisagée / Période",
+    form_msg: "Détails du projet & Moodboard",
+    form_submit: "Envoyer la demande de booking",
+    sticky_book: "Me booker"
+  },
+  en: {
+    menu_home: "Home",
+    menu_signature: "Manifesto",
+    menu_about: "Who is Moïra ?",
+    menu_compcard: "Comp Card",
+    menu_chapters: "Photo Chapters",
+    menu_motion: "Video & Motion",
+    menu_whyme: "Why choose me",
+    menu_contact: "Contact & Booking",
+    hero_badge: "Candidate Miss Gabon Morocco 2026",
+    hero_role: "Fashion Model | Afro Fashion Muse",
+    hero_tagline: "« Gabonese beauty in its most modern essence. »",
+    hero_scroll: "Explore the universe",
+    manifesto_text: "« I embody a beauty that refuses to fit into predefined molds. From studio precision to raw daylight, sculptural intensity to effortless summer moods, afro-chic heritage to refined casual, guided by <span class=\"highlight-word\">instinctive elegance</span>. »",
+    kw_1: "Elegant",
+    kw_2: "Expressive",
+    kw_3: "Solar",
+    kw_4: "Editorial",
+    about_subtitle: "A silhouette, an aura, a vision",
+    about_p1: "I am a Gabonese fashion model devoted to the art of the visual narrative, haute couture, and dynamic presence. My universe merges afro elegance, contemporary edge, spontaneity, and high-impact studio discipline.",
+    about_p2: "I navigate effortlessly between serenity and intensity, natural grace and sophisticated styling, ancestral heritage and modern fashion codes. Every shoot is a creative dialogue where garments come to life.",
+    label_directions: "Artistic Directions",
+    label_dna: "Model DNA",
+    dna_1: "Natural Presence",
+    dna_2: "Elegance",
+    dna_3: "Adaptability",
+    dna_4: "Expressiveness",
+    dna_5: "Versatility",
+    dna_6: "Professionalism",
+    compcard_subtitle: "Official Agency Measurements & Specifications",
+    compcard_avail: "Casablanca, Morocco · Available for travel",
+    meas_age: "Age",
+    meas_height: "Height",
+    meas_weight: "Weight",
+    meas_waist: "Waist",
+    meas_bust: "Bust",
+    meas_hips: "Hips",
+    meas_shoes: "Shoes",
+    meas_skin: "Skin Tone",
+    skin_val: "Ebony",
+    meas_hair: "Hair",
+    hair_val: "Black",
+    meas_eyes: "Eyes",
+    eyes_val: "Brown",
+    btn_compcard: "Download Comp Card (PDF)",
+    btn_booknow: "Inquire Booking & Availability",
+    mosaic_count: "42 Exclusive Looks",
+    why_subtitle: "The seamless fusion of artistic intuition and runway discipline",
+    why_t1: "Sharp Creative Direction",
+    why_p1: "I quickly grasp a director's vision, bringing it to life in front of the lens with sculptural accuracy and effortless intuition.",
+    why_t2: "Stylistic Versatility",
+    why_p2: "From high-end editorial close-ups to vibrant commercial campaigns, I adapt my posture and gaze without ever compromising my identity.",
+    why_t3: "Fresh & Contemporary Aura",
+    why_p3: "A vibrant, magnetic aesthetic tailored for contemporary brands and the high-engagement demands of premium digital platforms.",
+    why_t4: "Uncompromising Professionalism",
+    why_p4: "Punctual, committed, and resilient, I approach every shoot as a collaborative partnership built on mutual respect and excellence.",
+    why_t5: "Measurable Brand Value",
+    why_p5: "I go beyond simply posing: I actively help craft striking visuals that elevate product desirability and strengthen brand equity.",
+    tl_2023: "Official campaign photoshoot, <strong>Daily Desiign</strong>",
+    tl_2024: "Haute couture runway show, <strong>Kuba Concept Store</strong>",
+    tl_2025: "Flagship campaign shoots: <strong>Dimension Beyond the Extrêmes · Djino · Nourima</strong>",
+    tl_2026: "Official candidate for the prestigious <strong>Miss Gabon Morocco 2026</strong> Pageant",
+    metric_1_l: "TikTok Video Views",
+    metric_1_s: "Organic viral reach",
+    metric_2_l: "TikTok Likes & Reactions",
+    metric_2_s: "High community engagement",
+    metric_3_l: "Instagram Impressions",
+    metric_3_s: "Past 30 days qualified traffic",
+    metric_4_l: "Monthly Pinterest Views",
+    metric_4_s: "Moodboard curation traction",
+    contact_lead: "Ready to elevate your upcoming campaigns, lookbooks, runways, and premium digital storytelling. Available across Morocco & worldwide.",
+    form_name: "Full Name *",
+    form_brand: "Brand / Agency / Photographer *",
+    form_type: "Project Type *",
+    form_date: "Expected Date / Timeline",
+    form_msg: "Creative Vision & Moodboard Details",
+    form_submit: "Submit Booking Request",
+    sticky_book: "Book Moïra"
+  }
+};
+
+// =========================================================================
+// 2. ÉTAT GLOBAL ET RÉFÉRENCES PARTAGÉES (HAUT DU FICHIER - AUCUNE TDZ)
+// =========================================================================
+let currentLang = 'fr';
+let galleryElements = [];
+let activeLightboxIndex = 0;
+let metricsAnimated = false;
+let isShowingAllLooks = false;
+let loaderDismissed = false;
+let loaderIntervalId = null;
+let loaderSafetyTimeoutId = null;
+let lastScrollY = 0;
+
+// Registre central des éléments DOM
+const dom = {
+  scrollProgressBar: null,
+  siteLoader: null,
+  loaderCounter: null,
+  siteHeader: null,
+  menuToggleBtn: null,
+  fullscreenMenu: null,
+  menuPreviewImg: null,
+  menuLinks: null,
+  mobileStickyCta: null,
+  heroSection: null,
+  contactSection: null,
+  bookingForm: null,
+  formStatusMsg: null,
+  watermarkTrack: null,
+  langToggleBtn: null,
+  customCursor: null,
+  mosaicContainer: null,
+  mosaicToggleBtn: null,
+  filterButtons: null,
+  selectedWorksSec: null,
+  selectedWorksGrid: null,
+  selectedWorksCountLabel: null,
+  // Lightbox
+  lightboxModal: null,
+  lightboxImage: null,
+  lightboxCounter: null,
+  lightboxCaptionTitle: null,
+  lightboxCaptionSub: null,
+  lightboxCloseBtn: null,
+  lightboxPrevBtn: null,
+  lightboxNextBtn: null,
+  lightboxStage: null
+};
+
+// =========================================================================
+// 3. FONCTIONS UTILITAIRES & MODULES (DÉCLARÉES AVANT INIT)
+// =========================================================================
+
+/**
+ * Cache les sélecteurs DOM principaux pour des accès ultra-rapides.
+ */
+function cacheDomReferences() {
+  dom.scrollProgressBar = document.getElementById('scrollProgressBar');
+  dom.siteLoader = document.getElementById('siteLoader');
+  dom.loaderCounter = document.getElementById('loaderCounter');
+  dom.siteHeader = document.getElementById('siteHeader');
+  dom.menuToggleBtn = document.getElementById('menuToggleBtn');
+  dom.fullscreenMenu = document.getElementById('fullscreenMenu');
+  dom.menuPreviewImg = document.getElementById('menuPreviewImg');
+  dom.menuLinks = document.querySelectorAll('[data-menu-close]');
+  dom.mobileStickyCta = document.getElementById('mobileStickyCta');
+  dom.heroSection = document.getElementById('hero');
+  dom.contactSection = document.getElementById('contact');
+  dom.bookingForm = document.getElementById('bookingForm');
+  dom.formStatusMsg = document.getElementById('formStatusMsg');
+  dom.watermarkTrack = document.getElementById('watermarkTrack');
+  dom.langToggleBtn = document.getElementById('langToggleBtn');
+  dom.customCursor = document.getElementById('customCursor');
+  dom.mosaicContainer = document.getElementById('mosaicGridContainer');
+  dom.mosaicToggleBtn = document.getElementById('mosaicToggleBtn');
+  dom.filterButtons = document.querySelectorAll('#mosaicFilterBar .filter-btn');
+  dom.selectedWorksSec = document.getElementById('selected-works');
+  dom.selectedWorksGrid = document.getElementById('selectedWorksGrid');
+  dom.selectedWorksCountLabel = document.getElementById('selectedWorksCountLabel');
+
+  // Lightbox
+  dom.lightboxModal = document.getElementById('lightboxModal');
+  dom.lightboxImage = document.getElementById('lightboxImage');
+  dom.lightboxCounter = document.getElementById('lightboxCounter');
+  dom.lightboxCaptionTitle = document.getElementById('lightboxCaptionTitle');
+  dom.lightboxCaptionSub = document.getElementById('lightboxCaptionSub');
+  dom.lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+  dom.lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+  dom.lightboxNextBtn = document.getElementById('lightboxNextBtn');
+  dom.lightboxStage = document.getElementById('lightboxStage');
+}
+
+/**
+ * Recherche stricte des crédits photographes depuis data.js
+ */
+function findImageCredit(src, id) {
+  if (typeof PORTFOLIO_DATA === 'undefined') return '';
+  if (PORTFOLIO_DATA.hero && (src.includes('hero-portrait') || id === 'hero-portrait')) return PORTFOLIO_DATA.hero.credit || '';
+  if (PORTFOLIO_DATA.about && (src.includes('about-portrait') || id === 'about-portrait')) return PORTFOLIO_DATA.about.portraitCredit || '';
+  if (PORTFOLIO_DATA.compCard && (src.includes('comp-card') || id === 'comp-card-full')) return PORTFOLIO_DATA.compCard.credit || '';
+  if (PORTFOLIO_DATA.manifesto && (src.includes('01-signature-01') || id === '01-signature-01')) return PORTFOLIO_DATA.manifesto.credit || '';
+
+  if (Array.isArray(PORTFOLIO_DATA.chapters)) {
+    for (const chap of PORTFOLIO_DATA.chapters) {
+      if (chap.images) {
+        for (const item of chap.images) {
+          if (item.src && src.includes(item.src)) return item.credit || '';
+          if (id && item.src && item.src.includes(id)) return item.credit || '';
+        }
+      }
+    }
+  }
+  if (PORTFOLIO_DATA.visualArchive && Array.isArray(PORTFOLIO_DATA.visualArchive.items)) {
+    for (const item of PORTFOLIO_DATA.visualArchive.items) {
+      if (item.src && src.includes(item.src)) return item.credit || '';
+    }
+  }
+  return '';
+}
+
+/**
+ * Mise à jour de la langue et du dictionnaire
+ */
+function updateLanguage(lang) {
+  currentLang = lang;
+  document.body.setAttribute('data-lang', lang);
+  document.documentElement.lang = lang;
+
+  const dict = I18N[lang];
+  if (!dict) return;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) {
+      el.innerHTML = dict[key];
+    }
+  });
+
+  if (dom.langToggleBtn) {
+    const frSpan = dom.langToggleBtn.querySelector('.lang-fr');
+    const enSpan = dom.langToggleBtn.querySelector('.lang-en');
+    if (lang === 'fr') {
+      if (frSpan) frSpan.classList.add('active');
+      if (enSpan) enSpan.classList.remove('active');
+    } else {
+      if (frSpan) frSpan.classList.remove('active');
+      if (enSpan) enSpan.classList.add('active');
+    }
+  }
+}
+
+/**
+ * Mode production et galeries adaptatives (Seuil MIN_PHOTOS_PER_CHAPTER = 3)
+ */
+function applyAdaptiveGalleries() {
+  const isProduction = window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.SHOW_PLACEHOLDERS === false;
+  if (!isProduction) return;
+
+  document.body.classList.add('hide-placeholders');
+
+  const minThreshold = (window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.MIN_PHOTOS_PER_CHAPTER) || 3;
+  const chapters = (window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.chapters) || [];
+  const orphanedRealPhotos = [];
+
+  // Masquer les mosaïques / archives de placeholders sans photos réelles
+  const visualMosaic = document.getElementById('visual-mosaic');
+  if (visualMosaic) visualMosaic.style.display = 'none';
+
+  chapters.forEach(chap => {
+    if (chap.id === '06-visual-chapters') return;
+
+    const realPhotos = (chap.images || []).filter(img => !img.placeholder);
+    const chapElem = document.getElementById(chap.id) || document.getElementById(`chap-${chap.number}`);
+
+    if (realPhotos.length >= minThreshold) {
+      // >= 3 photos réelles : le chapitre s'affiche à sa place
+      if (chapElem) {
+        chapElem.style.display = 'block';
+        chapElem.querySelectorAll('[data-placeholder="true"]').forEach(el => el.style.display = 'none');
+      }
+    } else {
+      // < 3 photos : masquer le chapitre individuel
+      if (chapElem) chapElem.style.display = 'none';
+
+      // Regrouper les vraies photos de ce chapitre pour Selected Works
+      realPhotos.forEach(p => {
+        orphanedRealPhotos.push({
+          ...p,
+          chapterNumber: chap.number,
+          chapterTitle: chap.titleFr,
+          chapterTag: `${chap.number} — ${chap.titleFr}`
+        });
+      });
+    }
+  });
+
+  // Masquer les cartes placeholders restantes
+  document.querySelectorAll('[data-placeholder="true"]').forEach(el => {
+    el.style.display = 'none';
+  });
+
+  // Rendu dynamique de Selected Works si des photos orphelines existent
+  if (orphanedRealPhotos.length > 0 && dom.selectedWorksSec && dom.selectedWorksGrid) {
+    dom.selectedWorksSec.style.display = 'block';
+    if (dom.selectedWorksCountLabel) {
+      dom.selectedWorksCountLabel.textContent = `${orphanedRealPhotos.length} Regards Clés`;
+    }
+
+    dom.selectedWorksGrid.innerHTML = '';
+    orphanedRealPhotos.forEach(photo => {
+      const card = document.createElement('div');
+      const cardId = photo.src.replace('assets/images/', '').replace(/\.[^.]+$/, '');
+      card.className = 'selected-works-card';
+      card.setAttribute('data-lightbox', cardId);
+      card.setAttribute('data-placeholder', 'false');
+      card.setAttribute('data-caption', `${photo.captionFr} · ${photo.chapterTag}`);
+
+      card.innerHTML = `
+        <div class="selected-works-media">
+          <span class="selected-works-chapter-badge">✦ ${photo.chapterTag}</span>
+          <img 
+            src="${photo.src}" 
+            alt="${photo.alt || photo.captionFr}" 
+            class="selected-works-img" 
+            style="object-position: ${photo.focus || '50% 35%'};" 
+            loading="lazy"
+          >
+          <div class="selected-works-overlay">
+            <div class="selected-works-title">${photo.captionFr}</div>
+            <div class="selected-works-caption">${photo.chapterTitle} · Dorcas Moïra</div>
+          </div>
+        </div>
+      `;
+      dom.selectedWorksGrid.appendChild(card);
+    });
+  } else if (dom.selectedWorksSec) {
+    dom.selectedWorksSec.style.display = 'none';
+  }
+
+  // Filtrage intelligent des liens du menu plein écran
+  document.querySelectorAll('.menu-nav-links a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === '#chap-04' || href === '#visual-mosaic' || href === '#visual-chapters' || href === '#archive') {
+      const li = link.closest('li');
+      if (li) li.style.display = 'none';
+    }
+    if (href === '#chapters') {
+      if (orphanedRealPhotos.length > 0) {
+        link.setAttribute('href', '#selected-works');
+      }
+    }
+  });
+
+  // Re-synchronisation de la Lightbox
+  initLightboxElements();
+}
+
+/**
+ * Initialisation et synchronisation de la collection d'images Lightbox
+ */
+function initLightboxElements() {
+  const isProduction = window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.SHOW_PLACEHOLDERS === false;
+  let all = Array.from(document.querySelectorAll('[data-lightbox]'));
+
+  if (isProduction) {
+    all = all.filter(el => {
+      if (el.getAttribute('data-placeholder') === 'true') return false;
+      if (el.closest('[data-has-real-photos="false"]')) return false;
+      if (el.closest('[data-placeholder="true"]')) return false;
+      if (el.offsetParent === null && window.getComputedStyle(el).display === 'none') return false;
+      return true;
+    });
+  }
+
+  galleryElements = all;
+  galleryElements.forEach((el, index) => {
+    if (el._lightboxHandler) {
+      el.removeEventListener('click', el._lightboxHandler);
+    }
+    el._lightboxHandler = (e) => {
+      e.preventDefault();
+      openLightbox(index);
+    };
+    el.addEventListener('click', el._lightboxHandler);
+  });
+}
+
+function openLightbox(index) {
+  if (!dom.lightboxModal || !galleryElements.length) return;
+  activeLightboxIndex = (index >= 0 && index < galleryElements.length) ? index : 0;
+  updateLightboxContent();
+  dom.lightboxModal.classList.add('is-active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  if (!dom.lightboxModal) return;
+  dom.lightboxModal.classList.remove('is-active');
+  document.body.style.overflow = '';
+}
+
+function updateLightboxContent() {
+  if (!dom.lightboxImage || !galleryElements[activeLightboxIndex]) return;
+
+  const el = galleryElements[activeLightboxIndex];
+  const img = el.querySelector('img');
+  const src = img ? img.getAttribute('src') : '';
+  const caption = el.getAttribute('data-caption') || (img ? img.getAttribute('alt') : '');
+  const lightboxId = el.getAttribute('data-lightbox') || '';
+  const credit = el.getAttribute('data-credit') || findImageCredit(src, lightboxId);
+
+  dom.lightboxImage.style.transform = 'scale(0.96)';
+  dom.lightboxImage.style.opacity = '0';
+
+  setTimeout(() => {
+    dom.lightboxImage.src = src;
+    dom.lightboxImage.alt = caption;
+    if (dom.lightboxCaptionTitle) dom.lightboxCaptionTitle.textContent = caption;
+    const hasCredit = credit && credit !== 'null' && String(credit).trim() !== '';
+    const creditLabel = hasCredit ? ` · Ph: ${credit}` : '';
+    if (dom.lightboxCaptionSub) {
+      dom.lightboxCaptionSub.textContent = `Dorcas Moïra${creditLabel} · ${activeLightboxIndex + 1} / ${galleryElements.length}`;
+    }
+    if (dom.lightboxCounter) {
+      dom.lightboxCounter.textContent = `${String(activeLightboxIndex + 1).padStart(2, '0')} / ${String(galleryElements.length).padStart(2, '0')}`;
+    }
+    dom.lightboxImage.style.transform = 'scale(1)';
+    dom.lightboxImage.style.opacity = '1';
+  }, 60);
+}
+
+function showNextPhoto() {
+  if (!galleryElements.length) return;
+  activeLightboxIndex = (activeLightboxIndex + 1) % galleryElements.length;
+  updateLightboxContent();
+}
+
+function showPrevPhoto() {
+  if (!galleryElements.length) return;
+  activeLightboxIndex = (activeLightboxIndex - 1 + galleryElements.length) % galleryElements.length;
+  updateLightboxContent();
+}
+
+/**
+ * Événements et contrôles Lightbox (Touches, Clavier, Swipe tactile)
+ */
+function initLightbox() {
+  initLightboxElements();
+
+  if (dom.lightboxCloseBtn) dom.lightboxCloseBtn.addEventListener('click', closeLightbox);
+  if (dom.lightboxNextBtn) dom.lightboxNextBtn.addEventListener('click', showNextPhoto);
+  if (dom.lightboxPrevBtn) dom.lightboxPrevBtn.addEventListener('click', showPrevPhoto);
+
+  window.addEventListener('keydown', (e) => {
+    if (!dom.lightboxModal || !dom.lightboxModal.classList.contains('is-active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') showNextPhoto();
+    if (e.key === 'ArrowLeft') showPrevPhoto();
+  });
+
+  // Gestes tactiles sur mobile
+  if (dom.lightboxStage) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+
+    dom.lightboxStage.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    dom.lightboxStage.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      if (diffY > 80 && Math.abs(diffX) < 60) {
+        closeLightbox();
+        return;
+      }
+      if (Math.abs(diffX) > 45) {
+        if (diffX < 0) showNextPhoto();
+        else showPrevPhoto();
+      }
+    }, { passive: true });
+  }
+}
+
+/**
+ * Menu Plein Écran Haute Couture & Prévisualisation des Médias
+ */
+function toggleMenu(forceClose = false) {
+  if (!dom.fullscreenMenu || !dom.menuToggleBtn) return;
+  const isOpen = forceClose ? false : !dom.fullscreenMenu.classList.contains('is-open');
+  if (isOpen) {
+    dom.fullscreenMenu.classList.add('is-open');
+    dom.menuToggleBtn.classList.add('is-active');
+    dom.menuToggleBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  } else {
+    dom.fullscreenMenu.classList.remove('is-open');
+    dom.menuToggleBtn.classList.remove('is-active');
+    dom.menuToggleBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+}
+
+function initMenu() {
+  if (dom.menuToggleBtn) {
+    dom.menuToggleBtn.addEventListener('click', () => toggleMenu());
+  }
+
+  if (dom.menuLinks) {
+    dom.menuLinks.forEach(link => {
+      link.addEventListener('click', () => toggleMenu(true));
+
+      // Prévisualisation photo dynamique au survol
+      link.addEventListener('mouseenter', () => {
+        const targetImg = link.getAttribute('data-preview');
+        if (dom.menuPreviewImg && targetImg) {
+          dom.menuPreviewImg.style.opacity = '0.3';
+          setTimeout(() => {
+            dom.menuPreviewImg.src = targetImg;
+            dom.menuPreviewImg.style.opacity = '1';
+          }, 120);
+        }
+      });
+    });
+  }
+}
+
+/**
+ * Header sticky intelligent et barre de progression
+ */
+function initHeaderAndScroll() {
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+
+    // 1. Barre de progression supérieure
+    if (dom.scrollProgressBar) {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (currentScrollY / docHeight) * 100 : 0;
+      dom.scrollProgressBar.style.width = `${progress}%`;
+    }
+
+    // 2. Header sticky intelligent
+    if (dom.siteHeader) {
+      if (currentScrollY > 50) {
+        dom.siteHeader.classList.add('is-scrolled');
+      } else {
+        dom.siteHeader.classList.remove('is-scrolled');
+      }
+
+      if (currentScrollY > lastScrollY && currentScrollY > 180) {
+        dom.siteHeader.classList.add('is-hidden');
+      } else {
+        dom.siteHeader.classList.remove('is-hidden');
+      }
+    }
+
+    lastScrollY = currentScrollY;
+    handleStickyCtaVisibility();
+  }, { passive: true });
+}
+
+/**
+ * Visibilité du bouton sticky booking mobile
+ */
+function handleStickyCtaVisibility() {
+  if (!dom.mobileStickyCta || !dom.heroSection || !dom.contactSection) return;
+  const heroBottom = dom.heroSection.getBoundingClientRect().bottom;
+  const contactTop = dom.contactSection.getBoundingClientRect().top;
+  const windowHeight = window.innerHeight;
+
+  if (heroBottom < 100 && contactTop > windowHeight - 80) {
+    dom.mobileStickyCta.classList.remove('is-hidden');
+  } else {
+    dom.mobileStickyCta.classList.add('is-hidden');
+  }
+}
+
+/**
+ * Séquence d'entrée Awwwards du Hero (GSAP Timeline)
+ */
+function triggerHeroSequence() {
+  if (typeof gsap === 'undefined') return;
+
+  const easeWaw = 'power3.out';
+  const tl = gsap.timeline({ defaults: { ease: easeWaw } });
+
+  tl.from('#heroLayerBg', {
+    opacity: 0,
+    duration: 0.9
+  }, 0.1)
+  .from('#heroLayerPortfolio', {
+    y: 60,
+    opacity: 0,
+    duration: 1.1
+  }, 0.25)
+  .from('#heroCutoutImg', {
+    scale: 1.08,
+    y: 35,
+    opacity: 0,
+    duration: 1.2
+  }, 0.45)
+  .from('.hero-badge-pill', {
+    y: 20,
+    opacity: 0,
+    duration: 0.7
+  }, 0.65)
+  .from('.hero-script-creative', {
+    x: -40,
+    opacity: 0,
+    duration: 0.9
+  }, 0.75)
+  .from('.hero-main-name', {
+    y: 25,
+    opacity: 0,
+    duration: 0.8
+  }, 0.85)
+  .from('.hero-role-text, .hero-tagline, .hero-scroll-cue', {
+    y: 15,
+    opacity: 0,
+    stagger: 0.1,
+    duration: 0.7
+  }, 0.95);
+
+  // Parallaxe différencié au scroll
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const portfolioWord = document.getElementById('heroLayerPortfolio');
+      const heroCutout = document.getElementById('heroCutoutImg');
+
+      if (portfolioWord && scrollY < window.innerHeight) {
+        portfolioWord.style.transform = `translate(-50%, ${scrollY * 0.28}px)`;
+      }
+      if (heroCutout && scrollY < window.innerHeight) {
+        heroCutout.style.transform = `translate3d(0, ${scrollY * 0.12}px, 0)`;
+      }
+    }, { passive: true });
+  }
+}
+
+/**
+ * Mosaïque visuelle (Chapitre 06) et filtres
+ */
+function initVisualMosaic() {
+  if (!dom.mosaicContainer || !window.PORTFOLIO_DATA) return;
+  if (window.PORTFOLIO_DATA.SHOW_PLACEHOLDERS === false) {
+    const sec = document.getElementById('visual-mosaic');
+    if (sec) sec.style.display = 'none';
+    return;
+  }
+
+  const ch06 = window.PORTFOLIO_DATA.chapters.find(c => c.id === '06-visual-chapters');
+  if (!ch06 || !ch06.images) return;
+
+  dom.mosaicContainer.innerHTML = '';
+  ch06.images.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = `mosaic-item ${item.isTall ? 'tall' : ''}`;
+    card.setAttribute('data-category', item.category);
+    card.setAttribute('data-lightbox', `06-visual-${String(idx + 1).padStart(2, '0')}`);
+    card.setAttribute('data-caption', `${item.captionFr} · Dorcas Moïra`);
+
+    if (idx >= 12 && window.innerWidth < 768 && !isShowingAllLooks) {
+      card.classList.add('is-hidden-mobile');
+    }
+
+    const media = document.createElement('div');
+    media.className = 'mosaic-item-media';
+
+    const img = document.createElement('img');
+    img.src = item.src;
+    img.alt = item.alt;
+    img.loading = 'lazy';
+
+    const tag = document.createElement('span');
+    tag.className = 'mosaic-item-tag';
+    tag.textContent = item.category.toUpperCase();
+
+    media.appendChild(img);
+    card.appendChild(media);
+    card.appendChild(tag);
+    dom.mosaicContainer.appendChild(card);
+  });
+
+  initLightboxElements();
+
+  if (dom.mosaicToggleBtn) {
+    dom.mosaicToggleBtn.addEventListener('click', () => {
+      isShowingAllLooks = !isShowingAllLooks;
+      document.querySelectorAll('.is-hidden-mobile').forEach(el => {
+        el.style.display = isShowingAllLooks ? 'block' : 'none';
+      });
+      const span = dom.mosaicToggleBtn.querySelector('span');
+      if (span) {
+        span.textContent = isShowingAllLooks ? 'Réduire la sélection' : 'Voir tous les 42 looks';
+      }
+    });
+  }
+
+  if (dom.filterButtons) {
+    dom.filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        dom.filterButtons.forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+
+        const filterVal = btn.getAttribute('data-filter');
+        const items = document.querySelectorAll('#mosaicGridContainer .mosaic-item');
+
+        items.forEach(item => {
+          const itemCat = item.getAttribute('data-category');
+          if (filterVal === 'all' || itemCat === filterVal) {
+            item.classList.remove('is-hidden');
+            item.style.opacity = '0';
+            setTimeout(() => { item.style.opacity = '1'; }, 40);
+          } else {
+            item.classList.add('is-hidden');
+          }
+        });
+      });
+    });
+  }
+}
+
+/**
+ * Animation des compteurs métriques sur IntersectionObserver
+ */
+function initMetrics() {
+  const metricCards = document.querySelectorAll('.metric-number');
+  const metricsSection = document.getElementById('metrics');
+
+  function animateMetricCounters() {
+    metricCards.forEach(card => {
+      const target = parseInt(card.getAttribute('data-target'), 10);
+      const prefix = card.getAttribute('data-prefix') || '';
+      const suffix = card.getAttribute('data-suffix') || '';
+      const duration = 1800;
+      const startTime = performance.now();
+
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeVal = 1 - Math.pow(1 - progress, 3);
+        const currentVal = Math.floor(easeVal * target);
+
+        if (suffix === 'K') {
+          const valInK = (currentVal / 1000).toFixed(currentVal >= 100000 ? 0 : 1).replace('.', ',');
+          card.textContent = `${prefix}${valInK}K`;
+        } else {
+          card.textContent = `${prefix}${currentVal.toLocaleString()}`;
+        }
+
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    });
+  }
+
+  if (metricsSection && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !metricsAnimated) {
+          metricsAnimated = true;
+          animateMetricCounters();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(metricsSection);
+  }
+}
+
+/**
+ * Formulaire de contact et formatage WhatsApp officiel
+ */
+function initBookingForm() {
+  if (!dom.bookingForm) return;
+
+  dom.bookingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nameInput = document.getElementById('bookName');
+    const brandInput = document.getElementById('bookBrand');
+    const typeInput = document.getElementById('bookType');
+    const dateInput = document.getElementById('bookDate');
+    const msgInput = document.getElementById('bookMessage');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const brand = brandInput ? brandInput.value.trim() : '';
+    const type = typeInput ? typeInput.value : '';
+    const date = dateInput ? dateInput.value.trim() : '';
+    const message = msgInput ? msgInput.value.trim() : '';
+
+    if (!name || !brand || !type) {
+      alert(currentLang === 'fr' ? 'Veuillez renseigner les champs obligatoires (*).' : 'Please complete all required fields (*).');
+      return;
+    }
+
+    const formattedMsg = encodeURIComponent(
+      `✦ *DEMANDE DE BOOKING OFFICIELLE — DORCAS MOÏRA*\n\n` +
+      `• *Nom & Prénom:* ${name}\n` +
+      `• *Marque / Agence:* ${brand}\n` +
+      `• *Type de Projet:* ${type}\n` +
+      `• *Période / Date:* ${date || 'À convenir'}\n` +
+      `• *Détails & Moodboard:* ${message || 'Échange sur projet éditorial/commercial.'}\n\n` +
+      `_Envoyé depuis le portfolio officiel de Dorcas Moïra_`
+    );
+
+    if (dom.formStatusMsg) {
+      dom.formStatusMsg.style.display = 'block';
+      dom.formStatusMsg.innerHTML = currentLang === 'fr'
+        ? `<strong>Demande confirmée.</strong> Redirection immédiate vers le desk WhatsApp de Dorcas Moïra...`
+        : `<strong>Request registered.</strong> Redirecting directly to Dorcas Moïra's WhatsApp desk...`;
+    }
+
+    if (window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.identity && window.PORTFOLIO_DATA.identity.formspreeEndpoint) {
+      fetch(window.PORTFOLIO_DATA.identity.formspreeEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, brand, type, date, message })
+      }).catch(() => {});
+    }
+
+    setTimeout(() => {
+      window.open(`https://wa.me/212779732777?text=${formattedMsg}`, '_blank');
+      dom.bookingForm.reset();
+    }, 1200);
+  });
+}
+
+/**
+ * Parallaxe filigrane « The Muse Energy »
+ */
+function initWatermark() {
+  if (!dom.watermarkTrack) return;
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY;
+    dom.watermarkTrack.style.transform = `translateX(${- (scrollPos * 0.12) % 400}px)`;
+  }, { passive: true });
+}
+
+/**
+ * Curseur de luxe desktop et easter egg
+ */
+function initCursor() {
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  if (!isTouchDevice && dom.customCursor) {
+    window.addEventListener('mousemove', (e) => {
+      dom.customCursor.style.left = `${e.clientX}px`;
+      dom.customCursor.style.top = `${e.clientY}px`;
+    });
+
+    document.querySelectorAll('.carousel-card, .mosaic-item, .comp-card-photo, .reel-card, .selected-works-card').forEach(target => {
+      target.addEventListener('mouseenter', () => dom.customCursor.classList.add('is-visible'));
+      target.addEventListener('mouseleave', () => dom.customCursor.classList.remove('is-visible'));
+    });
+  }
+
+  // Monogramme footer qui se redessine
+  const egg = document.querySelector('.footer-monogram-egg');
+  if (egg) {
+    egg.addEventListener('mouseenter', () => {
+      const path = egg.querySelector('.footer-dm-stroke');
+      if (path) {
+        path.style.animation = 'none';
+        path.offsetHeight;
+        path.style.animation = 'drawSignature 1.1s var(--ease-waw) forwards';
+      }
+    });
+  }
+}
+
+/**
+ * Retrait sécurisé du loader et déclenchement du hero
+ */
+function dismissLoader() {
+  if (loaderDismissed) return;
+  loaderDismissed = true;
+
+  if (loaderIntervalId) {
+    clearInterval(loaderIntervalId);
+    loaderIntervalId = null;
+  }
+  if (loaderSafetyTimeoutId) {
+    clearTimeout(loaderSafetyTimeoutId);
+    loaderSafetyTimeoutId = null;
+  }
+
+  if (dom.loaderCounter) {
+    dom.loaderCounter.textContent = '100%';
+  }
+
+  if (dom.siteLoader) {
+    dom.siteLoader.classList.add('is-loaded');
+  }
+
+  try {
+    triggerHeroSequence();
+  } catch (err) {
+    console.warn('[Hero Animation Warning]', err);
+  }
+}
+
+/**
+ * Animation du loader avec compteur 00 -> 100%
+ */
+function initLoader() {
+  let loadPercent = 0;
+
+  loaderIntervalId = setInterval(() => {
+    loadPercent += Math.floor(Math.random() * 8) + 5;
+    if (loadPercent >= 100) {
+      loadPercent = 100;
+      clearInterval(loaderIntervalId);
+      loaderIntervalId = null;
+      if (dom.loaderCounter) dom.loaderCounter.textContent = '100%';
+      setTimeout(dismissLoader, 200);
+    } else {
+      if (dom.loaderCounter) {
+        dom.loaderCounter.textContent = `${String(loadPercent).padStart(2, '0')}%`;
+      }
+    }
+  }, 45);
+}
+
+// =========================================================================
+// 4. INITIALISATION CENTRALISÉE init()
+// Ordre strict : état → données → galeries adaptatives → lightbox → menu → animations → sortie du loader
+// =========================================================================
+function init() {
+  // 1. ÉTAT & CACHE DOM
+  try {
+    cacheDomReferences();
+  } catch (err) {
+    console.warn('[Init DOM Warning]', err);
+  }
+
+  // 2. DONNÉES & LANGUE
+  try {
+    updateLanguage(currentLang);
+    if (dom.langToggleBtn) {
+      dom.langToggleBtn.addEventListener('click', () => {
+        const nextLang = currentLang === 'fr' ? 'en' : 'fr';
+        updateLanguage(nextLang);
+      });
+    }
+  } catch (err) {
+    console.warn('[Init Language Warning]', err);
+  }
+
+  // 3. GALERIES ADAPTATIVES (Sécurisé : galleryElements déjà déclaré)
+  try {
+    applyAdaptiveGalleries();
+  } catch (err) {
+    console.warn('[Init Adaptive Galleries Warning]', err);
+  }
+
+  // 4. LIGHTBOX
+  try {
+    initLightbox();
+  } catch (err) {
+    console.warn('[Init Lightbox Warning]', err);
+  }
+
+  // 5. MENU, NAVIGATION & HEADER
+  try {
+    initMenu();
+    initHeaderAndScroll();
+  } catch (err) {
+    console.warn('[Init Navigation Warning]', err);
+  }
+
+  // 6. ANIMATIONS, COMPTEURS, FORMULAIRE & INTERACTIONS
+  try {
+    initVisualMosaic();
+    initMetrics();
+    initBookingForm();
+    initWatermark();
+    initCursor();
+  } catch (err) {
+    console.warn('[Init Interactions Warning]', err);
+  }
+
+  // 7. LOADER DE LUXE (avec sortie fluide)
+  try {
+    initLoader();
+  } catch (err) {
+    console.warn('[Init Loader Warning]', err);
+    dismissLoader();
+  }
+}
+
+// =========================================================================
+// 5. FILET DE SÉCURITÉ ABSOLU : RETRAIT DU LOADER APRÈS 4 SECONDES MAX
+// =========================================================================
+loaderSafetyTimeoutId = setTimeout(() => {
+  if (!loaderDismissed) {
+    console.warn('[Safety Net] Loader forced to dismiss after 4000ms.');
+    dismissLoader();
+  }
+}, 4000);
+
+// Écouteur principal
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  // Déjà chargé
+  init();
+}
+'''
+
+with open('js/main.js', 'w', encoding='utf-8') as f:
+    f.write(code.strip() + '\n')
+
+print("Wrote refactored js/main.js successfully!")

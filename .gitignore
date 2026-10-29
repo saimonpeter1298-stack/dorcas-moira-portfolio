@@ -1,0 +1,37 @@
+# Assets de travail et archives
+assets/_incoming/
+assets/_originals/
+assets/_backup/
+assets/crops_verify/
+
+# Build artifacts
+dist/
+
+# Dependencies & Environment
+node_modules/
+.env
+.env.*
+.vercel/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS Generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Logs & temp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+tools/lh-report.json
+tools/lighthouse-report.json

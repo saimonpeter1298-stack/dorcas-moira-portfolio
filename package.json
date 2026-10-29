@@ -1,0 +1,20 @@
+{
+  "name": "dorcas-moira-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio officiel de Dorcas Moïra — Modèle Photo & Afro Fashion Muse",
+  "scripts": {
+    "build": "node tools/build.js",
+    "start": "npx serve dist",
+    "dev": "node tools/serve.py"
+  },
+  "keywords": [
+    "portfolio",
+    "model",
+    "dorcas-moira",
+    "fashion",
+    "casablanca"
+  ],
+  "author": "Dorcas Moïra",
+  "license": "UNLICENSED",
+  "private": true
+}

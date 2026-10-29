@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Page non trouvée (404) — Dorcas Moïra</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#0B0807">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/google-fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    body.page-404 {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #0B0807;
+      color: #F3E6D8;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 24px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .error-404-container {
+      position: relative;
+      z-index: 2;
+      max-width: 580px;
+      width: 100%;
+      text-align: center;
+      padding: 48px 32px;
+      border: 1px solid rgba(184, 122, 82, 0.3);
+      background: radial-gradient(circle at center, rgba(30, 20, 15, 0.6) 0%, rgba(11, 8, 7, 0.95) 100%);
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(184, 122, 82, 0.08);
+    }
+
+    .error-404-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(184, 122, 82, 0.4);
+      background: rgba(184, 122, 82, 0.1);
+      color: #E3B48C;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .error-404-number {
+      font-family: var(--font-display, serif);
+      font-size: clamp(4.5rem, 14vw, 7.5rem);
+      font-weight: 800;
+      line-height: 1;
+      margin: 0 0 16px 0;
+      background: linear-gradient(135deg, #F3E6D8 0%, #E3B48C 40%, #B87A52 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .error-404-script {
+      font-family: var(--font-script, cursive);
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      color: #E3B48C;
+      margin: 0 0 16px 0;
+      line-height: 1.2;
+      font-weight: 400;
+    }
+
+    .error-404-desc {
+      color: #A8988C;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0 auto 32px auto;
+      max-width: 440px;
+    }
+
+    .error-404-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #B87A52 0%, #8C522D 100%);
+      color: #0B0807;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(184, 122, 82, 0.3);
+    }
+
+    .error-404-cta:hover {
+      background: linear-gradient(135deg, #E3B48C 0%, #B87A52 100%);
+      box-shadow: 0 6px 28px rgba(184, 122, 82, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .error-ambient-halo {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 122, 82, 0.15) 0%, rgba(11, 8, 7, 0) 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body class="page-404">
+  <div class="error-ambient-halo" aria-hidden="true"></div>
+
+  <main class="error-404-container">
+    <span class="error-404-badge">Édition & Navigation</span>
+    <h1 class="error-404-number">404</h1>
+    <h2 class="error-404-script">Silhouette introuvable</h2>
+    <p class="error-404-desc">
+      Cette page s'est évanouie dans les coulisses ou l'adresse demandée est indisponible.
+    </p>
+    <a href="/" class="error-404-cta">
+      <span>← Retourner au Portfolio</span>
+    </a>
+  </main>
+</body>
+</html>

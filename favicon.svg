@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="copperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3B48C"/>
+      <stop offset="50%" stop-color="#B87A52"/>
+      <stop offset="100%" stop-color="#8F5632"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#B87A52" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0B0807" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Fond noir nuit -->
+  <rect width="64" height="64" rx="14" fill="#0B0807"/>
+  <circle cx="32" cy="32" r="28" fill="url(#halo)"/>
+  <!-- Filet cuivre délicat -->
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="url(#copperGrad)" stroke-width="1.2" opacity="0.6"/>
+  <!-- Monogramme DM -->
+  <text x="32" y="42" font-family="'Didot', 'Bodoni MT', 'Cinzel', 'Georgia', serif" font-size="28" font-weight="700" fill="url(#copperGrad)" text-anchor="middle" letter-spacing="-1.5">DM</text>
+  <!-- Petit éclat étoile -->
+  <circle cx="48" cy="18" r="1.2" fill="#E3B48C"/>
+</svg>
