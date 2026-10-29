@@ -148,9 +148,13 @@ async function run() {
           { id: 'selected-works', name: '375_05_selected_works.png' },
           { id: 'chap-02', name: '375_06_chap_02_many_moods.png' },
           { id: 'chap-03', name: '375_07_chap_03_afro_chic.png' },
-          { id: 'chap-05', name: '375_08_chap_05_sun_kissed.png' },
-          { id: 'why-me', name: '375_09_why_me.png' },
-          { id: 'journey', name: '375_10_journey_timeline.png' }
+          { id: 'chap-04', name: '375_08_chap_04_studio.png' },
+          { id: 'chap-05', name: '375_09_chap_05_sun_kissed.png' },
+          { id: 'chap-06', name: '375_10_chap_06_visual.png' },
+          { id: 'motion', name: '375_11_motion_video.png' },
+          { id: 'why-me', name: '375_12_why_me.png' },
+          { id: 'journey', name: '375_13_journey_timeline.png' },
+          { id: 'contact', name: '375_14_contact.png' }
         ];
 
         for (const sec of sectionsToCapture) {

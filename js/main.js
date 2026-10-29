@@ -571,6 +571,45 @@ function handleStickyCtaVisibility() {
 }
 
 /**
+ * Initialisation de la vidéo Runway (Motion) :
+ * - Autoplay / pause automatique via IntersectionObserver
+ * - Clic / tap pour basculer lecture / pause
+ */
+function initMotionVideo() {
+  const video = document.getElementById('motionVideoPlayer');
+  if (!video) return;
+
+  let userPaused = false;
+
+  const togglePlay = (e) => {
+    if (e) e.preventDefault();
+    if (video.paused) {
+      userPaused = false;
+      video.play().catch(() => {});
+    } else {
+      userPaused = true;
+      video.pause();
+    }
+  };
+
+  video.addEventListener('click', togglePlay);
+  video.addEventListener('touchend', togglePlay);
+
+  if ('IntersectionObserver' in window) {
+    const vObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !userPaused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+    vObserver.observe(video);
+  }
+}
+
+/**
  * Séquence d'entrée Awwwards du Hero & Grille Éditoriale (GSAP Timeline)
  */
 function triggerHeroSequence() {
@@ -1102,6 +1141,7 @@ function init() {
   try {
     initMenu();
     initHeaderAndScroll();
+    initMotionVideo();
   } catch (err) {
     console.warn('[Init Navigation Warning]', err);
   }

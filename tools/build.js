@@ -138,7 +138,7 @@ function renderPictureTag(imgObj, options = {}) {
   const base = fname.replace(/\.(jpg|webp)$/, '');
   const alt = imgObj.alt || 'Dorcas Moïra';
   const focus = imgObj.focus ? ` style="object-position: ${imgObj.focus};"` : '';
-  const loading = options.loading || 'eager';
+  const loading = options.loading || 'lazy';
   const sizes = options.sizes || '(max-width: 768px) 85vw, 400px';
   const imgClass = options.imgClass ? ` class="${options.imgClass}"` : '';
 
@@ -237,7 +237,8 @@ const chaptersHtmlArray = standaloneChapters.map(chap => {
     '02-many-moods': 'Élégance chaude, intérieurs feutrés & nuances d\'or',
     '03-afro-chic': 'Héritage africain modernisé & éclat des métaux',
     '04-studio': 'Épure, présence magnétique & contrastes vibrants',
-    '05-sun-kissed': 'Solaire, sensuel & chorégraphie océanique'
+    '05-sun-kissed': 'Solaire, sensuel & chorégraphie océanique',
+    '06-visual': 'Allure contemporaine, pagnes d\'art & éclat des campagnes'
   };
   const chapMood = moods[chap.id] || '';
 

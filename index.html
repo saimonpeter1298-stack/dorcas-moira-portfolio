@@ -136,8 +136,9 @@
         <li><a href="#about" class="menu-nav-link" data-menu-close data-preview="assets/images/about-portrait.jpg"><span class="link-num">02</span> <span data-i18n="menu_about">Who is Moïra ?</span></a></li>
         <li><a href="#comp-card" class="menu-nav-link" data-menu-close data-preview="assets/images/comp-card-full.jpg"><span class="link-num">03</span> <span data-i18n="menu_compcard">Comp Card</span></a></li>
         <li><a href="#chapters" class="menu-nav-link" data-menu-close data-preview="assets/images/03-afro-chic-01.jpg"><span class="link-num">04</span> <span data-i18n="menu_chapters">Chapitres Photo</span></a></li>
-        <li><a href="#why-me" class="menu-nav-link" data-menu-close data-preview="assets/images/beauty-portrait.jpg"><span class="link-num">05</span> <span data-i18n="menu_whyme">Pourquoi moi</span></a></li>
-        <li><a href="#contact" class="menu-nav-link" data-menu-close data-preview="assets/images/contact-portrait.jpg"><span class="link-num">06</span> <span data-i18n="menu_contact">Contact & Booking</span></a></li>
+        <li><a href="#motion" class="menu-nav-link" data-menu-close data-preview="assets/images/motion-reel-01-poster.jpg"><span class="link-num">05</span> <span data-i18n="menu_motion">Vidéo & Motion</span></a></li>
+        <li><a href="#why-me" class="menu-nav-link" data-menu-close data-preview="assets/images/beauty-portrait.jpg"><span class="link-num">06</span> <span data-i18n="menu_whyme">Pourquoi moi</span></a></li>
+        <li><a href="#contact" class="menu-nav-link" data-menu-close data-preview="assets/images/contact-portrait.jpg"><span class="link-num">07</span> <span data-i18n="menu_contact">Contact & Booking</span></a></li>
       </ul>
 
       <!-- Aperçu visuel en direct -->
@@ -666,6 +667,40 @@
 
 
 
+  <!-- 13. MOTION & STORIES REELS (VRAIE VIDÉO RUNWAY) -->
+  <section class="section-wrap perf-auto-contain" id="motion">
+    <div class="ambient-halo" aria-hidden="true"></div>
+    <div class="section-container">
+      <div class="editorial-header">
+        <div class="editorial-header-left">
+          <span class="chapter-number-pill">07 · Motion & Dynamique</span>
+          <h2 class="chapter-title-script">Video & Motion</h2>
+          <span class="chapter-mood-italic">L'énergie d'une muse en mouvement</span>
+        </div>
+        <div class="editorial-header-right">
+          <strong>Runway & Motion</strong>
+          <span>Captation Verticale</span>
+        </div>
+      </div>
+
+      <div class="motion-video-container">
+        <video 
+          class="motion-video-player"
+          id="motionVideoPlayer"
+          muted 
+          loop 
+          playsinline 
+          preload="none" 
+          poster="assets/images/motion-reel-01-poster.jpg"
+          aria-label="Dorcas Moïra défilé de mode runway"
+        >
+          <source src="assets/images/motion-reel-01.webm" type="video/webm">
+          <source src="assets/images/motion-reel-01.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
   <!-- 14. POURQUOI LES MARQUES ME CHOISISSENT -->
   <section class="section-wrap perf-auto-contain" id="why-me">
     <div class="ambient-halo" aria-hidden="true"></div>
@@ -902,6 +937,14 @@
       <div class="contact-layout">
         <!-- Informations directes -->
         <div class="contact-info-col">
+          <div class="contact-portrait-wrap">
+            <picture>
+              <source type="image/avif" srcset="assets/images/contact-portrait-480w.avif 480w, assets/images/contact-portrait-800w.avif 800w, assets/images/contact-portrait-1200w.avif 1200w, assets/images/contact-portrait-1600w.avif 1600w" sizes="(max-width: 480px) 130px, 160px">
+              <source type="image/webp" srcset="assets/images/contact-portrait-480w.webp 480w, assets/images/contact-portrait-800w.webp 800w, assets/images/contact-portrait-1200w.webp 1200w, assets/images/contact-portrait-1600w.webp 1600w" sizes="(max-width: 480px) 130px, 160px">
+              <img src="assets/images/contact-portrait.jpg" alt="Dorcas Moïra — Contact" class="contact-portrait-img" style="object-position: 50% 35%;" loading="lazy" decoding="async">
+            </picture>
+          </div>
+
           <div class="editorial-header-left" style="margin-bottom: 24px;">
             <span class="chapter-number-pill">Prise de Contact & Collaboration</span>
             <h2>LET'S CREATE <span>The Muse Energy</span></h2>

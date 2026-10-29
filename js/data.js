@@ -226,6 +226,13 @@ const PORTFOLIO_DATA = {
           ratio: "4/5",
           focus: "50% 30%",
           credit: null
+        },
+        {
+          src: "assets/images/02-many-moods-05.jpg",
+          alt: "Dorcas Moïra — One Face Many Moods, photo 4",
+          ratio: "4/5",
+          focus: "45% 25%",
+          credit: null
         }
       ]
     },
@@ -272,6 +279,20 @@ const PORTFOLIO_DATA = {
           ratio: "4/5",
           focus: "50% 30%",
           credit: null
+        },
+        {
+          src: "assets/images/04-studio-02.jpg",
+          alt: "Dorcas Moïra — Pure Studio Presence, photo 2",
+          ratio: "4/5",
+          focus: "55% 35%",
+          credit: null
+        },
+        {
+          src: "assets/images/04-studio-03.jpg",
+          alt: "Dorcas Moïra — Pure Studio Presence, photo 3",
+          ratio: "4/5",
+          focus: "50% 20%",
+          credit: null
         }
       ]
     },
@@ -302,6 +323,43 @@ const PORTFOLIO_DATA = {
           ratio: "4/5",
           focus: "50% 25%",
           credit: "KeyFilm Photographie"
+        }
+      ]
+    },
+    {
+      id: "06-visual",
+      number: "06",
+      titleFr: "Visual Chapters",
+      titleEn: "Visual Chapters",
+      category: "editorial",
+      images: [
+        {
+          src: "assets/images/06-visual-01.jpg",
+          alt: "Dorcas Moïra — Visual Chapters, photo 1",
+          ratio: "4/5",
+          focus: "50% 25%",
+          credit: null
+        },
+        {
+          src: "assets/images/06-visual-02.jpg",
+          alt: "Dorcas Moïra — Visual Chapters, photo 2",
+          ratio: "4/5",
+          focus: "50% 30%",
+          credit: null
+        },
+        {
+          src: "assets/images/06-visual-03.jpg",
+          alt: "Dorcas Moïra — Visual Chapters, photo 3",
+          ratio: "4/5",
+          focus: "50% 45%",
+          credit: null
+        },
+        {
+          src: "assets/images/06-visual-04.jpg",
+          alt: "Dorcas Moïra — Visual Chapters, photo 4",
+          ratio: "4/5",
+          focus: "50% 50%",
+          credit: null
         }
       ]
     }
