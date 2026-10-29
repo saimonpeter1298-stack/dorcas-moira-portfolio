@@ -337,7 +337,7 @@ function updateLanguage(lang, forceUpdate = false) {
 }
 
 /**
- * Mode production et galeries adaptatives (Seuil MIN_PHOTOS_PER_CHAPTER = 3)
+ * Mode production et galeries adaptatives
  */
 function applyAdaptiveGalleries() {
   const isProduction = window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.SHOW_PLACEHOLDERS === false;
@@ -345,96 +345,27 @@ function applyAdaptiveGalleries() {
 
   document.body.classList.add('hide-placeholders');
 
-  const minThreshold = (window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.MIN_PHOTOS_PER_CHAPTER) || 3;
-  const chapters = (window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.chapters) || [];
-  const orphanedRealPhotos = [];
+  // S'assurer que tous les chapitres avec vraies photos et Selected Works restent visibles
+  ['selected-works', 'chap-01', 'chap-02', 'chap-03', 'chap-04', 'chap-05'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'block';
+  });
 
   // Masquer les mosaïques / archives de placeholders sans photos réelles
   const visualMosaic = document.getElementById('visual-mosaic');
   if (visualMosaic) visualMosaic.style.display = 'none';
 
-  chapters.forEach(chap => {
-    if (chap.id === '06-visual-chapters') return;
-
-    const realPhotos = (chap.images || []).filter(img => !img.placeholder);
-    const chapElem = document.getElementById(chap.id) || document.getElementById(`chap-${chap.number}`);
-
-    if (realPhotos.length >= minThreshold) {
-      // >= 3 photos réelles : le chapitre s'affiche à sa place
-      if (chapElem) {
-        chapElem.style.display = 'block';
-        chapElem.querySelectorAll('[data-placeholder="true"]').forEach(el => el.style.display = 'none');
-      }
-    } else {
-      // < 3 photos : masquer le chapitre individuel
-      if (chapElem) chapElem.style.display = 'none';
-
-      // Regrouper les vraies photos de ce chapitre pour Selected Works
-      realPhotos.forEach(p => {
-        orphanedRealPhotos.push({
-          ...p,
-          chapterNumber: chap.number,
-          chapterTitle: chap.titleFr,
-          chapterTag: `${chap.number} — ${chap.titleFr}`
-        });
-      });
-    }
-  });
-
-  // Masquer les cartes placeholders restantes
+  // Masquer toutes les cartes placeholder restantes
   document.querySelectorAll('[data-placeholder="true"]').forEach(el => {
     el.style.display = 'none';
   });
 
-  // Rendu dynamique de Selected Works si des photos orphelines existent
-  if (orphanedRealPhotos.length > 0 && dom.selectedWorksSec && dom.selectedWorksGrid) {
-    dom.selectedWorksSec.style.display = 'block';
-    if (dom.selectedWorksCountLabel) {
-      dom.selectedWorksCountLabel.textContent = `${orphanedRealPhotos.length} Regards Clés`;
-    }
-
-    dom.selectedWorksGrid.innerHTML = '';
-    orphanedRealPhotos.forEach(photo => {
-      const card = document.createElement('div');
-      const cardId = photo.src.replace('assets/images/', '').replace(/\.[^.]+$/, '');
-      card.className = 'selected-works-card';
-      card.setAttribute('data-lightbox', cardId);
-      card.setAttribute('data-placeholder', 'false');
-      card.setAttribute('data-caption', `${photo.captionFr} · ${photo.chapterTag}`);
-
-      card.innerHTML = `
-        <div class="selected-works-media">
-          <span class="selected-works-chapter-badge">✦ ${photo.chapterTag}</span>
-          <img 
-            src="${photo.src}" 
-            alt="${photo.alt || photo.captionFr}" 
-            class="selected-works-img" 
-            style="object-position: ${photo.focus || '50% 35%'};" 
-            loading="lazy"
-          >
-          <div class="selected-works-overlay">
-            <div class="selected-works-title">${photo.captionFr}</div>
-            <div class="selected-works-caption">${photo.chapterTitle} · Dorcas Moïra</div>
-          </div>
-        </div>
-      `;
-      dom.selectedWorksGrid.appendChild(card);
-    });
-  } else if (dom.selectedWorksSec) {
-    dom.selectedWorksSec.style.display = 'none';
-  }
-
-  // Filtrage intelligent des liens du menu plein écran
+  // Filtrage des liens de navigation pour les sections masquées
   document.querySelectorAll('.menu-nav-links a').forEach(link => {
     const href = link.getAttribute('href');
-    if (href === '#chap-04' || href === '#visual-mosaic' || href === '#visual-chapters' || href === '#archive') {
+    if (href === '#visual-mosaic' || href === '#visual-chapters' || href === '#archive') {
       const li = link.closest('li');
       if (li) li.style.display = 'none';
-    }
-    if (href === '#chapters') {
-      if (orphanedRealPhotos.length > 0) {
-        link.setAttribute('href', '#selected-works');
-      }
     }
   });
 
@@ -493,7 +424,6 @@ function updateLightboxContent() {
   const el = galleryElements[activeLightboxIndex];
   const img = el.querySelector('img');
   const src = img ? img.getAttribute('src') : '';
-  const caption = el.getAttribute('data-caption') || (img ? img.getAttribute('alt') : '');
   const lightboxId = el.getAttribute('data-lightbox') || '';
   const credit = el.getAttribute('data-credit') || findImageCredit(src, lightboxId);
 
@@ -502,12 +432,14 @@ function updateLightboxContent() {
 
   setTimeout(() => {
     dom.lightboxImage.src = src;
-    dom.lightboxImage.alt = caption;
-    if (dom.lightboxCaptionTitle) dom.lightboxCaptionTitle.textContent = caption;
+    dom.lightboxImage.alt = `Dorcas Moïra — Photo ${activeLightboxIndex + 1}`;
+    if (dom.lightboxCaptionTitle) {
+      dom.lightboxCaptionTitle.textContent = '';
+      dom.lightboxCaptionTitle.style.display = 'none';
+    }
     const hasCredit = credit && credit !== 'null' && String(credit).trim() !== '';
-    const creditLabel = hasCredit ? ` · Ph: ${credit}` : '';
     if (dom.lightboxCaptionSub) {
-      dom.lightboxCaptionSub.textContent = `Dorcas Moïra${creditLabel} · ${activeLightboxIndex + 1} / ${galleryElements.length}`;
+      dom.lightboxCaptionSub.textContent = hasCredit ? credit : '';
     }
     if (dom.lightboxCounter) {
       dom.lightboxCounter.textContent = `${String(activeLightboxIndex + 1).padStart(2, '0')} / ${String(galleryElements.length).padStart(2, '0')}`;
@@ -635,13 +567,16 @@ function initHeaderAndScroll() {
 
     // 2. Header sticky intelligent
     if (dom.siteHeader) {
-      if (currentScrollY > 50) {
+      const heroHeight = dom.heroSection ? dom.heroSection.offsetHeight : window.innerHeight;
+      const isPastHero = currentScrollY >= (heroHeight - 80);
+
+      if (isPastHero) {
         dom.siteHeader.classList.add('is-scrolled');
       } else {
         dom.siteHeader.classList.remove('is-scrolled');
       }
 
-      if (currentScrollY > lastScrollY && currentScrollY > 180) {
+      if (currentScrollY > lastScrollY && currentScrollY > heroHeight + 50) {
         dom.siteHeader.classList.add('is-hidden');
       } else {
         dom.siteHeader.classList.remove('is-hidden');

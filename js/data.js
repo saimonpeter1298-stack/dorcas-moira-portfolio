@@ -178,57 +178,27 @@ const PORTFOLIO_DATA = {
     openToTravelEn: "Morocco & Worldwide"
   },
 
-  chapters: [
+    chapters: [
     {
       id: "01-signature",
       number: "01",
       titleFr: "Signature",
       titleEn: "Signature",
-      moodFr: "Royauté, intensité & sculpture monochrome",
-      moodEn: "Royalty, intensity & sculptural monochrome",
-      descriptionFr: "Profil au chapeau à cauris et veste graphique haute couture ; sculpture de profil et contraste noir absolu.",
-      descriptionEn: "Regal profile crowned with a cowrie shell diadem and graphic tailored jacket; high-contrast monochrome depth.",
       category: "editorial",
       images: [
         {
           src: "assets/images/01-signature-01.jpg",
-          alt: "Dorcas Moïra profil chapeau cauris et veste graphique",
+          alt: "Dorcas Moïra — Signature, photo 1",
           ratio: "4/5",
           focus: "60% 55%",
-          credit: null,
-          placeholder: false,
-          captionFr: "Profil Chapeau Cauris & Veste Graphique",
-          captionEn: "Cowrie Shell Crown & Graphic Tailoring"
+          credit: null
         },
         {
           src: "assets/images/01-signature-02.jpg",
-          alt: "Dorcas Moïra portrait noir et blanc demi-visage afro fond gris",
+          alt: "Dorcas Moïra — Signature, photo 2",
           ratio: "4/5",
           focus: "50% 25%",
-          credit: null,
-          placeholder: false,
-          captionFr: "Portrait N&B Demi-Visage & Afro",
-          captionEn: "B&W Half-Face Editorial & Afro"
-        },
-        {
-          src: "assets/images/01-signature-03.jpg",
-          alt: "Dorcas Moïra sculpture studio haute couture",
-          ratio: "4/5",
-          focus: "50% 40%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Sculpture Studio Haute Couture",
-          captionEn: "Haute Couture Studio Silhouette"
-        },
-        {
-          src: "assets/images/01-signature-04.jpg",
-          alt: "Dorcas Moïra ligne pure et regard impérial",
-          ratio: "4/5",
-          focus: "50% 30%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Ligne Pure & Regard Impérial",
-          captionEn: "Pure Lines & Magnetic Gaze"
+          credit: null
         }
       ]
     },
@@ -237,61 +207,28 @@ const PORTFOLIO_DATA = {
       number: "02",
       titleFr: "One Face. Many Moods.",
       titleEn: "One Face. Many Moods.",
-      moodFr: "Élégance chaude, intérieurs feutrés & nuances d'or",
-      moodEn: "Warm elegance, intimate interiors & golden hues",
-      descriptionFr: "Ensemble chocolat couture et tresses ; trench camel en intérieur chaud ; boubou satin lilas aux reflets soyeux.",
-      descriptionEn: "Chocolate couture ensemble with braided hair; tailored camel trench bathed in warm interior glow; fluid lilac satin.",
       category: "lifestyle",
       images: [
         {
           src: "assets/images/02-many-moods-01.jpg",
-          alt: "Dorcas Moïra ensemble chocolat couture",
+          alt: "Dorcas Moïra — One Face Many Moods, photo 1",
           ratio: "4/5",
           focus: "45% 30%",
-          credit: null,
-          placeholder: false,
-          captionFr: "Ensemble Chocolat Couture & Tresses",
-          captionEn: "Chocolate Couture & Braids"
-        },
-        {
-          src: "assets/images/02-many-moods-02.jpg",
-          alt: "Dorcas Moïra trench camel lumière ambre",
-          ratio: "4/5",
-          focus: "50% 35%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Trench Camel & Lumière d'Ambre",
-          captionEn: "Camel Trench & Amber Glow"
+          credit: null
         },
         {
           src: "assets/images/02-many-moods-03.jpg",
-          alt: "Dorcas Moïra trench bicolore beige et camel contre table sac à franges",
+          alt: "Dorcas Moïra — One Face Many Moods, photo 2",
           ratio: "4/5",
           focus: "50% 25%",
-          credit: null,
-          placeholder: false,
-          captionFr: "Trench Bicolore Beige & Sac à Franges",
-          captionEn: "Two-Tone Beige Trench & Fringe Bag"
+          credit: null
         },
         {
           src: "assets/images/02-many-moods-04.jpg",
-          alt: "Dorcas Moïra trench beige assise sur chaise orange regard caméra",
+          alt: "Dorcas Moïra — One Face Many Moods, photo 3",
           ratio: "4/5",
           focus: "50% 30%",
-          credit: null,
-          placeholder: false,
-          captionFr: "Trench Beige sur Chaise Orange",
-          captionEn: "Beige Trench on Orange Chair"
-        },
-        {
-          src: "assets/images/02-many-moods-05.jpg",
-          alt: "Dorcas Moïra velours et douceur nocturne",
-          ratio: "4/5",
-          focus: "50% 35%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Velours & Douceur Nocturne",
-          captionEn: "Velvet Depth & Nocturnal Serenity"
+          credit: null
         }
       ]
     },
@@ -300,174 +237,44 @@ const PORTFOLIO_DATA = {
       number: "03",
       titleFr: "Afro Chic Heritage",
       titleEn: "Afro Chic Heritage",
-      moodFr: "Héritage africain modernisé & éclat des métaux",
-      moodEn: "African heritage modernized & metallic accents",
-      descriptionFr: "Pagne indigo traditionnel et denim brut dans un couloir d'hôtel aux appliques dorées ; kimono wax/bogolan rouille à ceinture dorée martelée.",
-      descriptionEn: "Ancestral indigo cloth paired with dark denim in a gold-sconced hotel hallway; rust wax kimono cinched with hammered gold clasp.",
       category: "afro-chic",
       images: [
         {
           src: "assets/images/03-afro-chic-01.jpg",
-          alt: "Dorcas Moïra pagne indigo et jean couloir hôtel",
+          alt: "Dorcas Moïra — Afro Chic Heritage, photo 1",
           ratio: "4/5",
           focus: "50% 35%",
-          credit: null,
-          placeholder: false,
-          captionFr: "Couloir d'Hôtel · Pagne Indigo & Denim",
-          captionEn: "Hotel Hallway · Indigo Cloth & Denim"
+          credit: null
         },
         {
           src: "assets/images/03-afro-chic-02.jpg",
-          alt: "Dorcas Moïra kimono wax rouille souriante",
+          alt: "Dorcas Moïra — Afro Chic Heritage, photo 2",
           ratio: "4/5",
           focus: "50% 25%",
-          credit: null,
-          placeholder: false,
-          captionFr: "Kimono Wax Rouille & Sourire",
-          captionEn: "Rust Wax Kimono & Radiant Smile"
+          credit: null
         },
         {
           src: "assets/images/03-afro-chic-03.jpg",
-          alt: "Dorcas Moïra robe blanche à cordons en spirale et tresses regard par-dessus l'épaule",
+          alt: "Dorcas Moïra — Afro Chic Heritage, photo 3",
           ratio: "4/5",
           focus: "50% 25%",
-          credit: null,
-          placeholder: false,
-          captionFr: "Robe Blanche Spirale & Tresses",
-          captionEn: "White Spiral Dress & Braids"
-        },
-        {
-          src: "assets/images/03-afro-chic-04.jpg",
-          alt: "Dorcas Moïra tissage traditionnel et lignes modernes",
-          ratio: "4/5",
-          focus: "50% 40%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Tissage Traditionnel & Lignes Modernes",
-          captionEn: "Ancestral Weaving & Modern Silhouettes"
-        },
-        {
-          src: "assets/images/03-afro-chic-05.jpg",
-          alt: "Dorcas Moïra parure royale et allure afro-chic",
-          ratio: "4/5",
-          focus: "50% 30%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Parure Royale & Allure Afro-Chic",
-          captionEn: "Royal Adornments & Afro-Chic Presence"
+          credit: null
         }
       ]
     },
     {
-      id: "04-studio-presence",
+      id: "04-studio",
       number: "04",
       titleFr: "Pure Studio Presence",
       titleEn: "Pure Studio Presence",
-      moodFr: "Épure, présence magnétique & contrastes vibrants",
-      moodEn: "Minimalism, magnetic gaze & vibrant contrast",
-      descriptionFr: "Boubou patchwork rouge/marine/argent en damier, fond studio clair ; série N&B en couleur sélective, veste en jean.",
-      descriptionEn: "Vibrant scarlet, navy and silver checkerboard boubou on bright cyclorama; monochrome series featuring selective color accents.",
       category: "studio",
       images: [
         {
           src: "assets/images/04-studio-01.jpg",
-          alt: "Dorcas Moïra veste en jean N&B et boucle d'oreille orange en couleur",
+          alt: "Dorcas Moïra — Pure Studio Presence, photo 1",
           ratio: "4/5",
           focus: "50% 30%",
-          credit: null,
-          placeholder: false,
-          captionFr: "Veste Denim & Boucle Orange",
-          captionEn: "Denim & Orange Statement Earring"
-        },
-        {
-          src: "assets/images/04-studio-02.jpg",
-          alt: "Dorcas Moïra cyclorama clair et géométrie",
-          ratio: "4/5",
-          focus: "50% 35%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Cyclorama Clair & Géométrie",
-          captionEn: "Bright Cyclorama & Geometric Precision"
-        },
-        {
-          src: "assets/images/04-studio-03.jpg",
-          alt: "Dorcas Moïra couleur sélective boucles jaunes",
-          ratio: "4/5",
-          focus: "50% 30%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Couleur Sélective & Boucles Solaires",
-          captionEn: "Selective Color & Solar Earrings"
-        },
-        {
-          src: "assets/images/04-studio-04.jpg",
-          alt: "Dorcas Moïra veste en jean et regard magnétique",
-          ratio: "4/5",
-          focus: "50% 30%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Veste Denim & Regard Magnétique",
-          captionEn: "Denim Jacket & Magnetic Eye Contact"
-        },
-        {
-          src: "assets/images/04-studio-05.jpg",
-          alt: "Dorcas Moïra ombre portée et contraste épuré",
-          ratio: "4/5",
-          focus: "50% 40%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Ombre Portée & Contraste Épuré",
-          captionEn: "Cast Shadows & Crisp Contrast"
-        },
-        {
-          src: "assets/images/04-studio-06.jpg",
-          alt: "Dorcas Moïra portrait serré studio lumière haute",
-          ratio: "4/5",
-          focus: "50% 25%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Portrait Serré · High-Key Studio",
-          captionEn: "Tight Portrait · High-Key Lighting"
-        },
-        {
-          src: "assets/images/04-studio-07.jpg",
-          alt: "Dorcas Moïra silhouette monochrome",
-          ratio: "4/5",
-          focus: "50% 35%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Silhouette Monochrome & Présence",
-          captionEn: "Monochrome Silhouette & Pure Stature"
-        },
-        {
-          src: "assets/images/04-studio-08.jpg",
-          alt: "Dorcas Moïra architecture corporelle et pose nette",
-          ratio: "4/5",
-          focus: "50% 40%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Architecture Corporelle & Pose Nette",
-          captionEn: "Bodily Architecture & Sharp Posing"
-        },
-        {
-          src: "assets/images/04-studio-09.jpg",
-          alt: "Dorcas Moïra studio électrique éclat cuivré",
-          ratio: "4/5",
-          focus: "50% 35%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Studio Électrique & Éclat Cuivré",
-          captionEn: "Electric Studio Lights & Copper Highlights"
-        },
-        {
-          src: "assets/images/04-studio-10.jpg",
-          alt: "Dorcas Moïra minimalisme noir et blanc intense",
-          ratio: "4/5",
-          focus: "50% 30%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Minimalisme N&B Intense",
-          captionEn: "Intense Minimalist Monochrome"
+          credit: null
         }
       ]
     },
@@ -476,96 +283,30 @@ const PORTFOLIO_DATA = {
       number: "05",
       titleFr: "Sun-Kissed Stories",
       titleEn: "Sun-Kissed Stories",
-      moodFr: "Solaire, sensuel & chorégraphie océanique",
-      moodEn: "Solar, sensual & oceanic choreography",
-      descriptionFr: "Plage de nuit sous halo bleu profond, drapé blanc immaculé fendu, parure et bijoux dorés scintillants sur peau d'ébène.",
-      descriptionEn: "Nocturnal Atlantic shoreline beneath a deep blue halo; fluttering split white drape and hammered golden jewels on ebony skin.",
       category: "beauty",
       images: [
         {
           src: "assets/images/05-sun-kissed-01.jpg",
-          alt: "Dorcas Moïra plage de nuit drapé blanc fendu bijoux dorés",
+          alt: "Dorcas Moïra — Sun-Kissed Stories, photo 1",
           ratio: "4/5",
           focus: "50% 40%",
-          credit: null,
-          placeholder: false,
-          captionFr: "Plage de Nuit & Drapé Blanc Céleste",
-          captionEn: "Nocturnal Beach & Celestial White Drape"
+          credit: null
         },
         {
           src: "assets/images/05-sun-kissed-02.jpg",
-          alt: "Dorcas Moïra drapé blanc corde contre un bateau",
+          alt: "Dorcas Moïra — Sun-Kissed Stories, photo 2",
           ratio: "4/5",
           focus: "50% 30%",
-          credit: "KeyFilm Photographie",
-          placeholder: false,
-          captionFr: "Drapé Blanc Corde & Bateau",
-          captionEn: "White Drape & Seaside Boat"
+          credit: "KeyFilm Photographie"
         },
         {
           src: "assets/images/05-sun-kissed-03.jpg",
-          alt: "Dorcas Moïra drapé blanc en mouvement de danse",
+          alt: "Dorcas Moïra — Sun-Kissed Stories, photo 3",
           ratio: "4/5",
           focus: "50% 25%",
-          credit: "KeyFilm Photographie",
-          placeholder: false,
-          captionFr: "Drapé Blanc & Mouvement de Danse",
-          captionEn: "White Drape & Flowing Dance"
-        },
-        {
-          src: "assets/images/05-sun-kissed-04.jpg",
-          alt: "Dorcas Moïra reflets lunaires sur la peau",
-          ratio: "4/5",
-          focus: "50% 40%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Reflets Lunaires sur Peau d'Ébène",
-          captionEn: "Moonlit Sheen on Ebony Skin"
-        },
-        {
-          src: "assets/images/05-sun-kissed-05.jpg",
-          alt: "Dorcas Moïra chorégraphie marine au crépuscule",
-          ratio: "4/5",
-          focus: "50% 40%",
-          credit: null,
-          placeholder: true,
-          captionFr: "Chorégraphie Marine au Crépuscule",
-          captionEn: "Dusk Oceanic Choreography"
+          credit: "KeyFilm Photographie"
         }
       ]
-    },
-    {
-      id: "06-visual-chapters",
-      number: "06",
-      titleFr: "Visual Chapters",
-      titleEn: "Visual Chapters",
-      moodFr: "Mosaïque libre & Richesse des univers",
-      moodEn: "Free editorial mosaic & expressive spectrum",
-      descriptionFr: "42 looks exclusifs couvrant l'éditorial haute couture, l'afro-chic, le studio, les campagnes commerciales, la beauté et le lifestyle.",
-      descriptionEn: "42 curated looks spanning high-fashion editorials, afro-chic heritage, studio captures, commercial campaigns, beauty, and lifestyle.",
-      category: "all",
-      mosaicCount: 42,
-      images: Array.from({ length: 42 }, (_, i) => {
-        const num = i + 1;
-        const pad = String(num).padStart(2, '0');
-        const categories = ["editorial", "afro-chic", "studio", "commercial", "beauty", "lifestyle"];
-        const cat = categories[i % categories.length];
-        const isTall = (num % 3 === 0);
-        const credits = ["Wazfeel", "Daily Desiign", "Kuba Concept Store", "Dimension Beyond", "Nourima", "Djino"];
-        const isFirst = (i === 0);
-        return {
-          src: `assets/images/06-visual-${pad}.jpg`,
-          alt: isFirst ? "Dorcas Moïra trench marron en pied lunettes et sculpture orange" : `Dorcas Moïra Look ${pad} - ${cat.toUpperCase()}`,
-          category: cat,
-          ratio: isTall ? "9/16" : "4/5",
-          isTall: isTall,
-          focus: isFirst ? "50% 20%" : (isTall ? "50% 35%" : "50% 30%"),
-          placeholder: isFirst ? false : true,
-          credit: null,
-          captionFr: isFirst ? "Trench Marron & Sculpture Orange" : `Look ${pad} · ${cat.toUpperCase()}`,
-          captionEn: isFirst ? "Brown Trench & Orange Sculpture" : `Look ${pad} · ${cat.toUpperCase()}`
-        };
-      })
     }
   ],
 
@@ -609,20 +350,17 @@ const PORTFOLIO_DATA = {
 
   whyChooseMeImage: {
     src: "assets/images/beauty-portrait.jpg",
-    alt: "Dorcas Moïra portrait beauté en top rouge lumière dorée",
-    focus: "35% 30%",
-    placeholder: false
+    alt: "Dorcas Moïra — Beauté",
+    focus: "35% 30%"
   },
 
   digitals: [
     {
       id: "digital-01-face",
-      titleFr: "Polaroid Face",
       src: "assets/images/digital-01-face.jpg",
-      alt: "Dorcas Moïra polaroid digital t-shirt blanc visage au naturel",
+      alt: "Dorcas Moïra — Digital 01",
       focus: "50% 30%",
-      placeholder: false,
-      captionFr: "Digital 01 · Portrait Face Naturel (Sans Fard)"
+      credit: null
     }
   ],
 
@@ -637,14 +375,14 @@ const PORTFOLIO_DATA = {
       eventFr: "Défilé de marque haute couture, <strong>Kuba Concept Store</strong>",
       eventEn: "Haute couture runway show, <strong>Kuba Concept Store</strong>",
       image: "assets/images/timeline-2024-kuba.jpg",
-      caption: "Défilé — Kuba Concept Store"
+      
     },
     {
       year: "2025/26",
       eventFr: "Shootings de campagnes phares : <strong>Dimension Beyond the Extrêmes · Djino · Nourima</strong>",
       eventEn: "Flagship campaign shoots: <strong>Dimension Beyond the Extrêmes · Djino · Nourima</strong>",
       image: "assets/images/timeline-2026-djino-backstage.jpg",
-      caption: "Coulisses — Campagne Djino"
+      
     },
     {
       year: "2026",

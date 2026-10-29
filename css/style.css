@@ -71,8 +71,8 @@ html {
   overflow-x: clip;
 }
 
-section[id] {
-  scroll-margin-top: calc(var(--sat, 0px) + 70px);
+section[id], div[id].digitals-showcase, [id="selected-works"] {
+  scroll-margin-top: calc(var(--sat, 0px) + 85px);
 }
 
 body {
@@ -329,10 +329,10 @@ button:active, .btn:active, .interactive-tap:active {
 }
 
 .site-header.is-scrolled {
-  background-color: rgba(11, 8, 7, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(184, 122, 82, 0.18);
+  background-color: rgba(11, 8, 7, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184, 122, 82, 0.28);
 }
 
 .site-header.is-hidden {
@@ -2009,14 +2009,10 @@ img[src*="05-sun-kissed-01"], img[src*="comp-card-full"] { object-position: 50% 
   transform: scale(1.05);
 }
 
-.carousel-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(11, 8, 7, 0.85) 0%, transparent 50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 16px;
+.carousel-card-overlay,
+.selected-works-overlay,
+.chapter-description-text {
+  display: none !important;
 }
 
 .card-caption-title {

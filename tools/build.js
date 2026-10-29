@@ -227,6 +227,21 @@ const EXCLUDED_FROM_DIST = new Set([
 const srcImgDir = path.join(ROOT, 'assets', 'images');
 const allSrcImages = fs.readdirSync(srcImgDir);
 
+// Also include all generated responsive variants (480w, 800w, 1200w, 1600w) for referenced images
+for (const ref of Array.from(referencedImages)) {
+  if (ref.endsWith('.jpg') || ref.endsWith('.webp')) {
+    const base = ref.replace(/\.(jpg|webp)$/, '');
+    for (const ext of ['webp', 'avif']) {
+      for (const w of ['480w', '800w', '1200w', '1600w']) {
+        const variant = `${base}-${w}.${ext}`;
+        if (allSrcImages.includes(variant)) {
+          referencedImages.add(variant);
+        }
+      }
+    }
+  }
+}
+
 const filesToCopy = new Set();
 for (const ref of referencedImages) {
   if (EXCLUDED_FROM_DIST.has(ref)) continue;
