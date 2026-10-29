@@ -33,10 +33,14 @@ if (process.env.SITE_URL) {
 console.log(`=== Building for Production ===`);
 console.log(`Target Site URL: ${config.SITE_URL}`);
 
-// Helper: compute md5 file hash
+// Helper: compute md5 file hash (platform-independent normalized for text files)
 function getFileHash(filePath) {
   if (!fs.existsSync(filePath)) return '1';
-  const data = fs.readFileSync(filePath);
+  let data = fs.readFileSync(filePath);
+  const ext = path.extname(filePath).toLowerCase();
+  if (['.html', '.css', '.js', '.json', '.xml', '.svg'].includes(ext)) {
+    data = Buffer.from(data.toString('utf8').replace(/\r\n/g, '\n'), 'utf8');
+  }
   return crypto.createHash('md5').update(data).digest('hex').slice(0, 8);
 }
 

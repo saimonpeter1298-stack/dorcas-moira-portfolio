@@ -1143,6 +1143,11 @@ async function runStage2() {
   if (stage2Initialized) return;
   stage2Initialized = true;
 
+  // Rendu complet de toutes les sections différées pour Googlebot et navigation fluide
+  document.querySelectorAll('.perf-auto-contain').forEach(el => {
+    el.style.contentVisibility = 'visible';
+  });
+
   try {
     await loadScript('js/data.js');
     applyAdaptiveGalleries();
@@ -1184,12 +1189,14 @@ async function runStage2() {
 }
 
 function scheduleStage2() {
-  // Différé : s'exécute dès le premier scroll/touch utilisateur, ou après 15s de repos absolu
-  setTimeout(runStage2, 15000);
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(runStage2, { timeout: 2500 });
+  }
+  setTimeout(runStage2, 3000);
 }
 
 // Déclencheurs utilisateur immédiats pour Stage 2
-['scroll', 'touchstart'].forEach(evt => {
+['scroll', 'touchstart', 'click', 'keydown'].forEach(evt => {
   window.addEventListener(evt, runStage2, { once: true, passive: true });
 });
 

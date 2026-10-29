@@ -4,8 +4,10 @@
   "description": "Portfolio officiel de Dorcas Moïra — Modèle Photo & Afro Fashion Muse",
   "scripts": {
     "build": "node tools/build.js",
-    "start": "npx serve dist",
-    "dev": "node tools/serve.py"
+    "start": "npx serve dist"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "keywords": [
     "portfolio",
