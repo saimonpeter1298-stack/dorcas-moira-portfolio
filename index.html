@@ -51,30 +51,27 @@
   }
   </script>
 
-  <!-- Preconnect Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Critical Font Preloads -->
+  <link rel="preload" href="css/fonts/font_7.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="css/fonts/font_3.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Hero Cutout High Priority Preload (AVIF) -->
+  <link rel="preload" as="image" href="assets/images/hero-cutout-960w.avif" imagesrcset="assets/images/hero-cutout-640w.avif 640w, assets/images/hero-cutout-960w.avif 960w, assets/images/hero-cutout-1280w.avif 1280w, assets/images/hero-cutout-1600w.avif 1600w" imagesizes="(max-width: 480px) 75vw, (max-width: 767px) 85vw, (max-width: 1024px) 70vw, 650px" type="image/avif" fetchpriority="high">
 
   <!-- Luxury Favicons (DM Copper on Night) -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="alternate icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-  <!-- Preconnect & Load Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Local Google Fonts -->
   <link rel="stylesheet" href="css/google-fonts.css">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 
   <!-- CDNs: GSAP 3 & Lenis -->
-  <script src="js/gsap.min.js" defer></script>
-  <script src="js/ScrollTrigger.min.js" defer></script>
-  <script src="js/lenis.min.js" defer></script>
 
   <!-- Centralized Data & Script Engine -->
-  <script src="js/data.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
 
@@ -146,7 +143,7 @@
 
       <!-- Aperçu visuel en direct -->
       <div class="menu-preview-portal">
-        <img src="assets/images/hero-portrait.jpg" id="menuPreviewImg" alt="Aperçu éditorial Dorcas Moïra" class="menu-preview-img">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="assets/images/hero-portrait.jpg" id="menuPreviewImg" alt="Aperçu éditorial Dorcas Moïra" class="menu-preview-img" loading="lazy" decoding="async">
       </div>
     </div>
 
@@ -184,7 +181,9 @@
         alt="" 
         class="hero-fallback-bg" 
         id="heroFallbackBg" 
-        aria-hidden="true"
+        aria-hidden="true" 
+        loading="lazy" 
+        decoding="async"
       >
     </div>
 
@@ -240,29 +239,27 @@
       <picture>
         <source 
           type="image/avif"
-          srcset="assets/images/hero-cutout-800w.avif 800w,
-                  assets/images/hero-cutout-1200w.avif 1200w,
-                  assets/images/hero-cutout-1800w.avif 1800w,
-                  assets/images/hero-cutout-2400w.avif 2400w,
-                  assets/images/hero-cutout.avif 2686w"
-          sizes="(max-width: 767px) 140vw, (max-width: 1024px) 90vw, 700px"
+          srcset="assets/images/hero-cutout-640w.avif 640w,
+                  assets/images/hero-cutout-960w.avif 960w,
+                  assets/images/hero-cutout-1280w.avif 1280w,
+                  assets/images/hero-cutout-1600w.avif 1600w"
+          sizes="(max-width: 480px) 75vw, (max-width: 767px) 85vw, (max-width: 1024px) 70vw, 650px"
         >
         <source 
           type="image/webp"
-          srcset="assets/images/hero-cutout-800w.webp 800w,
-                  assets/images/hero-cutout-1200w.webp 1200w,
-                  assets/images/hero-cutout-1800w.webp 1800w,
-                  assets/images/hero-cutout-2400w.webp 2400w,
-                  assets/images/hero-cutout.webp 2686w"
-          sizes="(max-width: 767px) 140vw, (max-width: 1024px) 90vw, 700px"
+          srcset="assets/images/hero-cutout-640w.webp 640w,
+                  assets/images/hero-cutout-960w.webp 960w,
+                  assets/images/hero-cutout-1280w.webp 1280w,
+                  assets/images/hero-cutout-1600w.webp 1600w"
+          sizes="(max-width: 480px) 75vw, (max-width: 767px) 85vw, (max-width: 1024px) 70vw, 650px"
         >
         <img 
-          src="assets/images/hero-cutout.png" 
+          src="assets/images/hero-cutout.webp" 
           alt="Dorcas Moïra — Mannequin photo & Afro Fashion Muse"
           class="hero-cutout-img"
           id="heroCutoutImg"
-          width="2686"
-          height="3858"
+          width="1600"
+          height="2298"
           loading="eager"
           fetchpriority="high"
           decoding="async"
@@ -305,7 +302,7 @@
        8. MANIFESTE « SIGNATURE » AVEC FOND NOIR INVISIBLE
        (Profil chapeau cauris 01-signature-01.jpg à 60% 55%)
        ========================================================================== -->
-  <section class="manifesto-section" id="manifesto">
+  <section class="manifesto-section perf-auto-contain" id="manifesto">
     <!-- Image de fond éditoriale fondue invisiblement dans #0B0807 -->
     <div class="manifesto-bg-image-wrap" aria-hidden="true">
       <img 
@@ -313,7 +310,7 @@
         alt="Dorcas Moïra profil chapeau cauris fond noir" 
         class="manifesto-bg-img"
         loading="lazy"
-      >
+       decoding="async">
       <div class="manifesto-scrim-blend"></div>
     </div>
 
@@ -347,7 +344,7 @@
        - 01 Sommaire Mode / Index Éditorial (lignes géantes + reveal curseur)
        - 02 Model ADN Manifeste (remplissage scroll + photos inline + étoiles)
        ========================================================================== -->
-  <section class="section-wrap" id="about">
+  <section class="section-wrap perf-auto-contain" id="about">
     <div class="ambient-halo" aria-hidden="true"></div>
     <div class="section-container">
       <div class="editorial-header">
@@ -370,7 +367,7 @@
             alt="Dorcas Moïra en boubou satin lilas accroupie dans un angle sombre" 
             class="about-portrait-img"
             loading="lazy"
-          >
+           decoding="async">
         </div>
 
         <div class="about-bio-text">
@@ -402,7 +399,7 @@
 
           <!-- Reveal d'image flottante au survol (Desktop) -->
           <div class="editorial-cursor-reveal" id="editorialCursorReveal" aria-hidden="true">
-            <img src="assets/images/03-afro-chic-01.jpg" alt="" class="cursor-reveal-img" id="cursorRevealImg">
+            <img src="assets/images/03-afro-chic-01.jpg" alt="" class="cursor-reveal-img" id="cursorRevealImg" loading="lazy" decoding="async">
           </div>
 
           <div class="editorial-index-list" id="editorialIndexList" role="list">
@@ -424,7 +421,7 @@
               <div class="row-accordion-drawer">
                 <div class="accordion-drawer-inner">
                   <div class="accordion-media-frame">
-                    <img src="assets/images/03-afro-chic-01.jpg" alt="Editorial Fashion — Dorcas Moïra" class="accordion-img" loading="lazy">
+                    <img src="assets/images/03-afro-chic-01.jpg" alt="Editorial Fashion — Dorcas Moïra" class="accordion-img" loading="lazy" decoding="async">
                   </div>
                   <p class="accordion-caption" data-i18n="dir_desc_1">Silhouettes audacieuses, pagnes revisités et jeux de contrastes pour les séries mode haute couture.</p>
                   <a href="#selected-works" class="accordion-cta" data-filter-link="editorial">Explorer cette série ↗</a>
@@ -448,7 +445,7 @@
               <div class="row-accordion-drawer">
                 <div class="accordion-drawer-inner">
                   <div class="accordion-media-frame">
-                    <img src="assets/images/02-many-moods-01.jpg" alt="Lifestyle — Dorcas Moïra" class="accordion-img" loading="lazy">
+                    <img src="assets/images/02-many-moods-01.jpg" alt="Lifestyle — Dorcas Moïra" class="accordion-img" loading="lazy" decoding="async">
                   </div>
                   <p class="accordion-caption" data-i18n="dir_desc_2">Spontanéité solaire, allure urbaine et matières nobles pour le prêt-à-porter contemporain.</p>
                   <a href="#selected-works" class="accordion-cta" data-filter-link="lifestyle">Explorer cette série ↗</a>
@@ -472,7 +469,7 @@
               <div class="row-accordion-drawer">
                 <div class="accordion-drawer-inner">
                   <div class="accordion-media-frame">
-                    <img src="assets/images/about-portrait.jpg" alt="Studio Portrait — Dorcas Moïra" class="accordion-img" loading="lazy">
+                    <img src="assets/images/about-portrait.jpg" alt="Studio Portrait — Dorcas Moïra" class="accordion-img" loading="lazy" decoding="async">
                   </div>
                   <p class="accordion-caption" data-i18n="dir_desc_3">Lumière feutrée, intensité du regard et présence sculpturale au service de la beauté pure.</p>
                   <a href="#selected-works" class="accordion-cta" data-filter-link="portrait">Explorer cette série ↗</a>
@@ -496,7 +493,7 @@
               <div class="row-accordion-drawer">
                 <div class="accordion-drawer-inner">
                   <div class="accordion-media-frame">
-                    <img src="assets/images/hero-portrait.jpg" alt="Commercial Campaign — Dorcas Moïra" class="accordion-img" loading="lazy">
+                    <img src="assets/images/hero-portrait.jpg" alt="Commercial Campaign — Dorcas Moïra" class="accordion-img" loading="lazy" decoding="async">
                   </div>
                   <p class="accordion-caption" data-i18n="dir_desc_4">Énergie magnétique, port de tête altier et valorisation immédiate des pièces clés de marques.</p>
                   <a href="#selected-works" class="accordion-cta" data-filter-link="commercial">Explorer cette série ↗</a>
@@ -520,7 +517,7 @@
               <div class="row-accordion-drawer">
                 <div class="accordion-drawer-inner">
                   <div class="accordion-media-frame">
-                    <img src="assets/images/comp-card-full.jpg" alt="Video and Motion — Dorcas Moïra" class="accordion-img" loading="lazy">
+                    <img src="assets/images/comp-card-full.jpg" alt="Video and Motion — Dorcas Moïra" class="accordion-img" loading="lazy" decoding="async">
                   </div>
                   <p class="accordion-caption" data-i18n="dir_desc_5">Fluidité du mouvement, drapés en apesanteur et narration vivante pour films de mode et digital.</p>
                   <a href="#selected-works" class="accordion-cta" data-filter-link="motion">Explorer cette série ↗</a>
@@ -543,7 +540,7 @@
               <span class="dna-star" aria-hidden="true">✦</span>
               <span class="dna-word serif-italic" data-i18n="dna_2">Élégance</span>
               <span class="dna-inline-badge" aria-hidden="true">
-                <img src="assets/images/01-signature-01.jpg" alt="" class="dna-inline-img" loading="lazy">
+                <img src="assets/images/01-signature-01.jpg" alt="" class="dna-inline-img" loading="lazy" decoding="async">
               </span>
               <span class="dna-star" aria-hidden="true">✦</span>
               <span class="dna-word sans-bold" data-i18n="dna_3">Adaptabilité</span>
@@ -552,7 +549,7 @@
               <span class="dna-star" aria-hidden="true">✦</span>
               <span class="dna-word sans-bold" data-i18n="dna_5">Polyvalence</span>
               <span class="dna-inline-badge" aria-hidden="true">
-                <img src="assets/images/about-portrait.jpg" alt="" class="dna-inline-img" loading="lazy">
+                <img src="assets/images/about-portrait.jpg" alt="" class="dna-inline-img" loading="lazy" decoding="async">
               </span>
               <span class="dna-star" aria-hidden="true">✦</span>
               <span class="dna-word serif-italic" data-i18n="dna_6">Professionnalisme</span>
@@ -567,7 +564,7 @@
   <!-- ==========================================================================
        10. FICHE MANNEQUIN / COMP CARD (Photo de plage, silhouette entière 50% 40%)
        ========================================================================== -->
-  <section class="section-wrap" id="comp-card">
+  <section class="section-wrap perf-auto-contain" id="comp-card">
     <div class="ambient-halo" aria-hidden="true"></div>
     <div class="section-container">
       <div class="editorial-header">
@@ -588,7 +585,7 @@
             src="assets/images/comp-card-full.jpg" 
             alt="Dorcas Moïra comp card mannequin vue pleine hauteur sur plage de nuit"
             loading="lazy"
-          >
+           decoding="async">
         </div>
 
         <div class="comp-card-data">
@@ -676,9 +673,9 @@
           <div class="polaroid-card" data-lightbox="digital-01-face" data-placeholder="false" data-caption="Digital 01 · Portrait Face Naturel (Sans Fard)">
             <div class="polaroid-frame">
               <picture>
-                <source type="image/avif" srcset="assets/images/digital-01-face-640w.avif 640w, assets/images/digital-01-face-1080w.avif 1080w, assets/images/digital-01-face-1600w.avif 1600w, assets/images/digital-01-face.avif 1717w" sizes="(max-width: 768px) 90vw, 360px">
-                <source type="image/webp" srcset="assets/images/digital-01-face-640w.webp 640w, assets/images/digital-01-face-1080w.webp 1080w, assets/images/digital-01-face-1600w.webp 1600w, assets/images/digital-01-face.webp 1717w" sizes="(max-width: 768px) 90vw, 360px">
-                <img src="assets/images/digital-01-face.jpg" alt="Dorcas Moïra polaroid digital t-shirt blanc visage au naturel" loading="lazy" style="object-position: 50% 30%;">
+                <source type="image/avif" srcset="assets/images/digital-01-face-480w.avif 480w, assets/images/digital-01-face-800w.avif 800w, assets/images/digital-01-face-1200w.avif 1200w, assets/images/digital-01-face-1600w.avif 1600w" sizes="(max-width: 768px) 90vw, 360px">
+                <source type="image/webp" srcset="assets/images/digital-01-face-480w.webp 480w, assets/images/digital-01-face-800w.webp 800w, assets/images/digital-01-face-1200w.webp 1200w, assets/images/digital-01-face-1600w.webp 1600w" sizes="(max-width: 768px) 90vw, 360px">
+                <img src="assets/images/digital-01-face.jpg" alt="Dorcas Moïra polaroid digital t-shirt blanc visage au naturel" loading="lazy" style="object-position: 50% 30%;" decoding="async">
               </picture>
             </div>
             <div class="polaroid-meta">
@@ -699,7 +696,7 @@
     <!-- ==========================================================================
          SELECTED WORKS (Galerie Adaptative Mode Production : seuil < MIN_PHOTOS_PER_CHAPTER)
          ========================================================================== -->
-    <section class="section-wrap" id="selected-works" style="display: none;">
+    <section class="section-wrap perf-auto-contain" id="selected-works" style="display: none;">
       <div class="ambient-halo" aria-hidden="true"></div>
       <div class="section-container">
         <div class="editorial-header">
@@ -723,7 +720,7 @@
 
 
     <!-- 01 · Signature -->
-    <section class="section-wrap" id="chap-01">
+    <section class="section-wrap perf-auto-contain" id="chap-01">
       <div class="ambient-halo" aria-hidden="true"></div>
       <div class="section-container">
         <div class="editorial-header">
@@ -742,7 +739,7 @@
         <div class="chapter-carousel-scroll">
           <div class="carousel-card" data-lightbox="01-signature-01" data-placeholder="false" data-caption="Profil Chapeau Cauris & Veste Graphique">
             <div class="carousel-card-media">
-              <img src="assets/images/01-signature-01.jpg" alt="Dorcas Moïra profil chapeau cauris et veste graphique" loading="lazy">
+              <img src="assets/images/01-signature-01.jpg" alt="Dorcas Moïra profil chapeau cauris et veste graphique" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Profil Chapeau Cauris</span>
                 <span class="card-caption-sub">Veste Graphique · Éditorial Haute Couture</span>
@@ -753,9 +750,9 @@
           <div class="carousel-card" data-lightbox="01-signature-02" data-placeholder="false" data-caption="Portrait N&B Demi-Visage & Afro">
             <div class="carousel-card-media">
               <picture>
-                <source type="image/avif" srcset="assets/images/01-signature-02-640w.avif 640w, assets/images/01-signature-02-1080w.avif 1080w, assets/images/01-signature-02.avif 1129w" sizes="(max-width: 768px) 85vw, 400px">
-                <source type="image/webp" srcset="assets/images/01-signature-02-640w.webp 640w, assets/images/01-signature-02-1080w.webp 1080w, assets/images/01-signature-02.webp 1129w" sizes="(max-width: 768px) 85vw, 400px">
-                <img src="assets/images/01-signature-02.jpg" alt="Dorcas Moïra portrait noir et blanc demi-visage afro" loading="lazy" style="object-position: 50% 25%;">
+                <source type="image/avif" srcset="assets/images/01-signature-02-480w.avif 480w, assets/images/01-signature-02-800w.avif 800w, assets/images/01-signature-02-1200w.avif 1200w, assets/images/01-signature-02-1600w.avif 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <source type="image/webp" srcset="assets/images/01-signature-02-480w.webp 480w, assets/images/01-signature-02-800w.webp 800w, assets/images/01-signature-02-1200w.webp 1200w, assets/images/01-signature-02-1600w.webp 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <img src="assets/images/01-signature-02.jpg" alt="Dorcas Moïra portrait noir et blanc demi-visage afro" loading="lazy" style="object-position: 50% 25%;" decoding="async">
               </picture>
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Portrait N&B Demi-Visage</span>
@@ -766,7 +763,7 @@
 
           <div class="carousel-card" data-lightbox="01-signature-03" data-placeholder="true" data-caption="Sculpture Studio Haute Couture">
             <div class="carousel-card-media">
-              <img src="assets/images/01-signature-03.jpg" alt="Dorcas Moïra sculpture studio haute couture" loading="lazy">
+              <img src="assets/images/01-signature-03.jpg" alt="Dorcas Moïra sculpture studio haute couture" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Sculpture Studio</span>
                 <span class="card-caption-sub">Ligne Haute Couture</span>
@@ -776,7 +773,7 @@
 
           <div class="carousel-card" data-lightbox="01-signature-04" data-placeholder="true" data-caption="Ligne Pure & Regard Impérial">
             <div class="carousel-card-media">
-              <img src="assets/images/01-signature-04.jpg" alt="Dorcas Moïra ligne pure regard impérial" loading="lazy">
+              <img src="assets/images/01-signature-04.jpg" alt="Dorcas Moïra ligne pure regard impérial" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Ligne Pure & Regard</span>
                 <span class="card-caption-sub">Intensité Monochrome</span>
@@ -788,7 +785,7 @@
     </section>
 
     <!-- 02 · One Face. Many Moods. -->
-    <section class="section-wrap" id="chap-02">
+    <section class="section-wrap perf-auto-contain" id="chap-02">
       <div class="ambient-halo" aria-hidden="true"></div>
       <div class="section-container">
         <div class="editorial-header">
@@ -807,7 +804,7 @@
         <div class="chapter-carousel-scroll">
           <div class="carousel-card" data-lightbox="02-many-moods-01" data-placeholder="false" data-caption="Ensemble Chocolat Couture & Tresses">
             <div class="carousel-card-media">
-              <img src="assets/images/02-many-moods-01.jpg" alt="Dorcas Moïra ensemble chocolat couture" loading="lazy">
+              <img src="assets/images/02-many-moods-01.jpg" alt="Dorcas Moïra ensemble chocolat couture" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Ensemble Chocolat Couture</span>
                 <span class="card-caption-sub">Mur de Briques & Tresses</span>
@@ -817,7 +814,7 @@
 
           <div class="carousel-card" data-lightbox="02-many-moods-02" data-placeholder="true" data-caption="Trench Camel & Lumière d'Ambre">
             <div class="carousel-card-media">
-              <img src="assets/images/02-many-moods-02.jpg" alt="Dorcas Moïra trench camel lumière ambre" loading="lazy">
+              <img src="assets/images/02-many-moods-02.jpg" alt="Dorcas Moïra trench camel lumière ambre" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Trench Camel Intérieur</span>
                 <span class="card-caption-sub">Lumière Feutrée & Douceur</span>
@@ -828,9 +825,9 @@
           <div class="carousel-card" data-lightbox="02-many-moods-03" data-placeholder="false" data-caption="Trench Bicolore Beige & Sac à Franges">
             <div class="carousel-card-media">
               <picture>
-                <source type="image/avif" srcset="assets/images/02-many-moods-03-640w.avif 640w, assets/images/02-many-moods-03-1080w.avif 1080w, assets/images/02-many-moods-03.avif 1117w" sizes="(max-width: 768px) 85vw, 400px">
-                <source type="image/webp" srcset="assets/images/02-many-moods-03-640w.webp 640w, assets/images/02-many-moods-03-1080w.webp 1080w, assets/images/02-many-moods-03.webp 1117w" sizes="(max-width: 768px) 85vw, 400px">
-                <img src="assets/images/02-many-moods-03.jpg" alt="Dorcas Moïra trench bicolore beige et camel contre table sac à franges" loading="lazy" style="object-position: 50% 25%;">
+                <source type="image/avif" srcset="assets/images/02-many-moods-03-480w.avif 480w, assets/images/02-many-moods-03-800w.avif 800w, assets/images/02-many-moods-03-1200w.avif 1200w, assets/images/02-many-moods-03-1600w.avif 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <source type="image/webp" srcset="assets/images/02-many-moods-03-480w.webp 480w, assets/images/02-many-moods-03-800w.webp 800w, assets/images/02-many-moods-03-1200w.webp 1200w, assets/images/02-many-moods-03-1600w.webp 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <img src="assets/images/02-many-moods-03.jpg" alt="Dorcas Moïra trench bicolore beige et camel contre table sac à franges" loading="lazy" style="object-position: 50% 25%;" decoding="async">
               </picture>
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Trench Bicolore Beige</span>
@@ -842,9 +839,9 @@
           <div class="carousel-card" data-lightbox="02-many-moods-04" data-placeholder="false" data-caption="Trench Beige sur Chaise Orange">
             <div class="carousel-card-media">
               <picture>
-                <source type="image/avif" srcset="assets/images/02-many-moods-04-640w.avif 640w, assets/images/02-many-moods-04-1080w.avif 1080w, assets/images/02-many-moods-04.avif 1066w" sizes="(max-width: 768px) 85vw, 400px">
-                <source type="image/webp" srcset="assets/images/02-many-moods-04-640w.webp 640w, assets/images/02-many-moods-04-1080w.webp 1080w, assets/images/02-many-moods-04.webp 1066w" sizes="(max-width: 768px) 85vw, 400px">
-                <img src="assets/images/02-many-moods-04.jpg" alt="Dorcas Moïra trench beige assise sur chaise orange regard caméra" loading="lazy" style="object-position: 50% 30%;">
+                <source type="image/avif" srcset="assets/images/02-many-moods-04-480w.avif 480w, assets/images/02-many-moods-04-800w.avif 800w, assets/images/02-many-moods-04-1200w.avif 1200w, assets/images/02-many-moods-04-1600w.avif 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <source type="image/webp" srcset="assets/images/02-many-moods-04-480w.webp 480w, assets/images/02-many-moods-04-800w.webp 800w, assets/images/02-many-moods-04-1200w.webp 1200w, assets/images/02-many-moods-04-1600w.webp 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <img src="assets/images/02-many-moods-04.jpg" alt="Dorcas Moïra trench beige assise sur chaise orange regard caméra" loading="lazy" style="object-position: 50% 30%;" decoding="async">
               </picture>
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Trench Beige & Chaise Orange</span>
@@ -855,7 +852,7 @@
 
           <div class="carousel-card" data-lightbox="02-many-moods-05" data-placeholder="true" data-caption="Velours & Douceur Nocturne">
             <div class="carousel-card-media">
-              <img src="assets/images/02-many-moods-05.jpg" alt="Dorcas Moïra velours et douceur nocturne" loading="lazy">
+              <img src="assets/images/02-many-moods-05.jpg" alt="Dorcas Moïra velours et douceur nocturne" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Velours Nocturne</span>
                 <span class="card-caption-sub">Douceur & Sérénité</span>
@@ -867,7 +864,7 @@
     </section>
 
     <!-- 03 · Afro Chic Heritage (Couloir d'hôtel 03-afro-chic-01.jpg à 50% 35%) -->
-    <section class="section-wrap" id="chap-03">
+    <section class="section-wrap perf-auto-contain" id="chap-03">
       <div class="ambient-halo" aria-hidden="true"></div>
       <div class="section-container">
         <div class="editorial-header">
@@ -886,7 +883,7 @@
         <div class="chapter-carousel-scroll">
           <div class="carousel-card" data-lightbox="03-afro-chic-01" data-placeholder="false" data-caption="Couloir d'Hôtel · Pagne Indigo & Denim">
             <div class="carousel-card-media">
-              <img src="assets/images/03-afro-chic-01.jpg" alt="Dorcas Moïra pagne indigo et jean couloir hôtel appliques dorées" loading="lazy">
+              <img src="assets/images/03-afro-chic-01.jpg" alt="Dorcas Moïra pagne indigo et jean couloir hôtel appliques dorées" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Pagne Indigo & Denim</span>
                 <span class="card-caption-sub">Couloir d'Hôtel · Afro Chic</span>
@@ -897,9 +894,9 @@
           <div class="carousel-card" data-lightbox="03-afro-chic-02" data-placeholder="false" data-caption="Kimono Wax Rouille & Sourire">
             <div class="carousel-card-media">
               <picture>
-                <source type="image/avif" srcset="assets/images/03-afro-chic-02-640w.avif 640w, assets/images/03-afro-chic-02-1080w.avif 1080w, assets/images/03-afro-chic-02-1600w.avif 1600w, assets/images/03-afro-chic-02.avif 1789w" sizes="(max-width: 768px) 85vw, 400px">
-                <source type="image/webp" srcset="assets/images/03-afro-chic-02-640w.webp 640w, assets/images/03-afro-chic-02-1080w.webp 1080w, assets/images/03-afro-chic-02-1600w.webp 1600w, assets/images/03-afro-chic-02.webp 1789w" sizes="(max-width: 768px) 85vw, 400px">
-                <img src="assets/images/03-afro-chic-02.jpg" alt="Dorcas Moïra kimono wax rouille souriante" loading="lazy" style="object-position: 50% 25%;">
+                <source type="image/avif" srcset="assets/images/03-afro-chic-02-480w.avif 480w, assets/images/03-afro-chic-02-800w.avif 800w, assets/images/03-afro-chic-02-1200w.avif 1200w, assets/images/03-afro-chic-02-1600w.avif 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <source type="image/webp" srcset="assets/images/03-afro-chic-02-480w.webp 480w, assets/images/03-afro-chic-02-800w.webp 800w, assets/images/03-afro-chic-02-1200w.webp 1200w, assets/images/03-afro-chic-02-1600w.webp 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <img src="assets/images/03-afro-chic-02.jpg" alt="Dorcas Moïra kimono wax rouille souriante" loading="lazy" style="object-position: 50% 25%;" decoding="async">
               </picture>
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Kimono Wax Rouille</span>
@@ -911,9 +908,9 @@
           <div class="carousel-card" data-lightbox="03-afro-chic-03" data-placeholder="false" data-caption="Robe Blanche Spirale & Tresses">
             <div class="carousel-card-media">
               <picture>
-                <source type="image/avif" srcset="assets/images/03-afro-chic-03-640w.avif 640w, assets/images/03-afro-chic-03-1080w.avif 1080w, assets/images/03-afro-chic-03-1600w.avif 1600w, assets/images/03-afro-chic-03.avif 3648w" sizes="(max-width: 768px) 85vw, 400px">
-                <source type="image/webp" srcset="assets/images/03-afro-chic-03-640w.webp 640w, assets/images/03-afro-chic-03-1080w.webp 1080w, assets/images/03-afro-chic-03-1600w.webp 1600w, assets/images/03-afro-chic-03.webp 3648w" sizes="(max-width: 768px) 85vw, 400px">
-                <img src="assets/images/03-afro-chic-03.jpg" alt="Dorcas Moïra robe blanche à cordons en spirale et tresses regard par-dessus l'épaule" loading="lazy" style="object-position: 50% 25%;">
+                <source type="image/avif" srcset="assets/images/03-afro-chic-03-480w.avif 480w, assets/images/03-afro-chic-03-800w.avif 800w, assets/images/03-afro-chic-03-1200w.avif 1200w, assets/images/03-afro-chic-03-1600w.avif 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <source type="image/webp" srcset="assets/images/03-afro-chic-03-480w.webp 480w, assets/images/03-afro-chic-03-800w.webp 800w, assets/images/03-afro-chic-03-1200w.webp 1200w, assets/images/03-afro-chic-03-1600w.webp 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <img src="assets/images/03-afro-chic-03.jpg" alt="Dorcas Moïra robe blanche à cordons en spirale et tresses regard par-dessus l'épaule" loading="lazy" style="object-position: 50% 25%;" decoding="async">
               </picture>
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Robe Blanche Spirale</span>
@@ -924,7 +921,7 @@
 
           <div class="carousel-card" data-lightbox="03-afro-chic-04" data-placeholder="true" data-caption="Tissage Traditionnel & Lignes Modernes">
             <div class="carousel-card-media">
-              <img src="assets/images/03-afro-chic-04.jpg" alt="Dorcas Moïra tissage traditionnel" loading="lazy">
+              <img src="assets/images/03-afro-chic-04.jpg" alt="Dorcas Moïra tissage traditionnel" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Tissage Traditionnel</span>
                 <span class="card-caption-sub">Silhouettes Contemporaines</span>
@@ -934,7 +931,7 @@
 
           <div class="carousel-card" data-lightbox="03-afro-chic-05" data-placeholder="true" data-caption="Parure Royale & Allure Afro-Chic">
             <div class="carousel-card-media">
-              <img src="assets/images/03-afro-chic-05.jpg" alt="Dorcas Moïra parure royale allure afro-chic" loading="lazy">
+              <img src="assets/images/03-afro-chic-05.jpg" alt="Dorcas Moïra parure royale allure afro-chic" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Parure Royale</span>
                 <span class="card-caption-sub">Allure Afro-Chic</span>
@@ -946,7 +943,7 @@
     </section>
 
     <!-- 04 · Pure Studio Presence -->
-    <section class="section-wrap" id="chap-04" data-has-real-photos="false">
+    <section class="section-wrap perf-auto-contain" id="chap-04" data-has-real-photos="false">
       <div class="ambient-halo" aria-hidden="true"></div>
       <div class="section-container">
         <div class="editorial-header">
@@ -966,9 +963,9 @@
           <div class="carousel-card" data-lightbox="04-studio-01" data-placeholder="false" data-caption="Veste Denim & Boucle Orange">
             <div class="carousel-card-media">
               <picture>
-                <source type="image/avif" srcset="assets/images/04-studio-01-640w.avif 640w, assets/images/04-studio-01-1080w.avif 1080w, assets/images/04-studio-01-1600w.avif 1600w, assets/images/04-studio-01.avif 1717w" sizes="(max-width: 768px) 85vw, 400px">
-                <source type="image/webp" srcset="assets/images/04-studio-01-640w.webp 640w, assets/images/04-studio-01-1080w.webp 1080w, assets/images/04-studio-01-1600w.webp 1600w, assets/images/04-studio-01.webp 1717w" sizes="(max-width: 768px) 85vw, 400px">
-                <img src="assets/images/04-studio-01.jpg" alt="Dorcas Moïra veste en jean N&B et boucle d'oreille orange en couleur" loading="lazy" style="object-position: 50% 30%;">
+                <source type="image/avif" srcset="assets/images/04-studio-01-480w.avif 480w, assets/images/04-studio-01-800w.avif 800w, assets/images/04-studio-01-1200w.avif 1200w, assets/images/04-studio-01-1600w.avif 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <source type="image/webp" srcset="assets/images/04-studio-01-480w.webp 480w, assets/images/04-studio-01-800w.webp 800w, assets/images/04-studio-01-1200w.webp 1200w, assets/images/04-studio-01-1600w.webp 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <img src="assets/images/04-studio-01.jpg" alt="Dorcas Moïra veste en jean N&B et boucle d'oreille orange en couleur" loading="lazy" style="object-position: 50% 30%;" decoding="async">
               </picture>
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Veste Denim & Boucle Orange</span>
@@ -979,7 +976,7 @@
 
           <div class="carousel-card" data-lightbox="04-studio-02" data-placeholder="true" data-caption="Cyclorama Clair & Géométrie">
             <div class="carousel-card-media">
-              <img src="assets/images/04-studio-02.jpg" alt="Dorcas Moïra cyclorama clair" loading="lazy">
+              <img src="assets/images/04-studio-02.jpg" alt="Dorcas Moïra cyclorama clair" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Cyclorama Clair</span>
                 <span class="card-caption-sub">Studio Minimaliste</span>
@@ -989,7 +986,7 @@
 
           <div class="carousel-card" data-lightbox="04-studio-03" data-placeholder="true" data-caption="Couleur Sélective & Boucles Solaires">
             <div class="carousel-card-media">
-              <img src="assets/images/04-studio-03.jpg" alt="Dorcas Moïra couleur sélective boucles solaires" loading="lazy">
+              <img src="assets/images/04-studio-03.jpg" alt="Dorcas Moïra couleur sélective boucles solaires" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Couleur Sélective</span>
                 <span class="card-caption-sub">Boucles d'Oreilles Solaires</span>
@@ -999,7 +996,7 @@
 
           <div class="carousel-card" data-lightbox="04-studio-04" data-placeholder="true" data-caption="Veste Denim & Regard Magnétique">
             <div class="carousel-card-media">
-              <img src="assets/images/04-studio-04.jpg" alt="Dorcas Moïra veste denim regard magnétique" loading="lazy">
+              <img src="assets/images/04-studio-04.jpg" alt="Dorcas Moïra veste denim regard magnétique" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Veste en Jean</span>
                 <span class="card-caption-sub">Force du Regard</span>
@@ -1009,7 +1006,7 @@
 
           <div class="carousel-card" data-lightbox="04-studio-05" data-placeholder="true" data-caption="Ombre Portée & Contraste Épuré">
             <div class="carousel-card-media">
-              <img src="assets/images/04-studio-05.jpg" alt="Dorcas Moïra ombre portée contraste épuré" loading="lazy">
+              <img src="assets/images/04-studio-05.jpg" alt="Dorcas Moïra ombre portée contraste épuré" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Ombre Portée</span>
                 <span class="card-caption-sub">Contraste Studio</span>
@@ -1019,7 +1016,7 @@
 
           <div class="carousel-card" data-lightbox="04-studio-06" data-placeholder="true" data-caption="Portrait Serré · High-Key Studio">
             <div class="carousel-card-media">
-              <img src="assets/images/04-studio-06.jpg" alt="Dorcas Moïra portrait serré high-key" loading="lazy">
+              <img src="assets/images/04-studio-06.jpg" alt="Dorcas Moïra portrait serré high-key" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Portrait Serré</span>
                 <span class="card-caption-sub">Lumière Haute</span>
@@ -1029,7 +1026,7 @@
 
           <div class="carousel-card" data-lightbox="04-studio-07" data-placeholder="true" data-caption="Silhouette Monochrome & Présence">
             <div class="carousel-card-media">
-              <img src="assets/images/04-studio-07.jpg" alt="Dorcas Moïra silhouette monochrome présence" loading="lazy">
+              <img src="assets/images/04-studio-07.jpg" alt="Dorcas Moïra silhouette monochrome présence" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Monochrome</span>
                 <span class="card-caption-sub">Présence Pure</span>
@@ -1039,7 +1036,7 @@
 
           <div class="carousel-card" data-lightbox="04-studio-08" data-placeholder="true" data-caption="Architecture Corporelle & Pose Nette">
             <div class="carousel-card-media">
-              <img src="assets/images/04-studio-08.jpg" alt="Dorcas Moïra architecture corporelle pose nette" loading="lazy">
+              <img src="assets/images/04-studio-08.jpg" alt="Dorcas Moïra architecture corporelle pose nette" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Architecture Corporelle</span>
                 <span class="card-caption-sub">Précision de la Pose</span>
@@ -1049,7 +1046,7 @@
 
           <div class="carousel-card" data-lightbox="04-studio-09" data-placeholder="true" data-caption="Studio Électrique & Éclat Cuivré">
             <div class="carousel-card-media">
-              <img src="assets/images/04-studio-09.jpg" alt="Dorcas Moïra studio électrique éclat cuivré" loading="lazy">
+              <img src="assets/images/04-studio-09.jpg" alt="Dorcas Moïra studio électrique éclat cuivré" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Studio Électrique</span>
                 <span class="card-caption-sub">Reflets Cuivrés</span>
@@ -1059,7 +1056,7 @@
 
           <div class="carousel-card" data-lightbox="04-studio-10" data-placeholder="true" data-caption="Minimalisme N&B Intense">
             <div class="carousel-card-media">
-              <img src="assets/images/04-studio-10.jpg" alt="Dorcas Moïra minimalisme N&B intense" loading="lazy">
+              <img src="assets/images/04-studio-10.jpg" alt="Dorcas Moïra minimalisme N&B intense" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Minimalisme Pur</span>
                 <span class="card-caption-sub">Noir & Blanc Intense</span>
@@ -1071,7 +1068,7 @@
     </section>
 
     <!-- 05 · Sun-Kissed Stories (Photo de plage 05-sun-kissed-01.jpg à 50% 40%) -->
-    <section class="section-wrap" id="chap-05">
+    <section class="section-wrap perf-auto-contain" id="chap-05">
       <div class="ambient-halo" aria-hidden="true"></div>
       <div class="section-container">
         <div class="editorial-header">
@@ -1090,7 +1087,7 @@
         <div class="chapter-carousel-scroll">
           <div class="carousel-card" data-lightbox="05-sun-kissed-01" data-placeholder="false" data-caption="Plage de Nuit & Drapé Blanc Céleste">
             <div class="carousel-card-media">
-              <img src="assets/images/05-sun-kissed-01.jpg" alt="Dorcas Moïra plage de nuit drapé blanc fendu bijoux dorés" loading="lazy">
+              <img src="assets/images/05-sun-kissed-01.jpg" alt="Dorcas Moïra plage de nuit drapé blanc fendu bijoux dorés" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Drapé Céleste au Vent</span>
                 <span class="card-caption-sub">Bleu Nuit Océan · Drapé Blanc</span>
@@ -1101,9 +1098,9 @@
           <div class="carousel-card" data-lightbox="05-sun-kissed-02" data-placeholder="false" data-credit="KeyFilm Photographie" data-caption="Drapé Blanc Corde & Bateau">
             <div class="carousel-card-media">
               <picture>
-                <source type="image/avif" srcset="assets/images/05-sun-kissed-02-640w.avif 640w, assets/images/05-sun-kissed-02-1080w.avif 1080w, assets/images/05-sun-kissed-02-1600w.avif 1600w, assets/images/05-sun-kissed-02.avif 2061w" sizes="(max-width: 768px) 85vw, 400px">
-                <source type="image/webp" srcset="assets/images/05-sun-kissed-02-640w.webp 640w, assets/images/05-sun-kissed-02-1080w.webp 1080w, assets/images/05-sun-kissed-02-1600w.webp 1600w, assets/images/05-sun-kissed-02.webp 2061w" sizes="(max-width: 768px) 85vw, 400px">
-                <img src="assets/images/05-sun-kissed-02.jpg" alt="Dorcas Moïra drapé blanc corde contre un bateau" loading="lazy" style="object-position: 50% 30%;">
+                <source type="image/avif" srcset="assets/images/05-sun-kissed-02-480w.avif 480w, assets/images/05-sun-kissed-02-800w.avif 800w, assets/images/05-sun-kissed-02-1200w.avif 1200w, assets/images/05-sun-kissed-02-1600w.avif 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <source type="image/webp" srcset="assets/images/05-sun-kissed-02-480w.webp 480w, assets/images/05-sun-kissed-02-800w.webp 800w, assets/images/05-sun-kissed-02-1200w.webp 1200w, assets/images/05-sun-kissed-02-1600w.webp 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <img src="assets/images/05-sun-kissed-02.jpg" alt="Dorcas Moïra drapé blanc corde contre un bateau" loading="lazy" style="object-position: 50% 30%;" decoding="async">
               </picture>
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Drapé Blanc & Bateau</span>
@@ -1115,9 +1112,9 @@
           <div class="carousel-card" data-lightbox="05-sun-kissed-03" data-placeholder="false" data-credit="KeyFilm Photographie" data-caption="Drapé Blanc & Mouvement de Danse">
             <div class="carousel-card-media">
               <picture>
-                <source type="image/avif" srcset="assets/images/05-sun-kissed-03-640w.avif 640w, assets/images/05-sun-kissed-03-1080w.avif 1080w, assets/images/05-sun-kissed-03-1600w.avif 1600w, assets/images/05-sun-kissed-03.avif 2061w" sizes="(max-width: 768px) 85vw, 400px">
-                <source type="image/webp" srcset="assets/images/05-sun-kissed-03-640w.webp 640w, assets/images/05-sun-kissed-03-1080w.webp 1080w, assets/images/05-sun-kissed-03-1600w.webp 1600w, assets/images/05-sun-kissed-03.webp 2061w" sizes="(max-width: 768px) 85vw, 400px">
-                <img src="assets/images/05-sun-kissed-03.jpg" alt="Dorcas Moïra drapé blanc en mouvement de danse" loading="lazy" style="object-position: 50% 25%;">
+                <source type="image/avif" srcset="assets/images/05-sun-kissed-03-480w.avif 480w, assets/images/05-sun-kissed-03-800w.avif 800w, assets/images/05-sun-kissed-03-1200w.avif 1200w, assets/images/05-sun-kissed-03-1600w.avif 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <source type="image/webp" srcset="assets/images/05-sun-kissed-03-480w.webp 480w, assets/images/05-sun-kissed-03-800w.webp 800w, assets/images/05-sun-kissed-03-1200w.webp 1200w, assets/images/05-sun-kissed-03-1600w.webp 1600w" sizes="(max-width: 768px) 85vw, 400px">
+                <img src="assets/images/05-sun-kissed-03.jpg" alt="Dorcas Moïra drapé blanc en mouvement de danse" loading="lazy" style="object-position: 50% 25%;" decoding="async">
               </picture>
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Drapé Blanc & Danse</span>
@@ -1128,7 +1125,7 @@
 
           <div class="carousel-card" data-lightbox="05-sun-kissed-04" data-placeholder="true" data-caption="Reflets Lunaires sur Peau d'Ébène">
             <div class="carousel-card-media">
-              <img src="assets/images/05-sun-kissed-04.jpg" alt="Dorcas Moïra reflets lunaires peau ébène" loading="lazy">
+              <img src="assets/images/05-sun-kissed-04.jpg" alt="Dorcas Moïra reflets lunaires peau ébène" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Clair de Lune</span>
                 <span class="card-caption-sub">Peau d'Ébène & Sérénité</span>
@@ -1138,7 +1135,7 @@
 
           <div class="carousel-card" data-lightbox="05-sun-kissed-05" data-placeholder="true" data-caption="Chorégraphie Marine au Crépuscule">
             <div class="carousel-card-media">
-              <img src="assets/images/05-sun-kissed-05.jpg" alt="Dorcas Moïra chorégraphie marine au crépuscule" loading="lazy">
+              <img src="assets/images/05-sun-kissed-05.jpg" alt="Dorcas Moïra chorégraphie marine au crépuscule" loading="lazy" decoding="async">
               <div class="carousel-card-overlay">
                 <span class="card-caption-title">Chorégraphie Marine</span>
                 <span class="card-caption-sub">Brise Atlantique</span>
@@ -1159,7 +1156,7 @@
   <!-- ==========================================================================
        12. CHAPITRE 06 : VISUAL CHAPTERS (42 LOOKS COMPLETS)
        ========================================================================== -->
-  <section class="section-wrap" id="visual-mosaic" data-has-real-photos="false">
+  <section class="section-wrap perf-auto-contain" id="visual-mosaic" data-has-real-photos="false">
     <div class="ambient-halo" aria-hidden="true"></div>
     <div class="section-container">
       <div class="editorial-header">
@@ -1197,7 +1194,7 @@
   </section>
 
   <!-- 13. MOTION & STORIES REELS -->
-  <section class="section-wrap" id="motion">
+  <section class="section-wrap perf-auto-contain" id="motion">
     <div class="ambient-halo" aria-hidden="true"></div>
     <div class="section-container">
       <div class="editorial-header">
@@ -1214,7 +1211,7 @@
 
       <div class="reels-grid">
         <div class="reel-card">
-          <img src="assets/images/about-portrait.jpg" alt="Allure en mouvement teaser" class="reel-card-preview" loading="lazy">
+          <img src="assets/images/about-portrait.jpg" alt="Allure en mouvement teaser" class="reel-card-preview" loading="lazy" decoding="async">
           <div class="reel-card-content">
             <span class="reel-badge-platform">TikTok · 48.2K</span>
             <a href="https://www.tiktok.com/@dorcas_moira" target="_blank" rel="noopener" class="reel-play-btn" aria-label="Lire sur TikTok">
@@ -1230,7 +1227,7 @@
         </div>
 
         <div class="reel-card">
-          <img src="assets/images/brand-why-portrait.jpg" alt="Studio Glow teaser" class="reel-card-preview" loading="lazy">
+          <img src="assets/images/brand-why-portrait.jpg" alt="Studio Glow teaser" class="reel-card-preview" loading="lazy" decoding="async">
           <div class="reel-card-content">
             <span class="reel-badge-platform">Instagram · 22.5K</span>
             <a href="https://www.instagram.com/dorc.as_moira/" target="_blank" rel="noopener" class="reel-play-btn" aria-label="Lire sur Instagram">
@@ -1246,7 +1243,7 @@
         </div>
 
         <div class="reel-card">
-          <img src="assets/images/03-afro-chic-01.jpg" alt="Afro Heritage shoot teaser" class="reel-card-preview" loading="lazy">
+          <img src="assets/images/03-afro-chic-01.jpg" alt="Afro Heritage shoot teaser" class="reel-card-preview" loading="lazy" decoding="async">
           <div class="reel-card-content">
             <span class="reel-badge-platform">TikTok · 52.1K</span>
             <a href="https://www.tiktok.com/@dorcas_moira" target="_blank" rel="noopener" class="reel-play-btn" aria-label="Lire sur TikTok">
@@ -1265,7 +1262,7 @@
   </section>
 
   <!-- 14. POURQUOI LES MARQUES ME CHOISISSENT -->
-  <section class="section-wrap" id="why-me">
+  <section class="section-wrap perf-auto-contain" id="why-me">
     <div class="ambient-halo" aria-hidden="true"></div>
     <div class="section-container">
       <div class="editorial-header">
@@ -1283,15 +1280,15 @@
       <div class="why-brands-layout">
         <div class="why-portrait-wrap" data-lightbox="beauty-portrait" data-placeholder="false" data-caption="Portrait Beauté Top Rouge & Lumière Dorée · Dorcas Moïra">
           <picture>
-            <source type="image/avif" srcset="assets/images/beauty-portrait-640w.avif 640w, assets/images/beauty-portrait-1080w.avif 1080w, assets/images/beauty-portrait.avif 1600w" sizes="(max-width: 768px) 100vw, 480px">
-            <source type="image/webp" srcset="assets/images/beauty-portrait-640w.webp 640w, assets/images/beauty-portrait-1080w.webp 1080w, assets/images/beauty-portrait.webp 1600w" sizes="(max-width: 768px) 100vw, 480px">
-            <img 
+                <source type="image/avif" srcset="assets/images/beauty-portrait-480w.avif 480w, assets/images/beauty-portrait-800w.avif 800w, assets/images/beauty-portrait-1200w.avif 1200w, assets/images/beauty-portrait-1600w.avif 1600w" sizes="(max-width: 768px) 100vw, 480px">
+                <source type="image/webp" srcset="assets/images/beauty-portrait-480w.webp 480w, assets/images/beauty-portrait-800w.webp 800w, assets/images/beauty-portrait-1200w.webp 1200w, assets/images/beauty-portrait-1600w.webp 1600w" sizes="(max-width: 768px) 100vw, 480px">
+                <img 
               src="assets/images/beauty-portrait.jpg" 
               alt="Dorcas Moïra portrait beauté en top rouge lumière dorée"
               loading="lazy"
               style="object-position: 35% 30%;"
-            >
-          </picture>
+             decoding="async">
+              </picture>
         </div>
 
         <div class="reasons-list">
@@ -1340,7 +1337,7 @@
   </section>
 
   <!-- 15. PARCOURS (TIMELINE EN CUIVRE) -->
-  <section class="section-wrap" id="journey">
+  <section class="section-wrap perf-auto-contain" id="journey">
     <div class="ambient-halo" aria-hidden="true"></div>
     <div class="section-container">
       <div class="editorial-header">
@@ -1368,7 +1365,7 @@
           <p class="timeline-event" data-i18n="tl_2024">Défilé de marque haute couture, <strong>Kuba Concept Store</strong></p>
           <div class="timeline-vignette-wrap">
             <div class="timeline-vignette">
-              <img src="assets/images/timeline-2024-kuba.jpg" alt="Défilé — Kuba Concept Store" loading="lazy">
+              <img src="assets/images/timeline-2024-kuba.jpg" alt="Défilé — Kuba Concept Store" loading="lazy" decoding="async">
             </div>
             <span class="timeline-vignette-caption">Défilé — Kuba Concept Store</span>
           </div>
@@ -1380,7 +1377,7 @@
           <p class="timeline-event" data-i18n="tl_2025">Shootings photo majeurs de campagnes : <strong>Dimension Beyond the Extrêmes · Djino · Nourima</strong></p>
           <div class="timeline-vignette-wrap">
             <div class="timeline-vignette">
-              <img src="assets/images/timeline-2026-djino-backstage.jpg" alt="Coulisses — Campagne Djino" loading="lazy">
+              <img src="assets/images/timeline-2026-djino-backstage.jpg" alt="Coulisses — Campagne Djino" loading="lazy" decoding="async">
             </div>
             <span class="timeline-vignette-caption">Coulisses — Campagne Djino</span>
           </div>
@@ -1396,7 +1393,7 @@
   </section>
 
   <!-- 16. CHIFFRES DIGITAUX (PORTÉE & ENGAGEMENT) -->
-  <section class="section-wrap" id="metrics">
+  <section class="section-wrap perf-auto-contain" id="metrics">
     <div class="ambient-halo" aria-hidden="true"></div>
     <div class="section-container">
       <div class="editorial-header">
@@ -1448,7 +1445,7 @@
   </section>
 
   <!-- 17. RÉFÉRENCES / ILS M'ONT FAIT CONFIANCE -->
-  <section class="section-wrap" id="references" style="padding-bottom: 20px;">
+  <section class="section-wrap perf-auto-contain" id="references" style="padding-bottom: 20px;">
     <div class="section-container">
       <div class="editorial-header" style="border-bottom:none; margin-bottom:12px;">
         <div class="editorial-header-left">
@@ -1493,7 +1490,7 @@
   </section>
 
   <!-- 18. CONTACT & BOOKING (« LET'S CREATE ») -->
-  <section class="contact-section" id="contact">
+  <section class="contact-section perf-auto-contain" id="contact">
     <div class="mobile-frame-border" aria-hidden="true"></div>
 
     <div class="section-container">
@@ -1641,7 +1638,7 @@
     <button class="lightbox-nav-btn lightbox-next-btn" id="lightboxNextBtn" aria-label="Photo suivante">→</button>
 
     <div class="lightbox-stage" id="lightboxStage">
-      <img src="" alt="" class="lightbox-image" id="lightboxImage">
+      <img src="" alt="" class="lightbox-image" id="lightboxImage" loading="lazy" decoding="async">
     </div>
 
     <div class="lightbox-footer">

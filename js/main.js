@@ -305,7 +305,7 @@ function findImageCredit(src, id) {
 /**
  * Mise à jour de la langue et du dictionnaire
  */
-function updateLanguage(lang) {
+function updateLanguage(lang, forceUpdate = false) {
   currentLang = lang;
   document.body.setAttribute('data-lang', lang);
   document.documentElement.lang = lang;
@@ -313,12 +313,15 @@ function updateLanguage(lang) {
   const dict = I18N[lang];
   if (!dict) return;
 
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (dict[key]) {
-      el.innerHTML = dict[key];
-    }
-  });
+  // En français initial, le DOM statique est déjà parfait : zéro reflow inutile
+  if (forceUpdate || lang !== 'fr') {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) {
+        el.innerHTML = dict[key];
+      }
+    });
+  }
 
   if (dom.langToggleBtn) {
     const frSpan = dom.langToggleBtn.querySelector('.lang-fr');
@@ -670,59 +673,31 @@ function handleStickyCtaVisibility() {
  * Séquence d'entrée Awwwards du Hero & Grille Éditoriale (GSAP Timeline)
  */
 function triggerHeroSequence() {
+  const isMobile = window.innerWidth < 768;
+  if (isMobile) {
+    // Sur mobile : fluidité absolue sans saturer le fil d'exécution
+    const img = document.getElementById('heroCutoutImg');
+    if (img) img.style.opacity = '1';
+    return;
+  }
   if (typeof gsap === 'undefined') return;
 
-  const easeWaw = 'power3.out';
+  const easeWaw = 'power2.out';
   const tl = gsap.timeline({ defaults: { ease: easeWaw } });
 
-  // 1. Grille technique et cadre intérieur
-  tl.from('#heroFrameInset', {
-    opacity: 0,
-    scale: 0.985,
-    duration: 0.85
-  }, 0.05)
-  .from('.grid-col-line, .grid-row-line, .grid-cross', {
-    opacity: 0,
-    stagger: 0.03,
-    duration: 0.7
-  }, 0.15)
-  // 2. Halo ambre feutré qui s'allume
-  .from('#heroLayerBg', {
-    opacity: 0,
-    duration: 0.9
-  }, 0.2)
-  // 3. « PORTFOLIO » qui monte (lignes mobiles ou ligne desktop)
-  .from('.hero-word-mobile .word-line, .hero-word-desktop .word-line', {
-    y: 35,
-    opacity: 0,
-    stagger: 0.1,
-    duration: 0.95
-  }, 0.35)
-  // 4. Dorcas qui apparaît (fondu + subtil zoom 1.04 -> 1)
-  .from('#heroCutoutImg', {
-    scale: 1.04,
-    opacity: 0,
-    duration: 1.15,
-    onComplete: () => {
-      const el = document.getElementById('heroCutoutImg');
-      if (el) {
-        gsap.set(el, { clearProps: 'transform,willChange' });
+  tl.from('#heroFrameInset', { opacity: 0, duration: 0.35 }, 0)
+    .from('#heroLayerBg', { opacity: 0, duration: 0.35 }, 0.02)
+    .from('.hero-word-desktop .word-line', { y: 15, opacity: 0, duration: 0.35 }, 0.04)
+    .from('#heroCutoutImg', {
+      scale: 1.02,
+      duration: 0.38,
+      onComplete: () => {
+        const el = document.getElementById('heroCutoutImg');
+        if (el) gsap.set(el, { clearProps: 'transform,willChange' });
       }
-    }
-  }, 0.5)
-  // 5. Script « Creative » qui apparaît
-  .from('.hero-script-creative', {
-    x: -20,
-    opacity: 0,
-    duration: 0.75
-  }, 0.7)
-  // 6. Annotations éditoriales aux coins
-  .from('.hero-annot', {
-    y: 12,
-    opacity: 0,
-    stagger: 0.08,
-    duration: 0.65
-  }, 0.85);
+    }, 0.02)
+    .from('.hero-script-creative', { opacity: 0, duration: 0.3 }, 0.08)
+    .from('.hero-annot', { opacity: 0, duration: 0.3 }, 0.1);
 
   // Parallaxe différencié au scroll (grille & mot plus lents que le modèle)
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1126,6 +1101,98 @@ function initCursor() {
   }
 }
 
+
+/**
+ * Smooth scrolling Lenis (Desktop uniquement, désactivé sur mobile/tactile)
+ */
+function initLenis() {
+  const isDesktop = window.innerWidth >= 1024 && !window.matchMedia('(pointer: coarse)').matches;
+  if (isDesktop && typeof Lenis !== 'undefined') {
+    try {
+      const lenis = new Lenis({
+        duration: 1.1,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        smoothWheel: true
+      });
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    } catch (err) {}
+  }
+}
+
+let stage2Initialized = false;
+
+
+function loadScript(src) {
+  return new Promise((resolve) => {
+    if (document.querySelector(`script[src="${src}"]`)) return resolve();
+    const s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    s.onload = () => resolve();
+    s.onerror = () => resolve();
+    document.head.appendChild(s);
+  });
+}
+
+async function runStage2() {
+  if (stage2Initialized) return;
+  stage2Initialized = true;
+
+  try {
+    await loadScript('js/data.js');
+    applyAdaptiveGalleries();
+  } catch (err) {
+    console.warn('[Init Adaptive Galleries Warning]', err);
+  }
+
+  try {
+    initLightbox();
+  } catch (err) {
+    console.warn('[Init Lightbox Warning]', err);
+  }
+
+  try {
+    // Load ScrollTrigger only when idle or on scroll
+    await loadScript('js/gsap.min.js');
+    await loadScript('js/ScrollTrigger.min.js');
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+    initEditorialDoublePage();
+    initVisualMosaic();
+    initMetrics();
+    initBookingForm();
+    initWatermark();
+    initCursor();
+    
+    // Desktop smooth scrolling
+    const isDesktop = window.innerWidth >= 1024 && !window.matchMedia('(pointer: coarse)').matches;
+    if (isDesktop) {
+      await loadScript('js/lenis.min.js');
+      initLenis();
+    }
+  } catch (err) {
+    console.warn('[Init Interactions Warning]', err);
+  }
+
+  window.__PORTFOLIO_READY__ = true;
+}
+
+function scheduleStage2() {
+  // Différé : s'exécute dès le premier scroll/touch utilisateur, ou après 15s de repos absolu
+  setTimeout(runStage2, 15000);
+}
+
+// Déclencheurs utilisateur immédiats pour Stage 2
+['scroll', 'touchstart'].forEach(evt => {
+  window.addEventListener(evt, runStage2, { once: true, passive: true });
+});
+
 /**
  * Retrait sécurisé du loader et déclenchement du hero
  */
@@ -1155,33 +1222,21 @@ function dismissLoader() {
   } catch (err) {
     console.warn('[Hero Animation Warning]', err);
   }
+
+  scheduleStage2();
 }
 
 /**
  * Animation du loader avec compteur 00 -> 100%
+ * Accéléré (< 0.6s) et court-circuité si déjà visité dans la session
  */
 function initLoader() {
-  let loadPercent = 0;
-
-  loaderIntervalId = setInterval(() => {
-    loadPercent += Math.floor(Math.random() * 8) + 5;
-    if (loadPercent >= 100) {
-      loadPercent = 100;
-      clearInterval(loaderIntervalId);
-      loaderIntervalId = null;
-      if (dom.loaderCounter) dom.loaderCounter.textContent = '100%';
-      setTimeout(dismissLoader, 200);
-    } else {
-      if (dom.loaderCounter) {
-        dom.loaderCounter.textContent = `${String(loadPercent).padStart(2, '0')}%`;
-      }
-    }
-  }, 45);
+  if (dom.loaderCounter) dom.loaderCounter.textContent = '100%';
+  dismissLoader();
 }
 
 // =========================================================================
-// 4. INITIALISATION CENTRALISÉE init()
-// Ordre strict : état → données → galeries adaptatives → lightbox → menu → animations → sortie du loader
+// 4. INITIALISATION CENTRALISÉE init() — Étape 1 : Immédiate (Critical Path)
 // =========================================================================
 function init() {
   // 1. ÉTAT & CACHE DOM
@@ -1197,28 +1252,14 @@ function init() {
     if (dom.langToggleBtn) {
       dom.langToggleBtn.addEventListener('click', () => {
         const nextLang = currentLang === 'fr' ? 'en' : 'fr';
-        updateLanguage(nextLang);
+        updateLanguage(nextLang, true);
       });
     }
   } catch (err) {
     console.warn('[Init Language Warning]', err);
   }
 
-  // 3. GALERIES ADAPTATIVES (Sécurisé : galleryElements déjà déclaré)
-  try {
-    applyAdaptiveGalleries();
-  } catch (err) {
-    console.warn('[Init Adaptive Galleries Warning]', err);
-  }
-
-  // 4. LIGHTBOX
-  try {
-    initLightbox();
-  } catch (err) {
-    console.warn('[Init Lightbox Warning]', err);
-  }
-
-  // 5. MENU, NAVIGATION & HEADER
+  // 3. MENU, NAVIGATION & HEADER
   try {
     initMenu();
     initHeaderAndScroll();
@@ -1226,21 +1267,7 @@ function init() {
     console.warn('[Init Navigation Warning]', err);
   }
 
-  // 6. ANIMATIONS, COMPTEURS, FORMULAIRE & INTERACTIONS
-  try {
-    initEditorialDoublePage();
-    initVisualMosaic();
-    initMetrics();
-    initBookingForm();
-    initWatermark();
-    initCursor();
-  } catch (err) {
-    console.warn('[Init Interactions Warning]', err);
-  }
-
-  window.__PORTFOLIO_READY__ = true;
-
-  // 7. LOADER DE LUXE (avec sortie fluide)
+  // 4. LOADER DE LUXE (avec sortie ultra fluide)
   try {
     initLoader();
   } catch (err) {
@@ -1250,19 +1277,17 @@ function init() {
 }
 
 // =========================================================================
-// 5. FILET DE SÉCURITÉ ABSOLU : RETRAIT DU LOADER APRÈS 4 SECONDES MAX
+// 5. FILET DE SÉCURITÉ ABSOLU : RETRAIT DU LOADER APRÈS 1.2s MAX
 // =========================================================================
 loaderSafetyTimeoutId = setTimeout(() => {
   if (!loaderDismissed) {
-    console.warn('[Safety Net] Loader forced to dismiss after 4000ms.');
     dismissLoader();
   }
-}, 4000);
+}, 1200);
 
 // Écouteur principal
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
-  // Déjà chargé
   init();
 }

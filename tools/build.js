@@ -67,6 +67,20 @@ fs.mkdirSync(path.join(DIST, 'assets', 'images'), { recursive: true });
 copyDir(path.join(ROOT, 'css'), path.join(DIST, 'css'));
 copyDir(path.join(ROOT, 'js'), path.join(DIST, 'js'));
 
+// Minify dist/css/style.css
+const distStyleCssPath = path.join(DIST, 'css', 'style.css');
+if (fs.existsSync(distStyleCssPath)) {
+  let rawCss = fs.readFileSync(distStyleCssPath, 'utf8');
+  let minCss = rawCss
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/\s*([{}:;,])\s*/g, '$1')
+    .replace(/;}/g, '}')
+    .trim();
+  fs.writeFileSync(distStyleCssPath, minCss, 'utf8');
+  console.log(`[OK] Minified dist/css/style.css (${rawCss.length} -> ${minCss.length} bytes)`);
+}
+
 // 4. Compute cache-busting hashes for production
 const styleHash = getFileHash(path.join(ROOT, 'css', 'style.css'));
 const fontsHash = getFileHash(path.join(ROOT, 'css', 'google-fonts.css'));
@@ -156,47 +170,64 @@ if (fs.existsSync(pdfPath)) {
 }
 
 // 11. Selective copy of assets/images/
-// We identify all image filenames referenced in index.html, css/, js/ + og-image.jpg
+// Strictly copy ONLY images that are referenced in HTML, CSS, JS + og-image.jpg
 const referencedImages = new Set();
 referencedImages.add('og-image.jpg');
 
 // Find all assets/images/ references in index.html
-const rawMatches = html.match(/assets\/images\/([a-zA-Z0-9_\-\.\(\)\s]+)/g) || [];
-for (const m of rawMatches) {
+const rawHtmlMatches = html.match(/assets\/images\/([a-zA-Z0-9_\-\.]+)/g) || [];
+for (const m of rawHtmlMatches) {
   const fname = m.replace('assets/images/', '').split('?')[0].split('#')[0].trim();
-  referencedImages.add(fname);
+  if (fname && !fname.includes(' ')) referencedImages.add(fname);
 }
 
-// Also scan js/data.js and js/main.js
+// Scan js/data.js and js/main.js
 const jsData = fs.readFileSync(path.join(ROOT, 'js', 'data.js'), 'utf8');
-const jsMatches = jsData.match(/assets\/images\/([a-zA-Z0-9_\-\.\(\)\s]+)/g) || [];
-for (const m of jsMatches) {
+const jsDataMatches = jsData.match(/assets\/images\/([a-zA-Z0-9_\-\.]+)/g) || [];
+for (const m of jsDataMatches) {
   const fname = m.replace('assets/images/', '').split('?')[0].split('#')[0].trim();
-  referencedImages.add(fname);
+  if (fname && !fname.includes(' ')) referencedImages.add(fname);
 }
 
-// Ensure WebP / AVIF variants of every referenced base image are included if present
+const jsMain = fs.readFileSync(path.join(ROOT, 'js', 'main.js'), 'utf8');
+const jsMainMatches = jsMain.match(/assets\/images\/([a-zA-Z0-9_\-\.]+)/g) || [];
+for (const m of jsMainMatches) {
+  const fname = m.replace('assets/images/', '').split('?')[0].split('#')[0].trim();
+  if (fname && !fname.includes(' ')) referencedImages.add(fname);
+}
+
+// Scan css/
+for (const cssFile of ['style.css', 'google-fonts.css']) {
+  const cssContent = fs.readFileSync(path.join(ROOT, 'css', cssFile), 'utf8');
+  const cssMatches = cssContent.match(/assets\/images\/([a-zA-Z0-9_\-\.]+)/g) || [];
+  for (const m of cssMatches) {
+    const fname = m.replace('assets/images/', '').split('?')[0].split('#')[0].trim();
+    if (fname && !fname.includes(' ')) referencedImages.add(fname);
+  }
+}
+
+const EXCLUDED_FROM_DIST = new Set([
+  'hero-cutout.png',
+  'hero-cutout-raw.png',
+  'hero-cutout-2400w.avif',
+  'hero-cutout-2400w.webp',
+  'hero-cutout-1800w.avif',
+  'hero-cutout-1800w.webp',
+  'hero-cutout-1200w.avif',
+  'hero-cutout-1200w.webp',
+  'hero-cutout-800w.avif',
+  'hero-cutout-800w.webp',
+  'hero-cutout.avif'
+]);
+
 const srcImgDir = path.join(ROOT, 'assets', 'images');
 const allSrcImages = fs.readdirSync(srcImgDir);
 
 const filesToCopy = new Set();
 for (const ref of referencedImages) {
+  if (EXCLUDED_FROM_DIST.has(ref)) continue;
   if (allSrcImages.includes(ref)) {
     filesToCopy.add(ref);
-  }
-  // If ref is a base jpg/png, find matching variants (e.g. 01-signature-01-640w.webp)
-  const stem = ref.replace(/\.[^.]+$/, '');
-  for (const srcFile of allSrcImages) {
-    if (srcFile.startsWith(stem + '.') || srcFile.startsWith(stem + '-')) {
-      filesToCopy.add(srcFile);
-    }
-  }
-}
-
-// Always include hero-cutout variants and og-image
-for (const srcFile of allSrcImages) {
-  if (srcFile.startsWith('hero-cutout') || srcFile.startsWith('og-image')) {
-    filesToCopy.add(srcFile);
   }
 }
 

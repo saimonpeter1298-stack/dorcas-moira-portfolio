@@ -7,7 +7,7 @@
    ========================================================================== */
 
 /* --- GOOGLE FONTS IMPORT --- */
-@import url('google-fonts.css');
+
 
 /* --- DESIGN TOKENS --- */
 :root {
@@ -197,11 +197,20 @@ button:active, .btn:active, .interactive-tap:active {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: transform 0.9s var(--ease-waw), opacity 0.8s ease;
+  animation: siteLoaderAutoDismiss 0.26s cubic-bezier(0.16, 1, 0.3, 1) 0.06s forwards;
+  pointer-events: none;
+}
+
+@keyframes siteLoaderAutoDismiss {
+  0% { transform: translateY(0); opacity: 1; }
+  60% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100%); opacity: 0; visibility: hidden; }
 }
 
 .site-loader.is-loaded {
   transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 }
 
@@ -3252,4 +3261,21 @@ body.hide-placeholders .menu-nav-links li:has(a[href="#visual-chapters"]) {
   .why-portrait-wrap img {
     object-position: 35% 25% !important;
   }
+}
+
+
+/* GPU composited layers for 60fps hero entrance */
+.hero-layer-subject,
+.hero-cutout-img,
+.hero-word-wrap,
+.hero-frame-inset,
+.hero-layer-bg {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Performance: content-visibility for below-the-fold sections */
+.perf-auto-contain {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 800px;
 }
