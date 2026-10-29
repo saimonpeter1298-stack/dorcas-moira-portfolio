@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <!-- SEO & Luxury Fashion Metadata -->
@@ -136,9 +136,8 @@
         <li><a href="#about" class="menu-nav-link" data-menu-close data-preview="assets/images/about-portrait.jpg"><span class="link-num">02</span> <span data-i18n="menu_about">Who is Moïra ?</span></a></li>
         <li><a href="#comp-card" class="menu-nav-link" data-menu-close data-preview="assets/images/comp-card-full.jpg"><span class="link-num">03</span> <span data-i18n="menu_compcard">Comp Card</span></a></li>
         <li><a href="#chapters" class="menu-nav-link" data-menu-close data-preview="assets/images/03-afro-chic-01.jpg"><span class="link-num">04</span> <span data-i18n="menu_chapters">Chapitres Photo</span></a></li>
-        <li><a href="#motion" class="menu-nav-link" data-menu-close data-preview="assets/images/05-sun-kissed-01.jpg"><span class="link-num">05</span> <span data-i18n="menu_motion">Vidéo & Motion</span></a></li>
-        <li><a href="#why-me" class="menu-nav-link" data-menu-close data-preview="assets/images/brand-why-portrait.jpg"><span class="link-num">06</span> <span data-i18n="menu_whyme">Pourquoi moi</span></a></li>
-        <li><a href="#contact" class="menu-nav-link" data-menu-close data-preview="assets/images/contact-portrait.jpg"><span class="link-num">07</span> <span data-i18n="menu_contact">Contact & Booking</span></a></li>
+        <li><a href="#why-me" class="menu-nav-link" data-menu-close data-preview="assets/images/beauty-portrait.jpg"><span class="link-num">05</span> <span data-i18n="menu_whyme">Pourquoi moi</span></a></li>
+        <li><a href="#contact" class="menu-nav-link" data-menu-close data-preview="assets/images/contact-portrait.jpg"><span class="link-num">06</span> <span data-i18n="menu_contact">Contact & Booking</span></a></li>
       </ul>
 
       <!-- Aperçu visuel en direct -->
@@ -221,14 +220,8 @@
       <div class="hero-word-wrap">
         <span class="hero-script-creative">Creative</span>
 
-        <!-- Mobile : 2 lignes superposées PORT / FOLIO -->
-        <div class="hero-word-mobile">
-          <span class="word-line line-port">PORT</span>
-          <span class="word-line line-folio">FOLIO</span>
-        </div>
-
-        <!-- Tablette & Desktop : 1 seule ligne pleine chasse clampée -->
-        <div class="hero-word-desktop">
+        <!-- Mobile & Desktop : 1 seule ligne pleine chasse clampée -->
+        <div class="hero-word-single">
           <span class="word-line line-single">PORTFOLIO</span>
         </div>
       </div>
@@ -1194,7 +1187,8 @@
   </section>
 
   <!-- 13. MOTION & STORIES REELS -->
-  <section class="section-wrap perf-auto-contain" id="motion">
+  <!-- 13. MOTION & STORIES REELS (MASQUÉ : EN ATTENTE DE VRAIES VIDÉOS) -->
+  <section class="section-wrap perf-auto-contain" id="motion" style="display: none;" aria-hidden="true">
     <div class="ambient-halo" aria-hidden="true"></div>
     <div class="section-container">
       <div class="editorial-header">
@@ -1203,59 +1197,17 @@
           <h2 class="chapter-title-script">Video & Motion</h2>
           <span class="chapter-mood-italic">L'énergie d'une muse en mouvement</span>
         </div>
-        <div class="editorial-header-right">
-          <strong>TikTok & Instagram Reels</strong>
-          <span>Captation Verticale 9:16</span>
-        </div>
       </div>
 
       <div class="reels-grid">
         <div class="reel-card">
-          <img src="assets/images/about-portrait.jpg" alt="Allure en mouvement teaser" class="reel-card-preview" loading="lazy" decoding="async">
-          <div class="reel-card-content">
-            <span class="reel-badge-platform">TikTok · 48.2K</span>
-            <a href="https://www.tiktok.com/@dorcas_moira" target="_blank" rel="noopener" class="reel-play-btn" aria-label="Lire sur TikTok">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-            </a>
-            <div class="reel-meta-bottom">
-              <span class="reel-title">Allure en Mouvement · Runway Backstage</span>
-              <span class="reel-stats">0:15 · Son Original</span>
-            </div>
-          </div>
+          <img src="assets/images/about-portrait.jpg" alt="Dorcas Moïra éditorial" class="reel-card-preview" loading="lazy" decoding="async">
         </div>
-
         <div class="reel-card">
-          <img src="assets/images/brand-why-portrait.jpg" alt="Studio Glow teaser" class="reel-card-preview" loading="lazy" decoding="async">
-          <div class="reel-card-content">
-            <span class="reel-badge-platform">Instagram · 22.5K</span>
-            <a href="https://www.instagram.com/dorc.as_moira/" target="_blank" rel="noopener" class="reel-play-btn" aria-label="Lire sur Instagram">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-            </a>
-            <div class="reel-meta-bottom">
-              <span class="reel-title">Studio Glow · Lumière Cuivrée & Regard</span>
-              <span class="reel-stats">0:24 · Campagne Beauty</span>
-            </div>
-          </div>
+          <img src="assets/images/beauty-portrait.jpg" alt="Dorcas Moïra beauté" class="reel-card-preview" loading="lazy" decoding="async">
         </div>
-
         <div class="reel-card">
-          <img src="assets/images/03-afro-chic-01.jpg" alt="Afro Heritage shoot teaser" class="reel-card-preview" loading="lazy" decoding="async">
-          <div class="reel-card-content">
-            <span class="reel-badge-platform">TikTok · 52.1K</span>
-            <a href="https://www.tiktok.com/@dorcas_moira" target="_blank" rel="noopener" class="reel-play-btn" aria-label="Lire sur TikTok">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-            </a>
-            <div class="reel-meta-bottom">
-              <span class="reel-title">Afro Heritage Shoot · Teaser Campagne</span>
-              <span class="reel-stats">0:18 · Mode & Identité</span>
-            </div>
-          </div>
+          <img src="assets/images/03-afro-chic-01.jpg" alt="Dorcas Moïra afro-chic" class="reel-card-preview" loading="lazy" decoding="async">
         </div>
       </div>
     </div>

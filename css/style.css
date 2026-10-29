@@ -66,6 +66,9 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 section[id] {
@@ -76,9 +79,12 @@ body {
   position: relative;
   background-color: var(--night);
   color: var(--cream);
+  max-width: 100%;
+  overflow-x: hidden;
   overflow-x: clip;
+  overscroll-behavior-y: none;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100svh;
   line-height: 1.6;
   font-weight: 300;
 }
@@ -108,6 +114,11 @@ img, video {
 a {
   color: inherit;
   text-decoration: none;
+  touch-action: manipulation;
+}
+
+button, .btn-primary, .btn-secondary, .sticky-book-btn, .sticky-whatsapp-btn, .menu-trigger, .lang-btn, .carousel-nav-btn {
+  touch-action: manipulation;
 }
 
 button {
@@ -116,7 +127,6 @@ button {
   color: inherit;
   font: inherit;
   cursor: pointer;
-  touch-action: manipulation;
 }
 
 button:active, .btn:active, .interactive-tap:active {
@@ -158,20 +168,24 @@ button:active, .btn:active, .interactive-tap:active {
 .ambient-halo {
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
   height: 480px;
-  background: radial-gradient(ellipse 65% 50% at 50% 0%, rgba(184, 122, 82, 0.16) 0%, rgba(30, 20, 15, 0.42) 45%, transparent 75%);
+  background: radial-gradient(ellipse 75% 50% at 50% 0%, rgba(184, 122, 82, 0.16) 0%, rgba(30, 20, 15, 0.42) 45%, transparent 75%);
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;
 }
 
 /* --- FILIGRANE « THE MUSE ENERGY » --- */
 .watermark-banner {
   position: relative;
   width: 100%;
+  max-width: 100vw;
   overflow: hidden;
+  contain: paint;
   user-select: none;
   pointer-events: none;
   line-height: 0.9;
@@ -560,10 +574,17 @@ button:active, .btn:active, .interactive-tap:active {
 .hero-section {
   position: relative;
   width: 100%;
+  max-width: 100vw;
   height: 100svh;
-  min-height: 560px;
   background-color: var(--night);
   overflow: hidden;
+  contain: paint;
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    min-height: 580px;
+  }
 }
 
 /* CALQUE 1 : Fond halo studio radial ambre/espresso feutré (pur, sans dédoublement) */
@@ -764,7 +785,7 @@ button:active, .btn:active, .interactive-tap:active {
   width: 100%;
   text-align: center;
   padding: 0 16px;
-  margin-top: calc(var(--sat) + 120px);
+  margin-top: calc(var(--sat, 0px) + 16svh);
 }
 
 @media (min-width: 768px) {
@@ -782,10 +803,10 @@ button:active, .btn:active, .interactive-tap:active {
 
 .hero-script-creative {
   position: absolute;
-  top: -24px;
-  left: 12%;
+  top: -18px;
+  left: 6%;
   font-family: var(--font-script);
-  font-size: clamp(2.3rem, 8.2vw, 3.8rem);
+  font-size: clamp(2.1rem, 7.8vw, 3.8rem);
   color: var(--copper-light);
   line-height: 1;
   z-index: 6;
@@ -816,47 +837,23 @@ button:active, .btn:active, .interactive-tap:active {
   will-change: transform, opacity;
 }
 
-/* Mobile : 2 lignes empilées PORT / FOLIO */
-.hero-word-mobile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/* Mobile & Desktop : 1 ligne pleine largeur clampée sans coupure */
+.hero-word-single {
+  display: block;
   width: 100%;
+  text-align: center;
 }
 
-.hero-word-mobile .line-port,
-.hero-word-mobile .line-folio {
-  font-size: clamp(4.4rem, 22.5vw, 6.8rem);
-  line-height: 0.82;
-  letter-spacing: -0.018em;
+.hero-word-single .line-single {
+  font-size: clamp(2.3rem, 13.5vw, 12.5rem);
+  line-height: 0.9;
+  letter-spacing: clamp(-0.02em, 0.3vw, 0.05em);
   white-space: nowrap;
+  text-align: center;
+  display: inline-block;
 }
 
-.hero-word-desktop {
-  display: none;
-}
-
-/* Tablette & Desktop : 1 ligne pleine largeur clampée */
-@media (min-width: 768px) {
-  .hero-word-mobile {
-    display: none;
-  }
-
-  .hero-word-desktop {
-    display: block;
-    width: 100%;
-  }
-
-  .hero-word-desktop .line-single {
-    font-size: clamp(4.5rem, 13.5vw, 12.5rem);
-    line-height: 0.9;
-    letter-spacing: clamp(0.01em, 1.1vw, 0.06em);
-    white-space: nowrap;
-  }
-}
-
-/* CALQUE 4 : Modèle détourée kimono wax rouille (75-80% hauteur)
+/* CALQUE 4 : Modèle détourée kimono wax rouille (70-75% hauteur mobile, 75-78% desktop)
    z-index: 999 pour passer au-dessus du grain .noise-overlay (998)
    et garantir qu'aucun dégradé, halo, grille ou grain ne passe sur Dorcas. */
 .hero-layer-subject {
@@ -864,14 +861,21 @@ button:active, .btn:active, .interactive-tap:active {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  height: 75svh;
-  max-height: 78svh;
+  height: 72svh;
+  max-height: 75svh;
   width: auto;
   z-index: 999;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .hero-layer-subject {
+    height: 75svh;
+    max-height: 78svh;
+  }
 }
 
 /* Cadre de composition au ratio exact de l'ancien détourage (356/421).
@@ -1219,6 +1223,8 @@ button:active, .btn:active, .interactive-tap:active {
   position: relative;
   padding: var(--space-xl) var(--space-sm);
   border-bottom: 1px solid rgba(184, 122, 82, 0.16);
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 .section-container {
@@ -1946,6 +1952,8 @@ button:active, .btn:active, .interactive-tap:active {
   margin: 0 calc(-1 * var(--space-sm));
   padding-left: var(--space-sm);
   padding-right: var(--space-sm);
+  overscroll-behavior-x: contain;
+  max-width: 100vw;
 }
 
 .chapter-carousel-scroll::-webkit-scrollbar {
@@ -2132,7 +2140,11 @@ img[src*="05-sun-kissed-01"], img[src*="comp-card-full"] { object-position: 50% 
   margin-top: var(--space-lg);
 }
 
-/* --- MOTION & STORIES REELS --- */
+/* --- MOTION & STORIES REELS (MASQUÉ : EN ATTENTE DE VRAIES VIDÉOS) --- */
+#motion {
+  display: none !important;
+}
+
 .reels-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -2452,6 +2464,8 @@ img[src*="05-sun-kissed-01"], img[src*="comp-card-full"] { object-position: 50% 
   background-color: var(--espresso);
   background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184, 122, 82, 0.22) 0%, var(--night) 90%);
   padding: var(--space-2xl) var(--space-sm) calc(var(--space-2xl) + 60px);
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 .contact-layout {
@@ -2566,7 +2580,7 @@ img[src*="05-sun-kissed-01"], img[src*="comp-card-full"] { object-position: 50% 
   padding: 12px 14px;
   color: var(--cream);
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 16px; /* Empêche l'auto-zoom iOS au focus */
   transition: border-color var(--transition-fast);
 }
 
@@ -2659,7 +2673,10 @@ img[src*="05-sun-kissed-01"], img[src*="comp-card-full"] { object-position: 50% 
   position: fixed;
   bottom: calc(var(--sab) + 12px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateZ(0);
+  -webkit-transform: translateX(-50%) translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   width: calc(100% - 24px);
   max-width: 400px;
   z-index: 850;
@@ -2667,10 +2684,12 @@ img[src*="05-sun-kissed-01"], img[src*="comp-card-full"] { object-position: 50% 
   gap: 10px;
   pointer-events: auto;
   transition: transform 0.35s var(--ease-waw), opacity 0.3s ease;
+  will-change: transform, opacity;
 }
 
 .mobile-sticky-cta.is-hidden {
-  transform: translate(-50%, 160%);
+  transform: translate(-50%, 160%) translateZ(0);
+  -webkit-transform: translate(-50%, 160%) translateZ(0);
   opacity: 0;
   pointer-events: none;
 }
@@ -2921,6 +2940,8 @@ body.hide-placeholders .menu-nav-links li:has(a[href="#visual-chapters"]) {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  max-width: 100vw;
   gap: 16px;
   padding: 12px 0 24px 0;
   scrollbar-width: none;

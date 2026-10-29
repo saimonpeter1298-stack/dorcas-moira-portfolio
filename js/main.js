@@ -687,7 +687,7 @@ function triggerHeroSequence() {
 
   tl.from('#heroFrameInset', { opacity: 0, duration: 0.35 }, 0)
     .from('#heroLayerBg', { opacity: 0, duration: 0.35 }, 0.02)
-    .from('.hero-word-desktop .word-line', { y: 15, opacity: 0, duration: 0.35 }, 0.04)
+    .from('.hero-word-single .word-line, .hero-word-desktop .word-line, .hero-word-mobile .word-line', { y: 15, opacity: 0, duration: 0.35 }, 0.04)
     .from('#heroCutoutImg', {
       scale: 1.02,
       duration: 0.38,
@@ -699,9 +699,10 @@ function triggerHeroSequence() {
     .from('.hero-script-creative', { opacity: 0, duration: 0.3 }, 0.08)
     .from('.hero-annot', { opacity: 0, duration: 0.3 }, 0.1);
 
-  // Parallaxe différencié au scroll (grille & mot plus lents que le modèle)
+  // Parallaxe différencié au scroll — UNIQUEMENT sur Desktop (>= 768px)
+  const isMobile = window.innerWidth < 768;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && !isMobile) {
     const frameElem = document.getElementById('heroFrameInset');
     const wordElem = document.getElementById('heroLayerPortfolio');
     const subjectElem = document.getElementById('heroLayerSubject');
@@ -836,27 +837,37 @@ function initEditorialDoublePage() {
         }
       });
 
-      // 5. Remplissage des mots de l'ADN au scroll (ScrollTrigger Scrub)
+      // 5. Remplissage des mots de l'ADN (Scrub sur desktop >= 768px, simple apparition unique sur mobile)
       const words = gsap.utils.toArray('.dna-word');
+      const isMobile = window.innerWidth < 768;
       if (words.length > 0) {
-        ScrollTrigger.create({
-          trigger: '#dnaManifestoQuote',
-          start: 'top 78%',
-          end: 'bottom 45%',
-          scrub: 0.8,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            const total = words.length;
-            words.forEach((w, idx) => {
-              const threshold = (idx + 0.35) / total;
-              if (progress >= threshold) {
-                w.classList.add('is-filled');
-              } else {
-                w.classList.remove('is-filled');
-              }
-            });
-          }
-        });
+        if (isMobile) {
+          ScrollTrigger.create({
+            trigger: '#dnaManifestoQuote',
+            start: 'top 85%',
+            once: true,
+            onEnter: () => words.forEach(w => w.classList.add('is-filled'))
+          });
+        } else {
+          ScrollTrigger.create({
+            trigger: '#dnaManifestoQuote',
+            start: 'top 78%',
+            end: 'bottom 45%',
+            scrub: 0.8,
+            onUpdate: (self) => {
+              const progress = self.progress;
+              const total = words.length;
+              words.forEach((w, idx) => {
+                const threshold = (idx + 0.35) / total;
+                if (progress >= threshold) {
+                  w.classList.add('is-filled');
+                } else {
+                  w.classList.remove('is-filled');
+                }
+              });
+            }
+          });
+        }
       }
     } else {
       document.querySelectorAll('.dna-word').forEach(w => w.classList.add('is-filled'));
@@ -1063,6 +1074,7 @@ function initBookingForm() {
  */
 function initWatermark() {
   if (!dom.watermarkTrack) return;
+  if (window.innerWidth < 768) return; // Désactivé sur mobile (< 768px)
   window.addEventListener('scroll', () => {
     const scrollPos = window.scrollY;
     dom.watermarkTrack.style.transform = `translateX(${- (scrollPos * 0.12) % 400}px)`;
@@ -1143,11 +1155,6 @@ async function runStage2() {
   if (stage2Initialized) return;
   stage2Initialized = true;
 
-  // Rendu complet de toutes les sections différées pour Googlebot et navigation fluide
-  document.querySelectorAll('.perf-auto-contain').forEach(el => {
-    el.style.contentVisibility = 'visible';
-  });
-
   try {
     await loadScript('js/data.js');
     applyAdaptiveGalleries();
@@ -1167,6 +1174,7 @@ async function runStage2() {
     await loadScript('js/ScrollTrigger.min.js');
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
+      ScrollTrigger.config({ ignoreMobileResize: true });
     }
     initEditorialDoublePage();
     initVisualMosaic();
