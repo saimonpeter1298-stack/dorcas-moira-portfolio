@@ -7,7 +7,7 @@
 
 const CREDITS = {
   agency: "Digitech Web",
-  url: "https://digitechweb-mljp.vercel.app/",
+  url: "https://www.digitechweb.online/",
   labelFr: "Conçu & développé par",
   labelEn: "Designed & built by"
 };

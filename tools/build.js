@@ -15,7 +15,7 @@ const SRC_IMG_DIR = path.join(ROOT, 'assets', 'images');
 
 // 1. Load site configuration
 let config = {
-  SITE_URL: "https://dorcasmoira.com",
+  SITE_URL: "https://dorcasmoiraportfolio.live",
   SITE_NAME: "Dorcas Moïra",
   OG_IMAGE: "/assets/images/og-image.jpg"
 };

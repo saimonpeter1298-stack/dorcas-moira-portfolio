@@ -3,7 +3,7 @@
 > **Portfolio officiel de SAPHOU Dorcas Moïra**  
 > *Mannequin Photo & Muse Mode Afro — Casablanca, Maroc*  
 > *Candidate officielle Miss Gabon Maroc 2026*  
-> Site web : [dorcasmoira.com](https://dorcasmoira.com)
+> Site web : [dorcasmoiraportfolio.live](https://dorcasmoiraportfolio.live)
 
 ---
 
@@ -92,8 +92,8 @@ Le dépôt local est déjà initialisé avec la branche `main` et un commit prop
 
 ### Étape 3 : Configurer votre Domaine Personnalisé
 1. Dans Vercel, allez dans **Settings** $\rightarrow$ **Domains**.
-2. Ajoutez votre domaine racine (ex. `dorcasmoira.com`) et le sous-domaine `www.dorcasmoira.com`.
-3. Vercel gère automatiquement la redirection `www.dorcasmoira.com` $\rightarrow$ `https://dorcasmoira.com` (définie dans `vercel.json`) et le certificat SSL gratuit Let's Encrypt.
+2. Ajoutez votre domaine racine (ex. `dorcasmoiraportfolio.live`) et le sous-domaine `www.dorcasmoiraportfolio.live`.
+3. Vercel gère automatiquement la redirection `www.dorcasmoiraportfolio.live` $\rightarrow$ `https://dorcasmoiraportfolio.live` (définie dans `vercel.json`) et le certificat SSL gratuit Let's Encrypt.
 4. Mettez à jour les enregistrements DNS chez votre registrar :
    - **Type A** : `@` $\rightarrow$ `76.76.21.21`
    - **Type CNAME** : `www` $\rightarrow$ `cname.vercel-dns.com`
@@ -106,11 +106,11 @@ L'URL officielle du site est centralisée dans un seul fichier : [site.config.js
 
 ```json
 {
-  "SITE_URL": "https://dorcasmoira.com"
+  "SITE_URL": "https://dorcasmoiraportfolio.live"
 }
 ```
 
-Si votre domaine final est différent (ex. `https://dorcas-moira.com` ou un sous-domaine `.vercel.app`), il vous suffit de modifier cette valeur dans `site.config.json` (ou d'ajouter une variable d'environnement `SITE_URL` dans les paramètres de votre projet Vercel). Lors du prochain build, toutes les balises suivantes seront automatiquement recalculées :
+Si votre domaine final est différent (ex. `https://dorcasmoiraportfolio.live` ou un sous-domaine `.vercel.app`), il vous suffit de modifier cette valeur dans `site.config.json` (ou d'ajouter une variable d'environnement `SITE_URL` dans les paramètres de votre projet Vercel). Lors du prochain build, toutes les balises suivantes seront automatiquement recalculées :
 - `<link rel="canonical">`
 - `og:url` et `og:image` (en URL absolue)
 - `twitter:image`

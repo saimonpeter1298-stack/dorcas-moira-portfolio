@@ -10,10 +10,32 @@
       "has": [
         {
           "type": "host",
+          "value": "www.dorcasmoiraportfolio.live"
+        }
+      ],
+      "destination": "https://dorcasmoiraportfolio.live/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "dorcasmoira.com"
+        }
+      ],
+      "destination": "https://dorcasmoiraportfolio.live/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
           "value": "www.dorcasmoira.com"
         }
       ],
-      "destination": "https://dorcasmoira.com/:path*",
+      "destination": "https://dorcasmoiraportfolio.live/:path*",
       "permanent": true
     }
   ],
