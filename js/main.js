@@ -364,11 +364,6 @@ function initLightboxElements() {
     el.addEventListener('click', el._lightboxHandler);
   });
 }
-      openLightbox(index);
-    };
-    el.addEventListener('click', el._lightboxHandler);
-  });
-}
 
 function openLightbox(index) {
   if (!dom.lightboxModal || !galleryElements.length) return;
@@ -640,7 +635,6 @@ function triggerHeroSequence() {
     .from('.hero-annot', { opacity: 0, duration: 0.3 }, 0.1);
 
   // Parallaxe différencié au scroll — UNIQUEMENT sur Desktop (>= 768px)
-  const isMobile = window.innerWidth < 768;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!prefersReducedMotion && !isMobile) {
     const frameElem = document.getElementById('heroFrameInset');
@@ -661,106 +655,130 @@ function triggerHeroSequence() {
 /**
  * Double Page Magazine : Index Éditorial (Directions) & Manifeste Typographique (Model ADN)
  */
+let editorialDoublePageInteractionsBound = false;
+
 function initEditorialDoublePage() {
   const indexList = document.getElementById('editorialIndexList');
   const cursorReveal = document.getElementById('editorialCursorReveal');
   const cursorImg = document.getElementById('cursorRevealImg');
   const rows = document.querySelectorAll('.editorial-index-row');
+  const doubleSpread = document.getElementById('editorialDoubleSpread');
   const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-  // 1. Floating cursor image reveal sur Desktop (>= 1024px)
-  if (indexList && cursorReveal && cursorImg && !isTouchDevice && window.innerWidth >= 1024) {
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let currentX = mouseX;
-    let currentY = mouseY;
-    let isTracking = false;
+  // Initialisation immédiate des interactions (Mobile & Desktop)
+  if (!editorialDoublePageInteractionsBound && rows && rows.length > 0) {
+    editorialDoublePageInteractionsBound = true;
 
-    function updateCursorPos() {
-      if (!isTracking) return;
-      currentX += (mouseX - currentX) * 0.16;
-      currentY += (mouseY - currentY) * 0.16;
-      cursorReveal.style.left = `${currentX}px`;
-      cursorReveal.style.top = `${currentY}px`;
-      requestAnimationFrame(updateCursorPos);
+    // Préchargement doux intelligent dès que la section approche du viewport (400px avant)
+    if (doubleSpread && 'IntersectionObserver' in window) {
+      const preloadObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            rows.forEach(r => {
+              const imgSrc = r.getAttribute('data-img');
+              if (imgSrc) {
+                const preloader = new Image();
+                preloader.src = imgSrc;
+              }
+            });
+            obs.disconnect();
+          }
+        });
+      }, { rootMargin: '400px 0px' });
+      preloadObserver.observe(doubleSpread);
     }
 
-    indexList.addEventListener('mouseenter', () => {
-      indexList.classList.add('is-hovering');
-      isTracking = true;
-      requestAnimationFrame(updateCursorPos);
-    });
+    // 1. Floating cursor image reveal sur Desktop (au survol)
+    if (indexList && cursorReveal && cursorImg && !isTouchDevice && window.innerWidth >= 1024) {
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let currentX = mouseX;
+      let currentY = mouseY;
+      let isTracking = false;
 
-    indexList.addEventListener('mouseleave', () => {
-      indexList.classList.remove('is-hovering');
-      cursorReveal.classList.remove('is-active');
-      rows.forEach(r => r.classList.remove('is-active-hover'));
-      isTracking = false;
-    });
+      function updateCursorPos() {
+        if (!isTracking) return;
+        currentX += (mouseX - currentX) * 0.16;
+        currentY += (mouseY - currentY) * 0.16;
+        cursorReveal.style.left = `${currentX}px`;
+        cursorReveal.style.top = `${currentY}px`;
+        requestAnimationFrame(updateCursorPos);
+      }
 
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    }, { passive: true });
-
-    rows.forEach(row => {
-      row.addEventListener('mouseenter', () => {
-        const imgSrc = row.getAttribute('data-img');
-        if (imgSrc) {
-          cursorImg.src = imgSrc;
-        }
-        cursorReveal.classList.add('is-active');
-        rows.forEach(r => r.classList.remove('is-active-hover'));
-        row.classList.add('is-active-hover');
+      indexList.addEventListener('mouseenter', () => {
+        indexList.classList.add('is-hovering');
+        isTracking = true;
+        requestAnimationFrame(updateCursorPos);
       });
-    });
-  }
 
-  // 2. Accordéon Mobile (au tap sur .editorial-row-header)
-  rows.forEach(row => {
-    const header = row.querySelector('.editorial-row-header');
-    if (!header) return;
+      indexList.addEventListener('mouseleave', () => {
+        indexList.classList.remove('is-hovering');
+        cursorReveal.classList.remove('is-active');
+        rows.forEach(r => r.classList.remove('is-active-hover'));
+        isTracking = false;
+      });
 
-    header.addEventListener('click', (e) => {
-      // Sur mobile & tablette (< 1024px), le tap ouvre l'accordéon
-      if (window.innerWidth < 1024) {
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      }, { passive: true });
+
+      rows.forEach(row => {
+        row.addEventListener('mouseenter', () => {
+          const imgSrc = row.getAttribute('data-img');
+          if (imgSrc && cursorImg.src !== imgSrc) {
+            cursorImg.src = imgSrc;
+          }
+          cursorReveal.classList.add('is-active');
+          rows.forEach(r => r.classList.remove('is-active-hover'));
+          row.classList.add('is-active-hover');
+        });
+      });
+    }
+
+    // 2. Accordéon Mobile & Desktop (au tap / au clic sur .editorial-row-header)
+    rows.forEach(row => {
+      const header = row.querySelector('.editorial-row-header');
+      const drawer = row.querySelector('.row-accordion-drawer');
+      if (!header || !drawer) return;
+
+      header.addEventListener('click', (e) => {
         e.preventDefault();
         header.blur();
         const wasOpen = row.classList.contains('is-open');
 
-        // Fermer les autres (un seul accordéon ouvert à la fois)
+        // Fermer toutes les autres lignes (une seule ligne ouverte à la fois)
         rows.forEach(r => {
           r.classList.remove('is-open');
           const h = r.querySelector('.editorial-row-header');
-          if (h) {
-            h.setAttribute('aria-expanded', 'false');
-            h.blur();
-          }
+          if (h) h.setAttribute('aria-expanded', 'false');
+          const d = r.querySelector('.row-accordion-drawer');
+          if (d) d.style.maxHeight = null;
         });
 
+        // Ouvrir si elle était fermée
         if (!wasOpen) {
           row.classList.add('is-open');
           header.setAttribute('aria-expanded', 'true');
+          const img = row.querySelector('.accordion-img');
+          if (img) {
+            img.loading = 'eager';
+          }
+          drawer.style.maxHeight = drawer.scrollHeight + 'px';
         }
-      }
+      });
     });
-  });
 
-  // 3. Liaison vers les filtres de la galerie
-  const filterLinks = document.querySelectorAll('[data-filter-link]');
-  filterLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      const filterVal = link.getAttribute('data-filter-link');
-      if (!filterVal) return;
-
-      const targetBtn = document.querySelector(`#mosaicFilterBar .filter-btn[data-filter="${filterVal}"]`);
-      if (targetBtn) {
-        targetBtn.click();
+    // Ajustement dynamique de la hauteur lors du redimensionnement de l'écran
+    window.addEventListener('resize', () => {
+      const openDrawer = document.querySelector('.editorial-index-row.is-open .row-accordion-drawer');
+      if (openDrawer) {
+        openDrawer.style.maxHeight = openDrawer.scrollHeight + 'px';
       }
-    });
-  });
+    }, { passive: true });
+  }
 
-  // 4. Tracé des filets 1px au scroll (GSAP ScrollTrigger)
+  // 3. Tracé des filets 1px au scroll (GSAP ScrollTrigger)
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1142,6 +1160,7 @@ function init() {
     initMenu();
     initHeaderAndScroll();
     initMotionVideo();
+    initEditorialDoublePage();
   } catch (err) {
     console.warn('[Init Navigation Warning]', err);
   }
