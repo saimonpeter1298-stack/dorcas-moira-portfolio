@@ -93,7 +93,8 @@ const I18N = {
     form_date: "Date envisagée / Période",
     form_msg: "Détails du projet & Moodboard",
     form_submit: "Envoyer la demande de booking",
-    sticky_book: "Me booker"
+    sticky_book: "Me booker",
+    footer_credit_intro: "Conçu & développé par"
   },
   en: {
     menu_home: "Home",
@@ -178,7 +179,8 @@ const I18N = {
     form_date: "Expected Date / Timeline",
     form_msg: "Creative Vision & Moodboard Details",
     form_submit: "Submit Booking Request",
-    sticky_book: "Book Moïra"
+    sticky_book: "Book Moïra",
+    footer_credit_intro: "Designed & built by"
   }
 };
 
@@ -547,6 +549,17 @@ function initHeaderAndScroll() {
     lastScrollY = currentScrollY;
     handleStickyCtaVisibility();
   }, { passive: true });
+
+  const scrollCue = document.querySelector('.hero-scroll-cue');
+  if (scrollCue) {
+    scrollCue.addEventListener('click', (e) => {
+      const target = document.getElementById('manifesto');
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
 }
 
 /**

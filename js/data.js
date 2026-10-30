@@ -5,7 +5,15 @@
  * Model measurements, dynamic variable photo chapters, and booking configurations.
  */
 
+const CREDITS = {
+  agency: "Digitech Web",
+  url: "https://digitechweb-mljp.vercel.app/",
+  labelFr: "Conçu & développé par",
+  labelEn: "Designed & built by"
+};
+
 const PORTFOLIO_DATA = {
+  credits: CREDITS,
   MIN_PHOTOS_PER_CHAPTER: 3,
   identity: {
     stageName: "Dorcas Moïra",

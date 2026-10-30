@@ -958,16 +958,17 @@ button:active, .btn:active, .interactive-tap:active {
   margin-top: 2px;
 }
 
-/* Mobile Bottom : Scroll Cue au-dessus du bord droit */
+/* Mobile Bottom : CTA Découvrir l'univers aligné à GAUCHE dans le cadre cuivre */
 .annot-bottom-right {
-  bottom: calc(var(--sab) - 4px);
-  right: 0px;
-  left: auto;
+  bottom: calc(var(--sab) + 16px);
+  left: 16px;
+  right: auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 4px;
   pointer-events: auto;
+  z-index: 1005;
 }
 
 .annot-mobile-quote {
@@ -982,14 +983,65 @@ button:active, .btn:active, .interactive-tap:active {
 .hero-scroll-cue {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.52rem;
-  letter-spacing: 0.11em;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--cream);
   text-decoration: none;
   transition: color 0.25s ease;
   white-space: nowrap;
+  pointer-events: auto;
+  padding: 6px 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero-scroll-cue:hover,
+.hero-scroll-cue:active {
+  color: var(--copper-light);
+}
+
+/* Filet cuivre horizontal fin (~32px) qui s'anime en boucle */
+.hero-scroll-line {
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(to right, var(--copper-light), rgba(184, 122, 82, 0.3));
+  transform-origin: left center;
+  animation: heroLinePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes heroLinePulse {
+  0%, 100% {
+    transform: scaleX(0.75);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleX(1.15);
+    opacity: 1;
+  }
+}
+
+/* Petite flèche ↓ cuivre qui descend légèrement en boucle */
+.hero-scroll-arrow {
+  display: inline-block;
+  color: var(--copper-light);
+  font-size: 0.75rem;
+  line-height: 1;
+  animation: heroArrowBob 2s ease-in-out infinite;
+}
+
+@keyframes heroArrowBob {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateY(3px);
+    opacity: 1;
+  }
 }
 
 @media (min-width: 768px) {
@@ -997,29 +1049,37 @@ button:active, .btn:active, .interactive-tap:active {
     font-size: 0.7rem;
     letter-spacing: 0.2em;
     gap: 10px;
+    padding: 0;
   }
-}
 
-.hero-scroll-cue:hover {
-  color: var(--copper-light);
-}
-
-.hero-scroll-line {
-  display: none;
-  width: 28px;
-  height: 1px;
-  background: linear-gradient(to right, var(--copper), transparent);
-  transition: width 0.3s ease;
-}
-
-@media (min-width: 768px) {
   .hero-scroll-line {
-    display: inline-block;
+    width: 28px;
+    animation: none;
+    transform: none;
+    background: linear-gradient(to right, var(--copper), transparent);
+    transition: width 0.3s ease;
+  }
+
+  .hero-scroll-cue:hover .hero-scroll-line {
+    width: 44px;
+  }
+
+  .hero-scroll-arrow {
+    animation: none;
+    transition: transform 0.25s ease;
+  }
+
+  .hero-scroll-cue:hover .hero-scroll-arrow {
+    transform: translateY(2px);
   }
 }
 
-.hero-scroll-cue:hover .hero-scroll-line {
-  width: 44px;
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-line,
+  .hero-scroll-arrow {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* Tablette & Desktop : 4 Coins Éditoriaux */
@@ -2646,31 +2706,69 @@ img[src*="05-sun-kissed-01"], img[src*="comp-card-full"] { object-position: 50% 
 .site-footer {
   position: relative;
   background-color: var(--night);
-  padding: var(--space-xl) var(--space-sm) calc(var(--space-xl) + 84px + var(--sab));
+  padding: var(--space-xl) var(--space-sm) calc(var(--space-md) + 90px + var(--sab));
   text-align: center;
   border-top: 1px solid rgba(184, 122, 82, 0.2);
 }
 
-.footer-monogram-egg {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 12px;
+@media (min-width: 768px) {
+  .site-footer {
+    padding: var(--space-xl) var(--space-md) var(--space-xl);
+  }
+}
+
+.footer-monogram-wrap {
+  display: inline-block;
+  margin: 0 auto 10px;
+  text-decoration: none;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.footer-monogram-svg {
+  width: 96px;
+  height: 60px;
+  margin: 0 auto;
   overflow: visible;
+  display: block;
+  transition: transform var(--transition-fast);
 }
 
-.footer-dm-stroke {
-  fill: none;
+.footer-monogram-wrap:hover .footer-monogram-svg {
+  transform: rotate(-3deg) scale(1.08);
+}
+
+.footer-monogram-text {
+  font-family: var(--font-script);
+  font-size: 56px;
+  fill: var(--copper-light);
   stroke: var(--copper-light);
-  stroke-width: 2.2;
+  stroke-width: 0.8px;
   stroke-linecap: round;
-  stroke-dasharray: 400;
+  stroke-linejoin: round;
+  stroke-dasharray: 260;
   stroke-dashoffset: 0;
-  transition: stroke 0.3s ease;
+  user-select: none;
+  transition: fill 0.3s ease;
 }
 
-.footer-monogram-egg:hover .footer-dm-stroke {
-  animation: drawSignature 1s var(--ease-waw) forwards;
+.footer-monogram-wrap:hover .footer-monogram-text {
+  animation: drawMonogramTrace 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes drawMonogramTrace {
+  0% {
+    stroke-dashoffset: 260;
+    fill-opacity: 0.2;
+  }
+  60% {
+    stroke-dashoffset: 0;
+    fill-opacity: 0.7;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill-opacity: 1;
+  }
 }
 
 .footer-logo-script {
@@ -2691,6 +2789,55 @@ img[src*="05-sun-kissed-01"], img[src*="comp-card-full"] { object-position: 50% 
 .footer-credits {
   font-size: 0.72rem;
   color: var(--muted-dark);
+  line-height: 1.6;
+}
+
+/* Ligne de crédit Digitech Web */
+.footer-developer-credit {
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.footer-developer-credit .credit-link {
+  color: var(--copper-light);
+  text-decoration: none;
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  transition: color 0.25s ease;
+}
+
+.footer-developer-credit .credit-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: var(--copper-light);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-developer-credit .credit-link:hover::after,
+.footer-developer-credit .credit-link:focus::after,
+.footer-developer-credit .credit-link:active::after {
+  transform: scaleX(1);
+}
+
+.footer-developer-credit .credit-link:hover {
+  color: var(--cream);
 }
 
 /* ==========================================================================
