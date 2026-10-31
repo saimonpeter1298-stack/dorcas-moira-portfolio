@@ -74,20 +74,12 @@
       --copper-bright: #E3B48C;
       --muted: #8E7B70;
     }
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
     html, body {
       background-color: #0B0807 !important;
       color: #F3E6D8;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      -webkit-text-size-adjust: 100%;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
-      min-height: 100vh;
     }
     a {
       color: inherit;
@@ -105,41 +97,11 @@
       font: inherit;
       cursor: pointer;
     }
-    img, picture, video {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
     .custom-cursor {
       display: none;
     }
     .fullscreen-menu {
-      position: fixed;
-      inset: 0;
-      background-color: #0B0807;
-      transform: translateY(-100%);
-      z-index: 1050;
-      display: flex;
-      flex-direction: column;
-    }
-    .fullscreen-menu.is-open {
-      transform: translateY(0);
-    }
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(11, 8, 7, 0.85);
-      border-bottom: 1px solid rgba(184, 122, 82, 0.15);
-      height: 64px;
-    }
-    .hero-section {
-      position: relative;
-      min-height: 100vh;
-      background-color: #0B0807;
-      overflow: hidden;
+      display: none;
     }
     .site-loader {
       position: fixed;

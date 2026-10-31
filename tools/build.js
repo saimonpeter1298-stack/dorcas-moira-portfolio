@@ -73,19 +73,7 @@ fs.mkdirSync(path.join(DIST, 'assets', 'images'), { recursive: true });
 copyDir(path.join(ROOT, 'css'), path.join(DIST, 'css'));
 copyDir(path.join(ROOT, 'js'), path.join(DIST, 'js'));
 
-// Minify dist/css/style.css
 const distStyleCssPath = path.join(DIST, 'css', 'style.css');
-if (fs.existsSync(distStyleCssPath)) {
-  let rawCss = fs.readFileSync(distStyleCssPath, 'utf8');
-  let minCss = rawCss
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/\s+/g, ' ')
-    .replace(/\s*([{}:;,])\s*/g, '$1')
-    .replace(/;}/g, '}')
-    .trim();
-  fs.writeFileSync(distStyleCssPath, minCss, 'utf8');
-  console.log(`[OK] Minified dist/css/style.css (${rawCss.length} -> ${minCss.length} bytes)`);
-}
 
 // 4. Compute cache-busting hashes for production
 const styleHash = getFileHash(distStyleCssPath);
