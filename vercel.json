@@ -10,10 +10,10 @@
       "has": [
         {
           "type": "host",
-          "value": "www.dorcasmoiraportfolio.live"
+          "value": "dorcasmoiraportfolio.live"
         }
       ],
-      "destination": "https://dorcasmoiraportfolio.live/:path*",
+      "destination": "https://www.dorcasmoiraportfolio.live/:path*",
       "permanent": true
     },
     {
@@ -24,7 +24,7 @@
           "value": "dorcasmoira.com"
         }
       ],
-      "destination": "https://dorcasmoiraportfolio.live/:path*",
+      "destination": "https://www.dorcasmoiraportfolio.live/:path*",
       "permanent": true
     },
     {
@@ -35,7 +35,7 @@
           "value": "www.dorcasmoira.com"
         }
       ],
-      "destination": "https://dorcasmoiraportfolio.live/:path*",
+      "destination": "https://www.dorcasmoiraportfolio.live/:path*",
       "permanent": true
     }
   ],

@@ -88,10 +88,16 @@ if (fs.existsSync(distStyleCssPath)) {
 }
 
 // 4. Compute cache-busting hashes for production
-const styleHash = getFileHash(path.join(ROOT, 'css', 'style.css'));
-const fontsHash = getFileHash(path.join(ROOT, 'css', 'google-fonts.css'));
-const dataHash = getFileHash(path.join(ROOT, 'js', 'data.js'));
-const mainHash = getFileHash(path.join(ROOT, 'js', 'main.js'));
+const styleHash = getFileHash(distStyleCssPath);
+const fontsHash = getFileHash(path.join(DIST, 'css', 'google-fonts.css'));
+const dataHash = getFileHash(path.join(DIST, 'js', 'data.js'));
+const mainHash = getFileHash(path.join(DIST, 'js', 'main.js'));
+
+// Create hashed physical files in dist/
+fs.copyFileSync(distStyleCssPath, path.join(DIST, 'css', `style.${styleHash}.css`));
+fs.copyFileSync(path.join(DIST, 'css', 'google-fonts.css'), path.join(DIST, 'css', `google-fonts.${fontsHash}.css`));
+fs.copyFileSync(path.join(DIST, 'js', 'data.js'), path.join(DIST, 'js', `data.${dataHash}.js`));
+fs.copyFileSync(path.join(DIST, 'js', 'main.js'), path.join(DIST, 'js', `main.${mainHash}.js`));
 
 console.log(`Asset hashes: style=${styleHash}, fonts=${fontsHash}, data=${dataHash}, main=${mainHash}`);
 
@@ -338,20 +344,20 @@ html = html.replace(
   `"@type": "Person",\n    "url": "${config.SITE_URL}",\n    "image": "${fullOgImage}",`
 );
 
-// E. Cache-busting queries for CSS/JS
-html = html.replace('href="css/google-fonts.css"', `href="css/google-fonts.css?v=${fontsHash}"`);
-html = html.replace('href="css/style.css"', `href="css/style.css?v=${styleHash}"`);
-html = html.replace('src="js/data.js"', `src="js/data.js?v=${dataHash}"`);
-html = html.replace('src="js/main.js"', `src="js/main.js?v=${mainHash}"`);
+// E. Cache-busting hashed filenames for CSS/JS
+html = html.replace('href="css/google-fonts.css"', `href="css/google-fonts.${fontsHash}.css"`);
+html = html.replace('href="css/style.css"', `href="css/style.${styleHash}.css"`);
+html = html.replace('src="js/data.js"', `src="js/data.${dataHash}.js"`);
+html = html.replace('src="js/main.js"', `src="js/main.${mainHash}.js"`);
 
 fs.writeFileSync(path.join(DIST, 'index.html'), html, 'utf8');
-console.log('[OK] Generated dist/index.html with build-time galleries and versioned assets');
+console.log('[OK] Generated dist/index.html with build-time galleries and hashed assets');
 
 // 7. Copy 404.html
 if (fs.existsSync(path.join(ROOT, '404.html'))) {
   let notFoundHtml = fs.readFileSync(path.join(ROOT, '404.html'), 'utf8');
-  notFoundHtml = notFoundHtml.replace('href="css/google-fonts.css"', `href="css/google-fonts.css?v=${fontsHash}"`);
-  notFoundHtml = notFoundHtml.replace('href="css/style.css"', `href="css/style.css?v=${styleHash}"`);
+  notFoundHtml = notFoundHtml.replace('href="css/google-fonts.css"', `href="css/google-fonts.${fontsHash}.css"`);
+  notFoundHtml = notFoundHtml.replace('href="css/style.css"', `href="css/style.${styleHash}.css"`);
   fs.writeFileSync(path.join(DIST, '404.html'), notFoundHtml, 'utf8');
   console.log('[OK] Copied dist/404.html');
 }
