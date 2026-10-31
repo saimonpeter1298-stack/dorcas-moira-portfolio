@@ -3476,8 +3476,10 @@ body.hide-placeholders .menu-nav-links li:has(a[href="#visual-chapters"]) {
   backface-visibility: hidden;
 }
 .hero-cutout-img,
+.hero-word-wrap,
 .hero-frame-inset,
 .hero-layer-bg {
+  transform: translateZ(0);
   backface-visibility: hidden;
 }
 
